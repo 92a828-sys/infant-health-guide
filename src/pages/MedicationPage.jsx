@@ -1,65 +1,119 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
-// ── Notion 直連設定 ────────────────────────────────────────────────
-const NOTION_KEY = import.meta.env.VITE_NOTION_API_KEY
-const NOTION_DB  = import.meta.env.VITE_NOTION_DATABASE_ID ?? '2d85578cd933803b9c9a000b56a13618'
-const NOTION_VER = '2025-09-03'
-
-function nProp(prop, type) {
-  if (!prop) return type === 'multi' ? [] : ''
-  switch (type) {
-    case 'title':  return prop.title?.map(r => r.plain_text).join('') ?? ''
-    case 'text':   return prop.rich_text?.map(r => r.plain_text).join('') ?? ''
-    case 'select': return prop.select?.name ?? ''
-    case 'multi':  return prop.multi_select?.map(o => o.name) ?? []
-    case 'files':
-      return (prop.files ?? []).map(f =>
-        f.type === 'file' ? f.file.url : f.type === 'external' ? f.external.url : null
-      ).filter(Boolean)
-    default: return ''
-  }
-}
-
-async function fetchDrugsFromNotion() {
-  if (!NOTION_KEY) throw new Error('尚未設定 VITE_NOTION_API_KEY，請在 .env 填入 Notion Token。')
-  const results = []
-  let cursor
-  do {
-    const body = { sorts: [{ property: '藥物分類', direction: 'ascending' }], page_size: 100 }
-    if (cursor) body.start_cursor = cursor
-    const resp = await fetch(`/notion-proxy/v1/data_sources/${NOTION_DB}/query`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${NOTION_KEY}`,
-        'Content-Type': 'application/json',
-        'Notion-Version': NOTION_VER,
-      },
-      body: JSON.stringify(body),
-    })
-    if (!resp.ok) {
-      const e = await resp.json().catch(() => ({}))
-      throw new Error(e.message ?? `Notion API 錯誤 HTTP ${resp.status}`)
-    }
-    const data = await resp.json()
-    results.push(...(data.results ?? []))
-    cursor = data.has_more ? data.next_cursor : undefined
-  } while (cursor)
-  return results
-    .filter(p => p.object === 'page' && !p.archived)
-    .map(p => ({
-      id:          p.id,
-      name:        nProp(p.properties['藥品名稱'],   'title'),
-      symptoms:    nProp(p.properties['主治症狀'],   'multi'),
-      storage:     nProp(p.properties['保存條件'],   'select'),
-      sideEffects: nProp(p.properties['副作用'],     'multi'),
-      notes:       nProp(p.properties['注意事項'],   'text'),
-      categories:  nProp(p.properties['藥物分類'],   'multi'),
-      mechanism:   nProp(p.properties['藥理作用'],   'text'),
-      images:      nProp(p.properties['外觀'],       'files'),
-      keywords:    nProp(p.properties['關鍵字/外觀'], 'text'),
-      updatedAt:   p.last_edited_time,
-    }))
-}
+// ── 靜態藥品資料庫 ────────────────────────────────────────────────
+// 新增藥品：在此陣列加一筆物件即可，欄位說明見下方範例
+const DRUG_DATA = [
+  {
+    id: '1',
+    name: '乙醯胺酚（Acetaminophen／普拿疼）',
+    categories: ['退燒藥'],
+    symptoms: ['發燒', '頭痛', '牙痛', '注射後疼痛'],
+    mechanism: '抑制中樞神經前列腺素合成，達到退燒與止痛效果。不具抗發炎作用。',
+    sideEffects: ['過量使用導致肝損傷', '皮膚紅疹（少見）'],
+    notes: '每次劑量 10–15 mg/kg，每 4–6 小時一次，每日不超過 5 次。\n3 個月以上嬰兒即可使用。\n過量使用是兒童急性肝衰竭最常見原因，請嚴格依體重計算。',
+    storage: '室溫陰涼乾燥處，避免陽光直射',
+    keywords: '白色、橢圓形、糖漿劑、栓劑',
+  },
+  {
+    id: '2',
+    name: '布洛芬（Ibuprofen）',
+    categories: ['退燒藥'],
+    symptoms: ['發燒', '頭痛', '耳痛', '肌肉痠痛', '關節疼痛'],
+    mechanism: '非類固醇消炎藥（NSAID），抑制前列腺素合成，具退燒、止痛、抗發炎三效。',
+    sideEffects: ['腸胃不適', '噁心', '空腹使用易胃痛'],
+    notes: '每次劑量 5–10 mg/kg，每 6–8 小時一次。\n6 個月以下嬰兒禁用。\n建議飯後或與食物一起服用，以減少腸胃刺激。\n脫水或腸胃炎期間避免使用。',
+    storage: '室溫陰涼乾燥處',
+    keywords: '橙色、糖漿劑',
+  },
+  {
+    id: '3',
+    name: '氯苯那敏（Chlorpheniramine，CTM）',
+    categories: ['抗組織胺'],
+    symptoms: ['過敏性鼻炎', '蕁麻疹', '皮膚癢', '流鼻水'],
+    mechanism: '第一代抗組織胺，競爭性阻斷 H1 受體，抑制過敏反應。具鎮靜作用。',
+    sideEffects: ['嗜睡', '口乾', '便秘', '尿瀦留'],
+    notes: '2 歲以下不建議常規使用。\n服藥後可能嗜睡，避免在需要注意力的時段給藥。\n劑量依體重遵醫師指示。',
+    storage: '室溫陰涼乾燥處',
+    keywords: '黃色、白色小錠、糖漿',
+  },
+  {
+    id: '4',
+    name: '西替利嗪（Cetirizine）',
+    categories: ['抗組織胺'],
+    symptoms: ['過敏性鼻炎', '慢性蕁麻疹', '皮膚癢', '眼睛癢'],
+    mechanism: '第二代抗組織胺，選擇性阻斷 H1 受體，嗜睡副作用較第一代低。',
+    sideEffects: ['輕微嗜睡（少數）', '頭痛', '口乾'],
+    notes: '6 個月以上嬰兒可使用。\n6 個月–1 歲：2.5 mg / 天；1–5 歲：2.5–5 mg / 天；6 歲以上：5–10 mg / 天。\n每日一次，建議睡前服用。',
+    storage: '室溫陰涼乾燥處',
+    keywords: '白色錠劑、糖漿',
+  },
+  {
+    id: '5',
+    name: '氨溴索（Ambroxol）',
+    categories: ['止咳化痰'],
+    symptoms: ['痰多', '黏稠不易咳出', '支氣管炎', '肺炎輔助'],
+    mechanism: '促進呼吸道分泌物液化，增加纖毛運動，幫助痰液排出。',
+    sideEffects: ['偶爾噁心', '腸胃不適'],
+    notes: '建議多補充水分以增強化痰效果。\n通常於餐後給藥。\n劑量依體重及年齡遵醫師指示。',
+    storage: '室溫陰涼乾燥處',
+    keywords: '白色錠劑、糖漿、草莓口味',
+  },
+  {
+    id: '6',
+    name: '右美沙芬（Dextromethorphan，DXM）',
+    categories: ['止咳化痰'],
+    symptoms: ['乾咳', '夜間咳嗽影響睡眠'],
+    mechanism: '中樞性鎮咳藥，作用於腦幹咳嗽中樞，抑制咳嗽反射。',
+    sideEffects: ['嗜睡', '頭暈', '噁心'],
+    notes: '2 歲以下不建議使用。\n有痰的濕咳不適合使用（會使痰液積聚）。\n過量使用有中樞神經抑制風險。',
+    storage: '室溫陰涼乾燥處',
+    keywords: '糖漿',
+  },
+  {
+    id: '7',
+    name: '益生菌（Probiotics）',
+    categories: ['腸胃用藥'],
+    symptoms: ['腹瀉', '腸胃炎後調理', '抗生素後腸菌恢復', '脹氣', '便秘'],
+    mechanism: '補充腸道益生菌（如 Lactobacillus、Bifidobacterium），維持腸道菌叢平衡，縮短病毒性腸胃炎病程。',
+    sideEffects: ['少數初期脹氣（通常數日後消失）'],
+    notes: '可與食物或奶水一起服用。\n服用抗生素期間建議間隔 2 小時再補充益生菌。\n冷藏型益生菌請放冰箱保存。',
+    storage: '依產品標示（部分需冷藏）',
+    keywords: '粉包、膠囊、滴劑',
+  },
+  {
+    id: '8',
+    name: '口服電解質液（ORS）',
+    categories: ['腸胃用藥'],
+    symptoms: ['腹瀉脫水補充', '嘔吐後電解質補充', '發燒補水'],
+    mechanism: '含適當比例的鈉、鉀、葡萄糖，利用腸道共同轉運機制快速補充水分與電解質。',
+    sideEffects: ['極少副作用'],
+    notes: '腹瀉期間不建議以白開水或運動飲料取代，應使用專用口服電解質液。\n少量多次餵食，避免一次大量引起嘔吐。\n開封後冷藏，24 小時內用完。',
+    storage: '開封前室溫，開封後冷藏24小時內使用',
+    keywords: '液體、蘋果口味、白葡萄口味',
+  },
+  {
+    id: '9',
+    name: '氧化鋅軟膏（Zinc Oxide）',
+    categories: ['外用藥'],
+    symptoms: ['尿布疹', '皮膚紅腫', '輕微擦傷', '皮膚保護'],
+    mechanism: '在皮膚表面形成保護膜，隔絕尿液和糞便對皮膚的刺激，同時具輕微收斂與抗菌作用。',
+    sideEffects: ['極少，偶爾局部皮膚刺激'],
+    notes: '換尿布時清潔後薄薄塗抹，可厚塗於尿布疹嚴重處。\n不可塗抹在感染性傷口或黴菌感染部位。\n若尿布疹3天未改善或出現水泡膿包，需就醫。',
+    storage: '室溫陰涼乾燥處',
+    keywords: '白色軟膏、乳霜',
+  },
+  {
+    id: '10',
+    name: '生理食鹽水（Normal Saline 0.9%）',
+    categories: ['外用藥'],
+    symptoms: ['鼻塞洗鼻', '眼睛異物沖洗', '傷口清潔', '霧化吸入稀釋'],
+    mechanism: '與人體體液等滲透壓，用於清潔沖洗，不刺激黏膜。',
+    sideEffects: ['無'],
+    notes: '洗鼻時使用專用洗鼻器，嬰兒可用滴管每側鼻孔滴2–3滴後輕輕吸出。\n開封後注意保存，建議24小時內用完（單次包裝最佳）。\n霧化吸入時可用於稀釋藥液（依醫師指示）。',
+    storage: '室溫，開封後盡快使用',
+    keywords: '透明液體、生食水、NS',
+  },
+]
 
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
@@ -209,23 +263,12 @@ function DrugCard({ drug }) {
 }
 
 function DrugDatabase() {
-  const [drugs, setDrugs] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
   const [search, setSearch] = useState('')
   const [activeCat, setActiveCat] = useState('全部')
 
-  useEffect(() => {
-    fetchDrugsFromNotion()
-      .then(setDrugs)
-      .catch(err => setError(err.message ?? '無法載入藥庫'))
-      .finally(() => setLoading(false))
-  }, [])
+  const categories = ['全部', ...Array.from(new Set(DRUG_DATA.flatMap(d => d.categories ?? []).filter(Boolean)))]
 
-  // 從 multi_select 收集所有分類
-  const categories = ['全部', ...Array.from(new Set(drugs.flatMap(d => d.categories ?? []).filter(Boolean)))]
-
-  const filtered = drugs.filter(d => {
+  const filtered = DRUG_DATA.filter(d => {
     const q = search.trim().toLowerCase()
     const matchSearch = !q ||
       d.name.toLowerCase().includes(q) ||
@@ -234,28 +277,6 @@ function DrugDatabase() {
     const matchCat = activeCat === '全部' || (d.categories ?? []).includes(activeCat)
     return matchSearch && matchCat
   })
-
-  if (loading) {
-    return (
-      <div className="text-center py-16">
-        <div className="text-5xl mb-4 animate-spin">⏳</div>
-        <p className="text-gray-500 text-sm">正在從 Notion 載入藥庫…</p>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="bg-red-50 border-2 border-red-200 rounded-3xl p-8 text-center">
-        <p className="text-4xl mb-3">⚠️</p>
-        <p className="font-bold text-red-700 mb-2">無法連線至藥庫</p>
-        <p className="text-sm text-red-500">{error}</p>
-        <p className="text-xs text-gray-400 mt-4">
-          請確認已完成 Notion 整合設定並部署至 Vercel。
-        </p>
-      </div>
-    )
-  }
 
   return (
     <div>
@@ -485,10 +506,10 @@ export default function MedicationPage({ navigate }) {
         {tab === 'database' && (
           <div>
             <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 mb-6 flex gap-3">
-              <span className="text-xl shrink-0">📡</span>
+              <span className="text-xl shrink-0">💊</span>
               <p className="text-sm text-teal-700 leading-relaxed">
-                藥庫資料來自 <strong>Notion 幼生藥庫</strong>，由托育護理人員持續更新。
-                點擊藥品名稱可展開詳細劑量與注意事項。
+                收錄幼兒常見藥品的分類、適應症、注意事項與保存方式，由護理及托育人員整理維護。
+                點擊藥品名稱可展開詳細資訊。
               </p>
             </div>
             <DrugDatabase />
