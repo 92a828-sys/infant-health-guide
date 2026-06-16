@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm create *)",
+      "Read(//mnt/c/**)",
+      "Read(//mnt/**)",
+      "Read(//c//**)",
+      "WebFetch(domain:api.notion.com)",
+      "Bash(npx vercel *)",
+      "Bash(node --input-type=module -e \"import\\('./api/drugs.js'\\).then\\(\\(\\) => console.log\\('語法正確'\\)\\).catch\\(e => console.error\\('語法錯誤:', e.message\\)\\)\")",
+      "Bash(vercel --version)",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const m = require\\('@notionhq/client'\\); console.log\\(Object.keys\\(m\\)\\); const c = new m.Client\\({auth:'test'}\\); console.log\\(Object.getOwnPropertyNames\\(Object.getPrototypeOf\\(c\\)\\)\\); console.log\\(typeof c.databases\\)\")",
+      "Bash(node -e \"const { Client } = require\\('@notionhq/client'\\); const c = new Client\\({auth:'test'}\\); console.log\\('dataSources:', Object.keys\\(c.dataSources\\)\\)\")",
+      "Bash(npm install *)",
+      "PowerShell(vercel *)",
+      "Bash(npm run *)",
+      "Bash(git init *)"
+    ]
+  }
+}
