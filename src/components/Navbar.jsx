@@ -9,6 +9,7 @@ const navItems = [
   { id: 'emergency',   label: '緊急狀況',   emoji: '🚑' },
   { id: 'medication',  label: '用藥衛教',   emoji: '💊' },
   { id: 'diseases',   label: '常見疾病',   emoji: '🏥' },
+  { id: 'vitals',    label: '生命徵象',   emoji: '📊' },
 ]
 
 export default function Navbar({ navigate, currentPage }) {

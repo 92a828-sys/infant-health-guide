@@ -62,6 +62,15 @@ const cards = [
     border: 'border-indigo-200',
     badge: 'bg-indigo-100 text-indigo-700',
   },
+  {
+    id: 'vitals',
+    emoji: '📊',
+    title: '0–3 歲生命徵象',
+    desc: '體溫、心跳、呼吸、血氧正常值對照表與測量方式，爸媽也看得懂',
+    grad: 'from-cyan-50 to-sky-50',
+    border: 'border-cyan-200',
+    badge: 'bg-cyan-100 text-cyan-700',
+  },
 ]
 
 const quotes = [
