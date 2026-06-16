@@ -272,11 +272,41 @@ function categoryBadge(cat) {
   return CATEGORY_COLORS[cat] ?? 'bg-gray-100 text-gray-600'
 }
 
+function ImageLightbox({ src, alt, onClose }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+      onClick={onClose}
+    >
+      <div className="relative max-w-lg w-full" onClick={e => e.stopPropagation()}>
+        <img
+          src={src}
+          alt={alt}
+          className="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
+        />
+        <button
+          onClick={onClose}
+          className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg text-gray-600 hover:text-gray-900 font-bold text-lg leading-none"
+        >
+          ✕
+        </button>
+        <p className="text-center text-white/70 text-xs mt-3">{alt}　—　點擊外側關閉</p>
+      </div>
+    </div>
+  )
+}
+
 function DrugCard({ drug }) {
   const [open, setOpen] = useState(false)
+  const [lightbox, setLightbox] = useState(null)
   const firstImg = drug.images?.[0]
 
   return (
+    <>
+      {lightbox && (
+        <ImageLightbox src={lightbox} alt={drug.name} onClose={() => setLightbox(null)} />
+      )}
+
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {/* ── 卡片標題（點擊展開） ── */}
       <button
@@ -285,12 +315,21 @@ function DrugCard({ drug }) {
         aria-expanded={open}
       >
         <div className="flex items-start gap-4 px-4 py-4">
-          {/* 圖片或預設圖示 */}
-          <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-teal-50 flex items-center justify-center border border-gray-100">
-            {firstImg
-              ? <img src={firstImg} alt={drug.name} className="w-full h-full object-cover" />
-              : <span className="text-3xl">💊</span>
-            }
+          {/* 圖片縮圖：點擊放大 */}
+          <div
+            className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-teal-50 flex items-center justify-center border border-gray-100 relative group cursor-zoom-in"
+            onClick={e => { if (firstImg) { e.stopPropagation(); setLightbox(firstImg) } }}
+          >
+            {firstImg ? (
+              <>
+                <img src={firstImg} alt={drug.name} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <span className="text-white text-lg opacity-0 group-hover:opacity-100 transition-opacity drop-shadow">🔍</span>
+                </div>
+              </>
+            ) : (
+              <span className="text-3xl">💊</span>
+            )}
           </div>
 
           <div className="flex-1 min-w-0">
@@ -327,16 +366,24 @@ function DrugCard({ drug }) {
       {/* ── 展開詳細資訊 ── */}
       {open && (
         <div className="border-t border-gray-100 px-4 pb-4 pt-3 space-y-3">
-          {/* 多張圖片 */}
+          {/* 多張圖片：點擊放大 */}
           {drug.images?.length > 0 && (
             <div className="flex gap-2 overflow-x-auto pb-1">
               {drug.images.map((url, i) => (
-                <img
+                <div
                   key={i}
-                  src={url}
-                  alt={`${drug.name} 外觀 ${i + 1}`}
-                  className="h-28 rounded-xl object-cover shrink-0 border border-gray-100"
-                />
+                  className="relative group cursor-zoom-in shrink-0"
+                  onClick={() => setLightbox(url)}
+                >
+                  <img
+                    src={url}
+                    alt={`${drug.name} 外觀 ${i + 1}`}
+                    className="h-28 rounded-xl object-cover border border-gray-100"
+                  />
+                  <div className="absolute inset-0 rounded-xl bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                    <span className="text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity drop-shadow">🔍</span>
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -390,6 +437,7 @@ function DrugCard({ drug }) {
         </div>
       )}
     </div>
+    </>
   )
 }
 
