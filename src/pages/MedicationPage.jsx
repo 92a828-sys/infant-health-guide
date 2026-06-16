@@ -438,7 +438,7 @@ function DrugDatabase() {
       </div>
 
       <p className="text-xs text-gray-400 mb-4">
-        顯示 {filtered.length} / {drugs.length} 筆藥品
+        顯示 {filtered.length} / {DRUG_DATA.length} 筆藥品
       </p>
 
       {/* 藥品卡片列表 */}
