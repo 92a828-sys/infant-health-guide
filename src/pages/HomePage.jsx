@@ -53,6 +53,15 @@ const cards = [
     border: 'border-teal-200',
     badge: 'bg-teal-100 text-teal-700',
   },
+  {
+    id: 'diseases',
+    emoji: '🏥',
+    title: '認識常見疾病',
+    desc: '腸病毒、RSV、玫瑰疹、川崎病等幼兒常見疾病症狀與照護',
+    grad: 'from-indigo-50 to-violet-50',
+    border: 'border-indigo-200',
+    badge: 'bg-indigo-100 text-indigo-700',
+  },
 ]
 
 const quotes = [

@@ -8,6 +8,7 @@ import VaccinationPage from './pages/VaccinationPage'
 import DietaryPage from './pages/DietaryPage'
 import EmergencyPage from './pages/EmergencyPage'
 import MedicationPage from './pages/MedicationPage'
+import CommonDiseasesPage from './pages/CommonDiseasesPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -26,6 +27,7 @@ function App() {
       case 'dietary':    return <DietaryPage navigate={navigate} />
       case 'emergency':  return <EmergencyPage navigate={navigate} />
       case 'medication': return <MedicationPage navigate={navigate} />
+      case 'diseases':   return <CommonDiseasesPage navigate={navigate} />
       default:           return <HomePage navigate={navigate} />
     }
   }
