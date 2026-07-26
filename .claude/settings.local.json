@@ -16,7 +16,16 @@
       "Bash(npm install *)",
       "PowerShell(vercel *)",
       "Bash(npm run *)",
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "WebFetch(domain:health.gov.taipei)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\a0903\\\\Desktop\\\\infant-health-guide\\\\幼生藥庫\")",
+      "Bash(Select-Object Name, Extension, Length)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\a0903\\\\Desktop\\\\infant-health-guide\\\\幼生藥庫\" | Select-Object Name, Extension, @{N='Size\\(KB\\)';E={[math]::Round\\($_.Length/1KB,1\\)}})",
+      "PowerShell(New-Item *)",
+      "Bash(git commit -m 'fix: 修正幼生藥庫空白問題（drugs 變數殘留） *)"
     ]
   }
 }

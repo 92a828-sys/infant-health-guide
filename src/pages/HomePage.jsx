@@ -71,6 +71,33 @@ const cards = [
     border: 'border-cyan-200',
     badge: 'bg-cyan-100 text-cyan-700',
   },
+  {
+    id: 'growth-chart',
+    emoji: '📈',
+    title: '生長曲線知多少',
+    desc: 'WHO生長曲線教學＋線上百分位估算器，早產兒矯正年齡換算',
+    grad: 'from-lime-50 to-emerald-50',
+    border: 'border-lime-200',
+    badge: 'bg-lime-100 text-lime-700',
+  },
+  {
+    id: 'early-learning',
+    emoji: '🧠',
+    title: '早期學習與親子共讀',
+    desc: '大腦開發三原則、分齡共讀技巧、感官刺激遊戲活動',
+    grad: 'from-fuchsia-50 to-purple-50',
+    border: 'border-fuchsia-200',
+    badge: 'bg-fuchsia-100 text-fuchsia-700',
+  },
+  {
+    id: 'caregiver',
+    emoji: '🧑‍🏫',
+    title: '托育人員專區',
+    desc: '日常觀察紀錄表、發展活動設計、與家長溝通話術範本',
+    grad: 'from-sky-50 to-blue-50',
+    border: 'border-sky-200',
+    badge: 'bg-sky-100 text-sky-700',
+  },
 ]
 
 const quotes = [

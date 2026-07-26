@@ -3,6 +3,7 @@ import { useState } from 'react'
 const navItems = [
   { id: 'home',        label: '首頁',      emoji: '🏠' },
   { id: 'growth',      label: '生長里程碑', emoji: '📏' },
+  { id: 'growth-chart', label: '生長曲線',  emoji: '📈' },
   { id: 'symptoms',    label: '常見症狀',   emoji: '🌡️' },
   { id: 'vaccination', label: '疫苗接種',   emoji: '💉' },
   { id: 'dietary',     label: '飲食副食品', emoji: '🥣' },
@@ -10,6 +11,8 @@ const navItems = [
   { id: 'medication',  label: '用藥衛教',   emoji: '💊' },
   { id: 'diseases',   label: '常見疾病',   emoji: '🏥' },
   { id: 'vitals',    label: '生命徵象',   emoji: '📊' },
+  { id: 'early-learning', label: '早期學習', emoji: '🧠' },
+  { id: 'caregiver', label: '托育專區',   emoji: '🧑‍🏫' },
 ]
 
 export default function Navbar({ navigate, currentPage }) {
