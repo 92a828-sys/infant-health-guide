@@ -131,6 +131,56 @@ function BleachCalculator() {
   )
 }
 
+const facilityChecklist = [
+  '逃生通道、太平門保持暢通，無雜物堆放',
+  '滅火器在有效期限內，並定期檢查壓力正常',
+  '緊急照明燈與警報系統功能正常',
+  '電器插座裝設安全蓋，電線妥善固定收納',
+  '樓梯口、陽台、頂樓出入口裝設安全門欄',
+  '遊戲器材、遊戲場地面軟墊無破損鬆動',
+  '藥品、清潔用品等危險物品上鎖存放於幼兒無法取得處',
+  '書櫃等高大家具固定於牆面，無倒塌風險',
+  '飲用水設備、食品儲存區域清潔衛生',
+  '緊急聯絡資訊（119、家長電話、鄰近醫院）張貼於明顯處',
+]
+
+const drillPoints = [
+  '建議每學期至少辦理1次消防（火災）逃生演練，全園師生共同參與並留存紀錄',
+  '依所在地區風險，建議增加地震避難演練（趴下、掩護、穩住）',
+  '演練後應檢討疏散動線是否順暢、集合點是否安全清楚、人數清點程序是否確實',
+  '建立緊急應變小組與分工（如疏散引導、清點人數、對外聯繫、急救處理），並定期更新聯絡名冊',
+  '演練紀錄應留存（日期、參與人數、演練類型、檢討事項），以供主管機關查核',
+]
+
+const incidentReportSteps = [
+  '事故發生當下，先確保幼兒安全並視情況給予急救處理，嚴重時立即撥打119',
+  '通知機構負責人／園所主管，並儘速以電話聯繫家長告知狀況（勿等放學才告知）',
+  '詳實填寫事故傷害紀錄表：時間、地點、經過、處理方式、後續狀況',
+  '依機構規定期限與主管機關要求，將事故通報表送交主管機關備查',
+  '事後檢討事故原因，研擬改善措施，避免同類事件再次發生',
+]
+
+const incidentScripts = [
+  {
+    scenario: '輕微擦挫傷通知',
+    tone: 'bg-emerald-50 border-emerald-200 text-emerald-800',
+    text: '「跟您說一下，○○今天在遊戲場跑步時不小心跌倒，膝蓋擦傷了一點皮，我們已經用生理食鹽水清潔並貼上OK繃，他當下有哭一下，但現在活動力恢復正常、有繼續開心玩耍，請您回家後留意一下傷口狀況。」',
+    note: '具體描述事發經過、當下處理方式與目前狀態，讓家長清楚掌握全貌而非模糊帶過',
+  },
+  {
+    scenario: '碰撞頭部通知',
+    tone: 'bg-amber-50 border-amber-200 text-amber-800',
+    text: '「要跟您說一件事，○○剛剛在教室裡不小心撞到頭，額頭有點紅腫，我們已經冰敷處理，這段時間他的意識、活動力都正常、也有正常說話反應，會持續留意觀察到您接回去。接下來24–72小時在家也請多留意他的精神狀況，如有嗜睡、嘔吐、異常等情形請儘速就醫。」',
+    note: '頭部撞傷須特別詳細說明觀察重點與時間範圍，並給家長明確的後續注意事項',
+  },
+  {
+    scenario: '需送醫狀況通知',
+    tone: 'bg-red-50 border-red-200 text-red-800',
+    text: '「（電話聯繫）您好，跟您報告一個緊急狀況，○○剛才發生……，我們已經立即為他做……處理，目前狀況是……，我們評估後決定叫救護車／由老師陪同送往ＯＯ醫院，麻煩您盡快到醫院與我們會合，路上請小心。」',
+    note: '緊急送醫狀況務必第一時間電話聯繫，語氣冷靜但明確傳達已處理的內容與現況',
+  },
+]
+
 const activities = [
   {
     age: '0～1歲', domain: '粗動作／感官',
@@ -235,7 +285,7 @@ export default function CaregiverToolsPage({ navigate }) {
         <div className="text-6xl mb-4">🧑‍🏫</div>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">托育人員專區</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
-          日常觀察紀錄、團體膳食與備餐衛生、感染管制與停托標準、發展活動設計與家長溝通參考工具
+          日常觀察紀錄、團體膳食與備餐衛生、感染管制與停托標準、空間安全與事故通報、發展活動設計與家長溝通參考工具
         </p>
       </div>
 
@@ -569,6 +619,83 @@ export default function CaregiverToolsPage({ navigate }) {
 
           <SourceNote>
             資料參考：衛生福利部疾病管制署環境消毒建議濃度、TOCC問診原則衛教資料。漂白水稀釋比例為通用估算，實際操作請依機構SOP或衛生單位指引為準。
+          </SourceNote>
+        </section>
+
+        {/* Facility safety checklist */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <span>✅</span> 空間與設備安全檢核表
+            </h2>
+            <button
+              onClick={() => window.print()}
+              className="text-xs bg-sky-500 text-white px-3 py-1.5 rounded-full hover:bg-sky-600 transition-colors print:hidden"
+            >
+              🖨️ 列印
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="bg-emerald-50 text-emerald-800">
+                  <th className="border border-emerald-200 p-2 text-left">檢核項目</th>
+                  <th className="border border-emerald-200 p-2 w-24">正常／異常</th>
+                  <th className="border border-emerald-200 p-2 w-32">改善備註</th>
+                </tr>
+              </thead>
+              <tbody>
+                {facilityChecklist.map((item, i) => (
+                  <tr key={i}>
+                    <td className="border border-gray-200 p-2 text-gray-700">{item}</td>
+                    <td className="border border-gray-200 p-2 h-10">&nbsp;</td>
+                    <td className="border border-gray-200 p-2">&nbsp;</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-400 mt-3">建議至少每月檢核一次，發現異常應立即改善並記錄追蹤。</p>
+        </section>
+
+        {/* Emergency drills */}
+        <section className="bg-white border-2 border-orange-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🏃</span> 緊急應變演練
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {drillPoints.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+          <SourceNote>
+            資料參考：兒童及少年福利機構設置標準防火避難相關規定、消防法及地方消防局公告之防火安全演練要求。實際辦理頻率與流程請依機構規模與地方主管機關規定為準。
+          </SourceNote>
+        </section>
+
+        {/* Incident reporting & parent communication */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>📋</span> 事故傷害通報流程
+          </h2>
+          <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+            {incidentReportSteps.map((s, i) => <li key={i}>{s}</li>)}
+          </ol>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>💬</span> 事故通知家長話術範本
+          </h2>
+          <div className="space-y-4">
+            {incidentScripts.map((s, i) => (
+              <div key={i} className={`border-2 rounded-2xl p-5 ${s.tone}`}>
+                <p className="font-bold text-sm mb-2">{s.scenario}</p>
+                <p className="text-sm leading-relaxed mb-3">「{s.text.replace(/^「|」$/g, '')}」</p>
+                <p className="text-xs opacity-80 border-t border-current/20 pt-2">💡 {s.note}</p>
+              </div>
+            ))}
+          </div>
+          <SourceNote>
+            資料參考：兒童及少年福利機構重大偶發事件通報規定、一般托育機構事故傷害處理實務。通報時限與表單格式請依所屬機構及地方主管機關規定辦理。
           </SourceNote>
         </section>
 

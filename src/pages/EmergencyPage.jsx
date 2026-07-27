@@ -82,16 +82,20 @@ const emergencies = [
     head: 'text-yellow-700',
     steps: [
       {
-        phase: '立即觀察（撞傷後 24 小時）',
-        content: '檢查意識清醒度、有無嘔吐（超過 2 次）、哭鬧是否可安撫、有無不對稱出現的頭皮血腫',
+        phase: '立即觀察（撞傷後最初 24 小時，密集觀察期）',
+        content: '檢查意識清醒度、有無嘔吐（超過 2 次）、哭鬧是否可安撫、有無不對稱出現的頭皮血腫；白天每 2–4 小時、入睡後也應叫醒一次確認可正常清醒、反應正常',
       },
       {
         phase: '立即送急診的警訊',
         content: '意識不清或叫不醒、反覆嘔吐、抽搐、頭骨凹陷感、耳/鼻流出清澈液體、瞳孔大小不一',
       },
       {
-        phase: '居家觀察（輕微撞傷）',
-        content: '2 歲以下若從 > 1 公尺高度跌落、2 歲以上從 > 1.5 公尺跌落，建議就醫評估；觀察期間 2–4 小時叫醒一次確認狀態',
+        phase: '72 小時延長觀察期',
+        content: '多數危險徵象在撞傷後24小時內出現，但部分遲發性顱內出血可能延遲顯現，建議延長留意至撞傷後72小時：期間若新出現嗜睡加重、頭痛加劇、反覆嘔吐、步態不穩或個性行為改變，仍應立即就醫',
+      },
+      {
+        phase: '何時建議直接就醫評估',
+        content: '2 歲以下若從 > 1 公尺高度跌落、2 歲以上從 > 1.5 公尺跌落，或跌落至硬質地面／撞及尖銳物，建議就醫評估，不必等待症狀出現',
       },
     ],
   },
@@ -170,14 +174,14 @@ export default function EmergencyPage({ navigate }) {
           ))}
         </div>
 
-        {/* CPR reminder */}
+        {/* CPR full walkthrough */}
         <div className="bg-purple-50 border-2 border-purple-200 rounded-3xl p-6 mb-6">
-          <h2 className="font-bold text-purple-800 text-lg mb-3">💜 嬰幼兒 CPR 基本要點</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <h2 className="font-bold text-purple-800 text-lg mb-3">💜 嬰幼兒 CPR 完整步驟</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
             {[
               { step: '評估環境安全', icon: '👀', desc: '確保現場安全，不讓救助者受傷' },
-              { step: '確認反應', icon: '📢', desc: '輕拍腳底（嬰兒）或肩膀，大聲呼喚' },
-              { step: '叫人撥 119', icon: '📞', desc: '立即叫人求助，啟動緊急救護體系' },
+              { step: '確認反應與呼吸', icon: '📢', desc: '輕拍腳底（嬰兒）或肩膀，大聲呼喚；觀察胸部起伏5–10秒' },
+              { step: '叫人撥 119、取 AED', icon: '📞', desc: '立即請人求助；若僅一人在場，先施行約2分鐘CPR再打電話' },
             ].map(c => (
               <div key={c.step} className="bg-white rounded-2xl p-4 text-center">
                 <span className="text-3xl mb-2 block">{c.icon}</span>
@@ -186,9 +190,44 @@ export default function EmergencyPage({ navigate }) {
               </div>
             ))}
           </div>
-          <p className="text-xs text-purple-600 mt-4 text-center">
-            強烈建議家長與托育人員參加<strong>嬰幼兒急救訓練課程</strong>，學習完整 CPR 技術。
-          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <div className="bg-white rounded-2xl p-4">
+              <p className="font-semibold text-purple-700 text-sm mb-2">👶 嬰兒（未滿1歲）CPR</p>
+              <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+                <li>按壓位置：胸骨下半部（兩乳頭連線中點下方），以兩指或雙手環繞拇指法按壓</li>
+                <li>按壓深度：約4公分（胸廓前後徑約1/3）</li>
+                <li>按壓速率：每分鐘100–120下</li>
+                <li>比例：每30下按壓，給予2次人工呼吸（口對口鼻，每次約1秒，見胸部起伏即可）</li>
+                <li>持續施行直到專業救護人員抵達、患者恢復反應，或施救者體力無法負荷</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-2xl p-4">
+              <p className="font-semibold text-purple-700 text-sm mb-2">🧒 幼兒（1–8歲）CPR</p>
+              <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+                <li>按壓位置同為胸骨下半部，依孩子體型以單手或雙手按壓</li>
+                <li>按壓深度：約5公分（胸廓前後徑約1/3）</li>
+                <li>按壓速率與比例（100–120下/分，30:2）與嬰兒相同</li>
+                <li>若有AED，滿1歲即可使用，優先使用兒童專用電擊貼片／衰減器，若無則使用成人款繼續施救</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-white border border-purple-200 rounded-2xl p-4">
+            <p className="text-sm text-purple-700 leading-relaxed">
+              🎥 <strong>影片教學：</strong>可至
+              <a href="https://www.youtube.com/user/redcrossROC" target="_blank" rel="noopener noreferrer" className="underline font-semibold mx-1">
+                中華民國紅十字會 YouTube 頻道
+              </a>
+              搜尋最新嬰幼兒CPR與異物哽塞教學影片。強烈建議家長與托育人員實際報名參加紅十字會、消防局等單位開設的
+              <strong>嬰幼兒急救訓練課程</strong>，透過假人操作練習才能真正熟悉正確力道與節奏。
+            </p>
+          </div>
+        </div>
+
+        <div className="mb-6 bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+          <span className="shrink-0">📋</span>
+          <p>資料參考：中華民國紅十字會、台灣兒科醫學會CPR教學指引；頭部撞傷觀察期原則參考一般兒科臨床衛教建議。實際急救仍以受過認證訓練之人員操作為準，本頁僅供事前熟悉流程使用。</p>
         </div>
 
         <div className="mt-8 text-center">
