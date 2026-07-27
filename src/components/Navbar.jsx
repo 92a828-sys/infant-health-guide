@@ -10,6 +10,7 @@ const navItems = [
   { id: 'emergency',   label: '緊急狀況',   emoji: '🚑' },
   { id: 'medication',  label: '用藥衛教',   emoji: '💊' },
   { id: 'diseases',   label: '常見疾病',   emoji: '🏥' },
+  { id: 'newborn-safety', label: '新生兒安全', emoji: '🛡️' },
   { id: 'vitals',    label: '生命徵象',   emoji: '📊' },
   { id: 'early-learning', label: '早期學習', emoji: '🧠' },
   { id: 'caregiver', label: '托育專區',   emoji: '🧑‍🏫' },

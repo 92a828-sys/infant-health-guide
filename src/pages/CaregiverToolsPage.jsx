@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 function SourceNote({ children }) {
   return (
     <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
@@ -35,6 +37,99 @@ const outbreakPrinciples = [
     ],
   },
 ]
+
+const reportingSteps = [
+  '機構人員發現疑似法定傳染病個案（如腸病毒重症、麻疹、水痘或諾羅病毒群聚等），應立即通知機構負責人並請家長帶幼兒就醫確診',
+  '依傳染病防治法規定，法定傳染病須於診斷或發現後規定時限內（多數為24小時內）通報轄區衛生局(所)，機構不可自行延遲或隱匿',
+  '配合衛生單位進行疫情調查，提供班級接觸者名冊、發病時間等資訊',
+  '啟動班級／機構內防治措施（加強消毒、健康監測，必要時配合停課），並持續追蹤至衛生單位解除列管',
+]
+
+const suspensionRules = [
+  { disease: '發燒', rule: '退燒後需滿24小時，且未使用退燒藥物情況下體溫正常，才可返園' },
+  { disease: '腸病毒（手足口病／疱疹性咽峽炎）', rule: '請假原則以醫師診斷日或發病日當天為第1天，停托滿7天；同班一週內2名以上病例且逢流行期，經衛生單位認定可能須全班停課7天' },
+  { disease: '水痘', rule: '全身疹子皆已結痂乾燥（通常出疹後約5–7天）才可返園' },
+  { disease: '流行性結膜炎（紅眼症）', rule: '症狀（分泌物、紅腫）消失後，經醫師評估才可返園' },
+  { disease: '諾羅／輪狀病毒腸胃炎', rule: '腹瀉、嘔吐症狀緩解至少48小時後才可返園，且應避免協助備餐' },
+  { disease: '流感等呼吸道傳染病', rule: '依當時衛生單位公告之隔離／返園條件為準' },
+]
+
+const staffHealthMgmt = [
+  '到職前及在職期間應依規定完成健康檢查，項目包含胸部X光（排除開放性肺結核）等傳染病篩檢，通常每1–2年更新一次',
+  '負責備餐或協助餵食之人員，若出現腹瀉、嘔吐等腸胃道症狀，應暫停接觸食物或餵食工作，症狀緩解至少48小時後才可恢復',
+  '出現呼吸道傳染病症狀（發燒、咳嗽等）之人員，應配戴口罩並考慮請假，避免帶病到園工作',
+  '如確診法定傳染病，須依醫囑完成治療並經評估無傳染力後，才可返回工作崗位',
+  '機構應建立人員健康資料檔案，定期更新健康檢查與疫苗接種紀錄（如MMR、水痘抗體、流感疫苗等）',
+]
+
+const handHygieneMoments = ['入園時、進食前後', '如廁後、協助幼兒如廁或更換尿布後', '接觸分泌物、嘔吐物、傷口後', '擤鼻涕、咳嗽、打噴嚏後', '接觸公共物品、玩具後']
+
+const envCleaningRules = ['每日清潔消毒幼兒常接觸物品表面（桌面、玩具、門把、扶手）', '尿布台、如廁設施每次使用後清潔消毒', '嘔吐物、排泄物污染區域應立即以高濃度漂白水處理並做好個人防護（手套、口罩）', '寢具、毛巾等應定期清洗曝曬，避免共用']
+
+const toccItems = [
+  { letter: 'T', word: 'Travel 旅遊史', desc: '近期是否有國內外旅遊或疫區活動史' },
+  { letter: 'O', word: 'Occupation 職業', desc: '家中成員是否於高風險場所工作（如醫療院所）' },
+  { letter: 'C', word: 'Contact 接觸史', desc: '是否接觸過確診／疑似傳染病個案' },
+  { letter: 'C', word: 'Cluster 群聚史', desc: '近期是否參與人群聚集場合，或家中／班級是否有群聚疫情' },
+]
+
+function BleachCalculator() {
+  const [liters, setLiters] = useState('')
+  const [ppm, setPpm] = useState(500)
+
+  const sourcePpm = 50000 // 市售家用漂白水約5%，估算為50,000ppm有效氯
+  const num = parseFloat(liters)
+  const cc = num > 0 ? Math.round(num * 1000 * (ppm / sourcePpm)) : null
+
+  const tiers = [
+    { value: 500, label: '500 ppm', desc: '日常環境／玩具消毒' },
+    { value: 1000, label: '1000 ppm', desc: '腸病毒流行期／物體表面加強消毒' },
+    { value: 5000, label: '5000 ppm', desc: '嘔吐物、排泄物等體液污染處理' },
+  ]
+
+  return (
+    <div className="bg-white/70 border border-teal-100 rounded-2xl p-4">
+      <p className="text-sm font-semibold text-gray-700 mb-3">🧮 漂白水稀釋計算器</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+        <div>
+          <label className="text-xs font-semibold text-gray-500 mb-1 block">需要配製的水量（公升）</label>
+          <input
+            type="number" min="0" step="0.5" value={liters}
+            onChange={e => setLiters(e.target.value)}
+            placeholder="例如：10"
+            className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm"
+          />
+        </div>
+        <div>
+          <label className="text-xs font-semibold text-gray-500 mb-1 block">目標濃度</label>
+          <div className="flex gap-1.5">
+            {tiers.map(t => (
+              <button
+                key={t.value}
+                onClick={() => setPpm(t.value)}
+                className={`flex-1 py-2 rounded-xl text-xs font-medium border transition-colors ${ppm === t.value ? 'bg-teal-500 text-white border-teal-500' : 'bg-white text-gray-600 border-gray-200'}`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p className="text-xs text-gray-400 mb-3">{tiers.find(t => t.value === ppm)?.desc}</p>
+      {cc !== null && (
+        <div className="bg-teal-50 border border-teal-200 rounded-xl p-3">
+          <p className="text-sm text-teal-800">
+            需加入市售漂白水（約5%原液）約 <strong className="text-lg">{cc} cc</strong>，
+            兌水至總量 {liters} 公升，配成約 {ppm} ppm 消毒液
+          </p>
+        </div>
+      )}
+      <p className="text-xs text-gray-400 mt-3">
+        以市售家用漂白水濃度約5%（約50,000ppm有效氯）估算，如使用產品濃度不同請自行換算比例；稀釋消毒液建議當日配製當日用完。
+      </p>
+    </div>
+  )
+}
 
 const activities = [
   {
@@ -140,7 +235,7 @@ export default function CaregiverToolsPage({ navigate }) {
         <div className="text-6xl mb-4">🧑‍🏫</div>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">托育人員專區</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
-          日常觀察紀錄、團體膳食與備餐衛生、發展活動設計與家長溝通參考工具
+          日常觀察紀錄、團體膳食與備餐衛生、感染管制與停托標準、發展活動設計與家長溝通參考工具
         </p>
       </div>
 
@@ -375,6 +470,105 @@ export default function CaregiverToolsPage({ navigate }) {
           </div>
           <SourceNote>
             資料參考：傳染病防治法及地方衛生局群聚事件處理指引、衛生福利部疾病管制署預防接種時程表。實際隔離／健康監測天數與通報流程請依當次衛生單位指示與最新公告為準。
+          </SourceNote>
+        </section>
+
+        {/* Infectious disease reporting, isolation & suspension standards */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>📢</span> 傳染病通報流程
+          </h2>
+          <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+            {reportingSteps.map((s, i) => <li key={i}>{s}</li>)}
+          </ol>
+        </section>
+
+        <section className="bg-white border-2 border-orange-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🚸</span> 停托標準參考
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="bg-orange-50 text-orange-800">
+                  <th className="border border-orange-200 p-2 text-left">情況</th>
+                  <th className="border border-orange-200 p-2 text-left">返園條件</th>
+                </tr>
+              </thead>
+              <tbody>
+                {suspensionRules.map(r => (
+                  <tr key={r.disease}>
+                    <td className="border border-gray-200 p-2 font-medium text-gray-700 whitespace-nowrap">{r.disease}</td>
+                    <td className="border border-gray-200 p-2 text-gray-600">{r.rule}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <SourceNote>
+            資料參考：教育部與地方政府防疫停課標準公告、衛生福利部疾病管制署腸病毒停課停托標準。實際標準會依當時疫情與地方主管機關公告調整，請以最新公告為準。
+          </SourceNote>
+        </section>
+
+        {/* Staff health management */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🩺</span> 人員健康管理
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {staffHealthMgmt.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+          <SourceNote>
+            資料參考：兒童及少年福利機構設置標準人員健康檢查相關規定、機構職業衛生一般實務。實際檢查項目與週期請依所屬機構規範及地方主管機關要求為準。
+          </SourceNote>
+        </section>
+
+        {/* Daily infection control */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🧼</span> 感染管制日常執行
+          </h2>
+
+          <p className="text-sm font-semibold text-gray-600 mb-2">✋ 手部衛生時機</p>
+          <div className="flex flex-wrap gap-2 mb-5">
+            {handHygieneMoments.map(m => (
+              <span key={m} className="text-xs font-medium bg-sky-100 text-sky-700 rounded-full px-3 py-1.5">{m}</span>
+            ))}
+          </div>
+
+          <p className="text-sm font-semibold text-gray-600 mb-2">🧽 環境清潔</p>
+          <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside mb-5">
+            {envCleaningRules.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+
+          <p className="text-sm font-semibold text-gray-600 mb-2">🗣️ TOCC 詢問原則</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+            {toccItems.map(t => (
+              <div key={t.word} className="bg-indigo-50 border border-indigo-100 rounded-2xl p-3 flex gap-3">
+                <span className="text-xl font-bold text-indigo-500 shrink-0">{t.letter}</span>
+                <div>
+                  <p className="font-semibold text-indigo-700 text-xs">{t.word}</p>
+                  <p className="text-xs text-gray-500">{t.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mb-5">
+            適用於幼兒或訪客出現不明原因發燒、呼吸道或腸胃道症狀時的初步詢問，協助研判傳播風險並決定是否需要進一步隔離或通報。
+          </p>
+
+          <div className="bg-sky-50 border border-sky-200 rounded-2xl p-4 mb-5">
+            <p className="text-sm text-sky-800 leading-relaxed">
+              📎 本頁提供之漂白水稀釋原則為通用參考；若貴機構（如IC班／NIDO班）已建置專屬的<strong>「漂白水消毒SOP」</strong>
+              （含1000/5000 PPM四桶配置），建議與該SOP相互對照使用。
+              <span className="italic text-sky-500">（連結位置預留，待補上實際連結）</span>
+            </p>
+          </div>
+
+          <BleachCalculator />
+
+          <SourceNote>
+            資料參考：衛生福利部疾病管制署環境消毒建議濃度、TOCC問診原則衛教資料。漂白水稀釋比例為通用估算，實際操作請依機構SOP或衛生單位指引為準。
           </SourceNote>
         </section>
 

@@ -19,12 +19,26 @@ const symptoms = [
     color: 'from-red-50 to-rose-50',
     border: 'border-red-200',
     badge: 'bg-red-100 text-red-700',
+    concept: [
+      '發燒是身體對抗感染的正常免疫反應：體溫上升有助抑制病原體繁殖、活化免疫細胞，是身體正在「作戰」的訊號，不等於疾病本身',
+      '體溫的「高低」不直接等於病情嚴重度，觀察孩子的精神活力、食慾、呼吸狀況，比單看溫度數字更重要',
+      '用藥的目的是讓孩子感到舒服，不是把體溫壓到正常值；退燒後幾小時體溫再次上升是常見現象，不代表藥物無效或病情惡化',
+      '3 個月以下嬰兒發燒（肛溫 ≥38°C）是特殊警訊，新生兒免疫系統尚未成熟，須直接就醫評估，不適用一般在家觀察原則',
+    ],
     care: [
       '補充足夠水分（母乳、配方奶、開水）',
       '穿著舒適輕薄衣物，避免包太緊',
-      '體溫 ≥ 38.5°C 且不舒服時，可使用退燒藥',
+      '體溫 ≥ 38.5°C 且孩子感到不舒服時，可使用退燒藥',
       '溫水擦澡可輔助降溫（水溫約 30–37°C）',
       '記錄發燒時間、最高溫度及退燒藥使用時間',
+    ],
+    medication: [
+      '常用退燒藥為乙醯胺酚（Acetaminophen，如普拿疼）與布洛芬（Ibuprofen，如美林），須依醫師／藥師指示的體重劑量給藥，不可自行增量',
+      '同一種藥物兩劑之間，乙醯胺酚需間隔至少4–6小時、布洛芬需間隔至少6–8小時，24小時內不超過建議總劑量',
+      '若考慮兩種藥物交替使用，務必先詢問醫師或藥師確認劑量與間隔時間，避免因換算錯誤或分工混亂而不慎過量給藥',
+      '務必確認手邊所有藥品（包含複方感冒糖漿）是否已含有乙醯胺酚或布洛芬成分，重複用藥是最常見的過量原因',
+      '布洛芬不適用於6個月以下嬰兒、嚴重脫水或水痘感染中的幼兒，使用前務必詢問醫師',
+      '孩子精神活力良好、體溫略高但無明顯不適時，不一定需要立即用藥',
     ],
     emergency: [
       '3 個月以下嬰兒，肛溫 ≥ 38°C',
@@ -151,6 +165,85 @@ const symptoms = [
       '已知嚴重過敏史，接觸過敏原後出現疹子',
     ],
   },
+  {
+    id: 'diaper-rash',
+    emoji: '🍑',
+    title: '尿布疹',
+    subtitle: '尿布包覆範圍內的刺激性皮膚炎，需與念珠菌感染區分',
+    color: 'from-orange-50 to-amber-50',
+    border: 'border-orange-200',
+    badge: 'bg-orange-100 text-orange-700',
+    signs: [
+      '好發於尿布包覆的屁股、鼠蹊部，皮膚皺褶處通常不受影響',
+      '皮膚泛紅、局部脫皮，嚴重時可能破皮或滲液',
+      '若皮膚皺褶處也出現紅疹、邊緣清楚且周圍散布小紅疹（衛星病灶），需懷疑念珠菌（黴菌）感染尿布疹',
+    ],
+    care: [
+      '勤換尿布，減少皮膚與排泄物接觸的時間',
+      '每次更換時以溫水清潔，輕輕拍乾而非用力擦拭',
+      '塗抹足量氧化鋅或凡士林等隔離型護膚膏，形成保護層',
+      '適度讓屁股透氣，可安排短時間不包尿布',
+      '若懷疑念珠菌感染，一般護膚膏無效，需醫師開立抗黴菌藥膏',
+    ],
+    emergency: [
+      '疹子出現水泡、化膿或明顯滲液',
+      '合併發燒',
+      '擦護膚膏3–5天未改善或持續惡化',
+      '範圍迅速擴大，超出尿布包覆範圍',
+    ],
+  },
+  {
+    id: 'eczema',
+    emoji: '🧴',
+    title: '濕疹',
+    subtitle: '嬰幼兒常見的皮膚乾燥發炎，好發於臉頰與四肢伸側',
+    color: 'from-yellow-50 to-orange-50',
+    border: 'border-yellow-200',
+    badge: 'bg-yellow-100 text-yellow-700',
+    signs: [
+      '好發於臉頰、頭皮、四肢伸側，皮膚乾燥粗糙、泛紅',
+      '可能有細小丘疹，搔癢明顯，寶寶會磨蹭或搔抓',
+      '症狀時好時壞，常因環境乾燥、悶熱、口水刺激而加劇',
+    ],
+    care: [
+      '加強保濕是核心：每日至少塗抹保濕乳液2次以上，洗澡後3分鐘內立即塗抹鎖水',
+      '洗澡水溫不宜過高（約37–38°C），時間不超過10分鐘，避免過度使用清潔劑',
+      '選擇無香料、無皂鹼的溫和沐浴清潔品',
+      '剪短指甲，必要時夜間可戴透氣手套避免抓破皮膚',
+      '依醫師指示使用外用類固醇藥膏控制發炎，勿自行長期使用或自行停藥',
+    ],
+    emergency: [
+      '皮膚出現黃色結痂、化膿等感染徵象',
+      '搔癢劇烈已影響睡眠，且加強保濕仍無法改善',
+      '疹子快速擴散並合併發燒',
+    ],
+  },
+  {
+    id: 'atopic-dermatitis',
+    emoji: '🌿',
+    title: '異位性皮膚炎',
+    subtitle: '慢性反覆發作的過敏體質皮膚病，目標為長期穩定控制',
+    color: 'from-emerald-50 to-teal-50',
+    border: 'border-emerald-200',
+    badge: 'bg-emerald-100 text-emerald-700',
+    signs: [
+      '屬於慢性、反覆發作的皮膚疾病，常與過敏體質（氣喘、過敏性鼻炎）家族史相關',
+      '嬰兒期好發於臉頰、頭皮及四肢伸側；較大幼兒常轉為肘窩、膝窩等關節屈側',
+      '皮膚長期乾燥，搔癢劇烈，反覆搔抓可能造成皮膚增厚、色素沉澱',
+    ],
+    care: [
+      '「保濕、保濕、保濕」是治療基礎：每日多次規律塗抹足量保濕劑，即使沒有發作也要持續使用',
+      '急性發作期依醫師指示使用適當強度的外用藥膏，並依指示逐漸減量，勿自行驟停',
+      '找出並避免個人誘發因子（特定衣物材質、清潔用品、悶熱流汗、塵蟎等）',
+      '嚴重、反覆發作或懷疑食物誘發者，建議轉介皮膚科或過敏免疫科進一步評估',
+      '異位性皮膚炎為慢性病程，目標是長期穩定控制，而非一次「根治」，須與醫療團隊長期配合',
+    ],
+    emergency: [
+      '皮膚大範圍破損合併發燒、化膿，需排除細菌或疱疹病毒感染（疱疹性濕疹屬皮膚科急症）',
+      '症狀嚴重影響睡眠與生活品質，一般保濕與藥膏控制效果不佳',
+      '合併明顯呼吸道過敏症狀（如喘鳴），需一併評估',
+    ],
+  },
 ]
 
 function SymptomCard({ s }) {
@@ -176,6 +269,32 @@ function SymptomCard({ s }) {
 
       {open && (
         <div className="px-6 pb-6 space-y-4">
+          {s.concept && (
+            <div className="bg-indigo-50/80 border border-indigo-200 rounded-2xl p-4">
+              <h4 className="font-semibold text-indigo-700 text-sm mb-3">💡 正確觀念</h4>
+              <ul className="space-y-2">
+                {s.concept.map((c, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-indigo-700">
+                    <span className="shrink-0">•</span>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {s.signs && (
+            <div className="bg-white/70 rounded-2xl p-4">
+              <h4 className="font-semibold text-gray-700 text-sm mb-3">🔍 辨識重點</h4>
+              <ul className="space-y-2">
+                {s.signs.map((c, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-gray-600">
+                    <span className="text-gray-400 shrink-0">•</span>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="bg-white/70 rounded-2xl p-4">
             <h4 className="font-semibold text-gray-700 text-sm mb-3">🏠 居家照護建議</h4>
             <ul className="space-y-2">
@@ -187,6 +306,19 @@ function SymptomCard({ s }) {
               ))}
             </ul>
           </div>
+          {s.medication && (
+            <div className="bg-teal-50/80 border border-teal-200 rounded-2xl p-4">
+              <h4 className="font-semibold text-teal-700 text-sm mb-3">💊 退燒藥使用順序（防過量給藥）</h4>
+              <ul className="space-y-2">
+                {s.medication.map((m, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-teal-700">
+                    <span className="shrink-0">•</span>
+                    <span>{m}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="bg-red-50/80 border border-red-200 rounded-2xl p-4">
             <h4 className="font-semibold text-red-700 text-sm mb-3">🚨 立即就醫時機</h4>
             <ul className="space-y-2">
@@ -234,6 +366,11 @@ export default function CommonSymptomsPage({ navigate }) {
             就算最後什麼都沒有，帶去看醫生也是正確的選擇。
             比較狀況總是可以在下次更準確地判斷。
           </p>
+        </div>
+
+        <div className="mt-4 bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+          <span className="shrink-0">📋</span>
+          <p>資料參考：衛生福利部疾病管制署、台灣兒科醫學會發燒與退燒藥使用衛教資料、皮膚科兒童常見皮膚問題衛教資訊。個別用藥劑量與間隔仍請以醫師或藥師指示為準。</p>
         </div>
 
         <div className="mt-8 text-center">
