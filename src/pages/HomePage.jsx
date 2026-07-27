@@ -47,8 +47,8 @@ const cards = [
   {
     id: 'medication',
     emoji: '💊',
-    title: '用藥衛教',
-    desc: '退燒藥劑量計算、幼兒用藥原則、禁止藥物一覽',
+    title: '用藥與托藥管理',
+    desc: '退燒藥劑量計算、禁用藥物、幼生藥庫、三讀五對托藥SOP',
     grad: 'from-teal-50 to-cyan-50',
     border: 'border-teal-200',
     badge: 'bg-teal-100 text-teal-700',

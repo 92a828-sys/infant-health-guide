@@ -544,6 +544,37 @@ const principles = [
   { icon: '🔒', title: '置於幼兒拿不到處', desc: '藥物外觀鮮豔，幼兒易誤食，請上鎖保存。' },
 ]
 
+// ── 托藥管理 SOP（托育人員） ──────────────────────────────
+
+const threeReads = [
+  { title: '第一讀', desc: '從藥櫃／保存處取出藥品時，核對藥袋或托藥單上的姓名與藥名' },
+  { title: '第二讀', desc: '準備調配、量取劑量時，再次核對藥名與劑量是否相符' },
+  { title: '第三讀', desc: '給藥前於幼兒面前再次核對姓名，確認無誤後才實際給藥' },
+]
+
+const fiveRights = [
+  { icon: '🙋', title: '對姓名', desc: '核對幼兒姓名，可請幼兒自報姓名或核對手圈／座位卡，避免同名或相似臉孔混淆' },
+  { icon: '💊', title: '對藥名', desc: '核對藥袋／托藥單上的藥品名稱與實際藥品是否相符' },
+  { icon: '⚖️', title: '對劑量', desc: '核對托藥單載明之劑量（cc／顆）與實際量取的分量是否一致' },
+  { icon: '⏰', title: '對時間', desc: '核對給藥時段（如午餐後、下午3點）是否為托藥單指定時間' },
+  { icon: '💉', title: '對途徑', desc: '核對給藥方式（口服、外用、滴劑等）是否正確' },
+]
+
+const sopPractices = [
+  '每次僅準備一位幼兒的藥物，餵完再取下一位，避免多位幼兒藥物同時擺放而混淆',
+  '給藥後應立即於托藥單／給藥紀錄表上簽名，並記錄實際給藥時間',
+  '若發現托藥單資訊不清、藥品已過期、外觀與平常不同，或有任何疑慮，應暫緩給藥並聯繫家長或藥師確認，不可自行判斷給藥',
+  '給藥人員應保持專注，避免同時進行其他工作分心而中斷核對流程',
+]
+
+const refusalPoints = [
+  '教保／托育人員僅能依家長提供之「醫師開立處方藥」並填妥正式托藥單後協助給藥，不得代為餵食成藥、健康食品、保健食品或民間偏方',
+  '機構通常於用藥管理相關規範中明訂：僅協助「醫囑用藥」，非醫囑藥品之風險與責任應由家長自行承擔，機構人員無醫療專業判斷資格，不應承擔額外風險',
+  '保健食品、益生菌等雖非藥品，仍可能與其他藥物產生交互作用或引發過敏，機構同樣不建議代為餵食',
+  '若家長要求餵食非處方藥品，可婉轉說明機構政策，並建議家長利用接送時間自行給藥，或於回診時請醫師開立涵蓋在園時段的正式處方',
+  '拒絕不代表不關心：可同時提醒家長留意幼兒狀況，機構如觀察到不適，會立即主動通知家長',
+]
+
 // ── 主頁面 ────────────────────────────────────────────────
 
 const MAIN_TABS = [
@@ -551,6 +582,7 @@ const MAIN_TABS = [
   { id: 'fever',      label: '🌡️ 退燒藥劑量' },
   { id: 'forbidden',  label: '🚫 禁用藥物' },
   { id: 'database',   label: '💊 幼生藥庫' },
+  { id: 'sop',         label: '🏫 托藥管理SOP' },
 ]
 
 export default function MedicationPage({ navigate }) {
@@ -562,7 +594,7 @@ export default function MedicationPage({ navigate }) {
       <PageHeader
         emoji="💊"
         title="用藥衛教"
-        subtitle="嬰幼兒用藥原則、退燒藥劑量計算與幼生藥庫"
+        subtitle="嬰幼兒用藥原則、退燒藥劑量計算、幼生藥庫與托藥管理SOP"
         color="bg-gradient-to-br from-teal-50 to-cyan-100"
       />
 
@@ -692,6 +724,108 @@ export default function MedicationPage({ navigate }) {
               </p>
             </div>
             <DrugDatabase />
+          </div>
+        )}
+
+        {/* ── 托藥管理 SOP ── */}
+        {tab === 'sop' && (
+          <div className="space-y-8">
+            <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 flex gap-3">
+              <span className="text-xl shrink-0">🏫</span>
+              <p className="text-sm text-teal-700 leading-relaxed">
+                本頁提供托育人員協助給藥時的標準作業流程，適用於機構內多位幼兒同時托藥的情境。
+              </p>
+            </div>
+
+            {/* 三讀五對 */}
+            <section className="bg-white border-2 border-teal-200 rounded-3xl p-6">
+              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <span>✅</span> 三讀五對餵藥SOP
+              </h2>
+
+              <p className="text-sm font-semibold text-gray-600 mb-3">📖 三讀：每次給藥前檢查三次標籤</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                {threeReads.map((r, i) => (
+                  <div key={r.title} className="bg-teal-50 border border-teal-100 rounded-2xl p-4">
+                    <p className="font-semibold text-teal-700 text-sm mb-1">{i + 1}. {r.title}</p>
+                    <p className="text-xs text-gray-600 leading-relaxed">{r.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-sm font-semibold text-gray-600 mb-3">🎯 五對：每次核對五個要點</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                {fiveRights.map(r => (
+                  <div key={r.title} className="bg-cyan-50 border border-cyan-100 rounded-2xl p-4 flex gap-3">
+                    <span className="text-xl shrink-0">{r.icon}</span>
+                    <div>
+                      <p className="font-semibold text-cyan-700 text-sm mb-1">{r.title}</p>
+                      <p className="text-xs text-gray-600 leading-relaxed">{r.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-sm font-semibold text-gray-600 mb-2">💡 實務執行要點</p>
+              <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+                {sopPractices.map((t, i) => <li key={i}>{t}</li>)}
+              </ul>
+            </section>
+
+            {/* 拒絕非處方藥 */}
+            <section className="bg-white border-2 border-red-100 rounded-3xl p-6">
+              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <span>🚫</span> 拒絕餵食非處方藥（成藥、保健食品）
+              </h2>
+              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+                {refusalPoints.map((t, i) => <li key={i}>{t}</li>)}
+              </ul>
+            </section>
+
+            {/* 電子托藥單範本 */}
+            <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                  <span>📝</span> 托藥單範本
+                </h2>
+                <button
+                  onClick={() => window.print()}
+                  className="text-xs bg-teal-500 text-white px-3 py-1.5 rounded-full hover:bg-teal-600 transition-colors print:hidden"
+                >
+                  🖨️ 列印
+                </button>
+              </div>
+
+              <div className="border-2 border-gray-200 rounded-2xl p-5">
+                <p className="text-center font-bold text-gray-800 mb-4">托藥單 Medication Delivery Form</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-4">
+                  <p className="border-b border-gray-300 pb-1">幼兒姓名：＿＿＿＿＿＿＿＿＿＿</p>
+                  <p className="border-b border-gray-300 pb-1">班級：＿＿＿＿＿＿＿＿＿＿</p>
+                  <p className="border-b border-gray-300 pb-1">日期：＿＿＿＿年＿＿月＿＿日</p>
+                  <p className="border-b border-gray-300 pb-1">開立院所／醫師：＿＿＿＿＿＿＿＿</p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-4">
+                  <p className="border-b border-gray-300 pb-1">藥品名稱：＿＿＿＿＿＿＿＿＿＿</p>
+                  <p className="border-b border-gray-300 pb-1">劑型（藥水／藥粉／藥膏等）：＿＿＿＿</p>
+                  <p className="border-b border-gray-300 pb-1">每次劑量：＿＿＿＿＿＿＿＿＿＿</p>
+                  <p className="border-b border-gray-300 pb-1">給藥途徑：口服 ／ 外用 ／ 滴劑 ／ 其他＿＿</p>
+                  <p className="border-b border-gray-300 pb-1 sm:col-span-2">給藥時間（可複選）：□ 早上　□ 午餐後　□ 午睡前　□ 下午　□ 其他＿＿＿＿</p>
+                </div>
+                <p className="text-sm border-b border-gray-300 pb-1 mb-4">特殊注意事項／過敏史：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  <p className="border-b border-gray-300 pb-1">家長簽名：＿＿＿＿＿＿＿＿　　連絡電話：＿＿＿＿＿＿＿＿</p>
+                  <p className="border-b border-gray-300 pb-1">教保／托育人員給藥確認簽名：＿＿＿＿＿＿＿＿</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-400 mt-3">
+                本表單為通用範本，實際使用請依機構自訂格式與地方主管機關規定調整；每次給藥皆須完成「三讀五對」核對後由給藥人員簽名確認。
+              </p>
+            </section>
+
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+              <span className="shrink-0">📋</span>
+              <p>資料參考：護理實務「三讀五對」給藥安全原則、兒童及少年福利機構用藥管理相關規範。實際托藥流程與表單格式請依所屬機構規定辦理。</p>
+            </div>
           </div>
         )}
 
