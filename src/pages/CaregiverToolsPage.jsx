@@ -7,6 +7,35 @@ function SourceNote({ children }) {
   )
 }
 
+const recordCheckPoints = [
+  '入托（園）時要求家長提供兒童健康手冊或衛生所開立之預防接種證明，核對是否已完成該月齡應接種項目',
+  '建立班級疫苗接種清單，對照現行公費疫苗時程表定期(如每學期)覆核，標記缺漏或延遲接種的幼兒',
+  '對於接種紀錄有缺漏者，以書面或口頭主動通知家長，並約定補種期限，追蹤補種後將證明存入幼兒個人資料',
+  '新生入園、轉學或延遲提供接種紀錄者，應建立追蹤名冊，避免遺漏查核',
+]
+
+const outbreakPrinciples = [
+  {
+    disease: '水痘 / 麻疹等空氣或飛沫傳染疾病',
+    emoji: '🌡️',
+    steps: [
+      '一旦發現疑似病例，應立即通知家長帶幼兒就醫，並依規定通報衛生單位（法定傳染病）',
+      '確認病例的班級內，清查其他幼兒之疫苗接種紀錄（如水痘、MMR疫苗），未完成接種或無自然感染證明者為高風險接觸者',
+      '高風險接觸者依衛生單位指示進行健康監測或居家隔離，觀察期通常涵蓋該疾病最長潛伏期（如水痘、麻疹約至最後暴露後21天，實際天數以衛生單位公告為準）',
+      '監測期間如出現發燒、紅疹等疑似症狀，應立即就醫並再次通報，避免帶病到園',
+    ],
+  },
+  {
+    disease: '百日咳等飛沫傳染疾病',
+    emoji: '😷',
+    steps: [
+      '疑似病例應立即就醫並依醫囑於傳染力消失前在家休養，避免到園',
+      '同班未完成五合一/DTaP相關疫苗接種之幼兒，應提高健康監測警覺，出現持續咳嗽等症狀立即就醫',
+      '機構內加強落實洗手、咳嗽禮節、環境消毒等一般防治措施',
+    ],
+  },
+]
+
 const activities = [
   {
     age: '0～1歲', domain: '粗動作／感官',
@@ -314,6 +343,40 @@ export default function CaregiverToolsPage({ navigate }) {
         <SourceNote>
           資料參考：食品安全衛生管理法及其過敏原標示相關公告、食品良好衛生規範準則、兒童及少年福利機構設置標準之餐飲衛生規定、台灣兒科醫學會與紅十字會異物梗塞急救衛教資料。緊急處理流程僅供平時衛教參考，正式急救仍應以受過認證訓練之人員操作為準。
         </SourceNote>
+
+        {/* Vaccination record check & outbreak isolation */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>💉</span> 接種紀錄查核與補種提醒
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {recordCheckPoints.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+          <p className="text-xs text-gray-400 mt-3">
+            現行公費疫苗時程表可對照「預防接種」頁面查詢。
+          </p>
+        </section>
+
+        <section className="bg-white border-2 border-red-100 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🏫</span> 群聚時接種查核與隔離原則
+          </h2>
+          <div className="space-y-4">
+            {outbreakPrinciples.map(o => (
+              <div key={o.disease} className="bg-red-50 border border-red-100 rounded-2xl p-4">
+                <p className="font-bold text-red-700 text-sm mb-2 flex items-center gap-2">
+                  <span className="text-xl">{o.emoji}</span> {o.disease}
+                </p>
+                <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+                  {o.steps.map((s, i) => <li key={i}>{s}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <SourceNote>
+            資料參考：傳染病防治法及地方衛生局群聚事件處理指引、衛生福利部疾病管制署預防接種時程表。實際隔離／健康監測天數與通報流程請依當次衛生單位指示與最新公告為準。
+          </SourceNote>
+        </section>
 
         {/* Activity design */}
         <section>

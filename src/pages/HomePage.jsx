@@ -20,8 +20,8 @@ const cards = [
   {
     id: 'vaccination',
     emoji: '💉',
-    title: '疫苗接種時程',
-    desc: '114年公費與自費疫苗完整時程表，接種後注意事項',
+    title: '預防接種',
+    desc: '公費/自費疫苗時程、反應與禁忌、個人化試算、預防保健與新生兒篩檢',
     grad: 'from-violet-50 to-purple-50',
     border: 'border-violet-200',
     badge: 'bg-violet-100 text-violet-700',
