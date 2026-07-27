@@ -238,6 +238,8 @@ const burnoutPrevention = [
   '適時尋求專業心理協助（如機構提供之員工協助方案EAP），或洽詢各縣市心理衛生中心',
 ]
 
+const disinfectionLogColumns = ['日期', '時間', '消毒區域／物品', '消毒方式／濃度', '執行人簽名', '備註']
+
 const activities = [
   {
     age: '0～1歲', domain: '粗動作／感官',
@@ -848,6 +850,94 @@ export default function CaregiverToolsPage({ navigate }) {
           <SourceNote>
             資料參考：職業安全衛生相關人因工程建議、Maslach職業倦怠三面向理論（情緒耗竭／去人格化／成就感低落）。若情緒困擾持續，可參考「心理與親職支持」頁的求助管道。
           </SourceNote>
+        </section>
+
+        {/* Additional printable forms */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <span>🤒</span> 生病請假通知單
+            </h2>
+            <button onClick={() => window.print()} className="text-xs bg-sky-500 text-white px-3 py-1.5 rounded-full hover:bg-sky-600 transition-colors print:hidden">
+              🖨️ 列印
+            </button>
+          </div>
+          <div className="border-2 border-gray-200 rounded-2xl p-5 text-sm space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <p className="border-b border-gray-300 pb-1">幼兒姓名：＿＿＿＿＿＿＿＿＿＿</p>
+              <p className="border-b border-gray-300 pb-1">班級：＿＿＿＿＿＿＿＿＿＿</p>
+              <p className="border-b border-gray-300 pb-1">日期：＿＿＿＿年＿＿月＿＿日</p>
+              <p className="border-b border-gray-300 pb-1">通知時間：＿＿＿＿時＿＿分</p>
+            </div>
+            <p className="border-b border-gray-300 pb-1">觀察到的症狀：□ 發燒＿＿°C　□ 嘔吐　□ 腹瀉　□ 皮疹　□ 咳嗽／流鼻水　□ 其他＿＿＿＿</p>
+            <p className="border-b border-gray-300 pb-1">建議處置：□ 在家休息觀察　□ 儘速就醫　□ 依醫囑返園　□ 其他＿＿＿＿</p>
+            <p className="border-b border-gray-300 pb-1">建議請假天數：＿＿＿＿天（返園條件請對照上方「停托標準參考」）</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <p className="border-b border-gray-300 pb-1">通知人簽名：＿＿＿＿＿＿＿＿</p>
+              <p className="border-b border-gray-300 pb-1">家長簽收：＿＿＿＿＿＿＿＿</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <span>📢</span> 腸病毒停課通知單
+            </h2>
+            <button onClick={() => window.print()} className="text-xs bg-sky-500 text-white px-3 py-1.5 rounded-full hover:bg-sky-600 transition-colors print:hidden">
+              🖨️ 列印
+            </button>
+          </div>
+          <div className="border-2 border-gray-200 rounded-2xl p-5 text-sm space-y-3">
+            <p className="text-center font-bold mb-2">腸病毒停課通知</p>
+            <p className="border-b border-gray-300 pb-1">班級：＿＿＿＿＿＿＿＿　　停課期間：＿＿年＿＿月＿＿日 至 ＿＿年＿＿月＿＿日（共7日）</p>
+            <p className="leading-relaxed">
+              停課原因：本班一週內已有2名以上幼童經醫師診斷為腸病毒感染（手足口病／疱疹性咽峽炎），
+              依現行腸病毒停課標準，本班自上述期間停課7日。
+            </p>
+            <p className="leading-relaxed">
+              返園條件：個別病童請假原則以醫師診斷日或發病日當天為第1天，停托滿7天；停課期滿且無其他新增病例，即可依規定返園。
+            </p>
+            <p className="leading-relaxed">
+              居家照護提醒：勤洗手、玩具餐具以稀釋漂白水消毒、補充水分、觀察是否出現嗜睡意識改變、肌肉抽搐、呼吸急促等重症前兆，
+              如有請立即就醫（詳見「常見疾病與照護」頁腸病毒章節）。
+            </p>
+            <p className="border-b border-gray-300 pb-1">機構聯絡人／電話：＿＿＿＿＿＿＿＿＿＿＿＿＿＿</p>
+          </div>
+        </section>
+
+        <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <span>🧴</span> 消毒登記表
+            </h2>
+            <button onClick={() => window.print()} className="text-xs bg-sky-500 text-white px-3 py-1.5 rounded-full hover:bg-sky-600 transition-colors print:hidden">
+              🖨️ 列印
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs sm:text-sm border-collapse">
+              <thead>
+                <tr className="bg-sky-50 text-sky-800">
+                  {disinfectionLogColumns.map(c => (
+                    <th key={c} className="border border-sky-200 p-2">{c}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <tr key={i}>
+                    {disinfectionLogColumns.map(c => (
+                      <td key={c} className="border border-gray-200 p-3 h-10">&nbsp;</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-400 mt-3">
+            濃度可對照上方「漂白水稀釋計算器」換算；建議每次執行環境消毒後立即登記，供日後查核追蹤。
+          </p>
         </section>
 
         {/* Activity design */}

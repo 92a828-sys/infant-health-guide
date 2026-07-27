@@ -148,8 +148,16 @@ export default function NewbornSafetyPage({ navigate }) {
             ))}
           </div>
 
-          <div className="bg-white border-2 border-amber-200 rounded-3xl p-6">
-            <p className="font-bold text-gray-800 text-sm mb-1">嬰兒黃金九色卡（示意）</p>
+          <div className="bg-white border-2 border-amber-200 rounded-3xl p-6 print:border-0">
+            <div className="flex items-center justify-between mb-1">
+              <p className="font-bold text-gray-800 text-sm">嬰兒黃金九色卡（示意）</p>
+              <button
+                onClick={() => window.print()}
+                className="text-xs bg-amber-500 text-white px-3 py-1.5 rounded-full hover:bg-amber-600 transition-colors print:hidden"
+              >
+                🖨️ 列印
+              </button>
+            </div>
             <p className="text-xs text-gray-400 mb-4">1–6號為異常（淡黃／灰白），7–9號為正常（黃／綠）</p>
             <div className="grid grid-cols-3 sm:grid-cols-9 gap-2">
               {stoolCards.map(c => (
@@ -166,7 +174,7 @@ export default function NewbornSafetyPage({ navigate }) {
             </div>
             <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mt-5">
               <p className="text-sm text-red-700 leading-relaxed">
-                ⚠️ <strong>螢幕顯示顏色僅供示意參考</strong>，實際比對請使用兒童健康手冊中的正版印刷色卡，
+                ⚠️ <strong>螢幕顯示與自行列印的顏色僅供示意參考</strong>，家用印表機色彩也可能失真，實際比對請使用兒童健康手冊中的正版印刷色卡，
                 於自然光或白色燈光下比對寶寶大便顏色。若比對結果落在1–6號異常範圍，或對顏色判讀有疑慮，
                 請儘速攜帶寶寶及大便顏色卡就醫評估，不要自行等待觀察。
               </p>

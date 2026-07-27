@@ -341,7 +341,15 @@ const catIcon = {
 
 export default function GrowthMilestonesPage({ navigate }) {
   const [activeId, setActiveId] = useState('m4')
+  const [checked, setChecked] = useState({})
   const group = ageGroups.find(g => g.id === activeId)
+
+  const toggleCheck = key => setChecked(prev => ({ ...prev, [key]: !prev[key] }))
+
+  const totalItems = Object.values(group.milestones).reduce((sum, items) => sum + items.length, 0)
+  const checkedCount = Object.entries(group.milestones).reduce((sum, [cat, items]) => {
+    return sum + items.filter((_, i) => checked[`${group.id}-${cat}-${i}`]).length
+  }, 0)
 
   return (
     <div>
@@ -395,12 +403,23 @@ export default function GrowthMilestonesPage({ navigate }) {
             </div>
           </div>
 
-          <div className="bg-white p-6">
+          <div className="bg-white p-6 print:p-0">
 
             {/* Milestones */}
-            <h3 className="font-bold text-gray-700 text-sm mb-4 flex items-center gap-2">
-              <span className="bg-green-100 text-green-700 rounded-full px-2 py-0.5 text-xs">✅ 這個階段可以做到</span>
-            </h3>
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+              <h3 className="font-bold text-gray-700 text-sm flex items-center gap-2">
+                <span className="bg-green-100 text-green-700 rounded-full px-2 py-0.5 text-xs">✅ 這個階段可以做到（點擊項目可勾選）</span>
+              </h3>
+              <div className="flex items-center gap-3 print:hidden">
+                <span className="text-xs text-gray-400">已勾選 {checkedCount} / {totalItems} 項</span>
+                <button
+                  onClick={() => window.print()}
+                  className="text-xs bg-emerald-500 text-white px-3 py-1.5 rounded-full hover:bg-emerald-600 transition-colors"
+                >
+                  🖨️ 列印本階段檢核表
+                </button>
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               {Object.entries(group.milestones).map(([cat, items]) => (
                 <div
@@ -412,12 +431,23 @@ export default function GrowthMilestonesPage({ navigate }) {
                     <span>{cat}</span>
                   </p>
                   <ul className="space-y-1.5">
-                    {items.map((item, i) => (
-                      <li key={i} className="text-xs leading-relaxed flex gap-1.5 text-gray-700">
-                        <span className="shrink-0 mt-0.5 opacity-50">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
+                    {items.map((item, i) => {
+                      const key = `${group.id}-${cat}-${i}`
+                      const isChecked = !!checked[key]
+                      return (
+                        <li key={i}>
+                          <button
+                            onClick={() => toggleCheck(key)}
+                            className="text-xs leading-relaxed flex gap-1.5 text-gray-700 text-left w-full"
+                          >
+                            <span className={`shrink-0 mt-0.5 w-3.5 h-3.5 rounded border flex items-center justify-center ${isChecked ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-gray-300'}`}>
+                              {isChecked && '✓'}
+                            </span>
+                            <span className={isChecked ? 'line-through opacity-60' : ''}>{item}</span>
+                          </button>
+                        </li>
+                      )
+                    })}
                   </ul>
                 </div>
               ))}

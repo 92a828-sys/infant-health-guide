@@ -175,6 +175,12 @@ const officialLinks = [
   { name: '國民健康署', desc: '孕產婦與嬰幼兒健康', url: 'https://www.hpa.gov.tw', emoji: '📋', bg: 'bg-purple-50 border-purple-100 hover:bg-purple-100' },
 ]
 
+const officialManuals = [
+  { name: '兒童健康手冊（電子版）', desc: '生長發育、預防接種紀錄官方手冊', url: 'https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=1139', emoji: '📗' },
+  { name: '兒童衛教手冊', desc: '早產兒出院照顧、SIDS預防、副食品等衛教內容', url: 'https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=1459', emoji: '📘' },
+  { name: '托嬰中心感染管制手冊', desc: '疾管署發布之機構感染管制指引（供托育人員使用）', url: 'https://at.cdc.gov.tw/3Yg76d', emoji: '📙' },
+]
+
 export default function HomePage({ navigate }) {
   // UTC+8 台灣時間的第幾天，確保午夜 12 點換句
   const q = quotes[Math.floor((Date.now() + 8 * 3600000) / 86400000) % quotes.length]
@@ -271,6 +277,25 @@ export default function HomePage({ navigate }) {
                   <p className="text-xs text-blue-400 mt-1 truncate">{l.url}</p>
                 </div>
                 <span className="text-gray-400 ml-auto shrink-0 text-lg">↗</span>
+              </a>
+            ))}
+          </div>
+
+          <h3 className="text-lg font-bold text-amber-900 text-center mt-12 mb-6">📖 官方手冊下載</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {officialManuals.map(l => (
+              <a
+                key={l.url}
+                href={l.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 p-4 rounded-2xl border-2 bg-amber-50 border-amber-100 hover:bg-amber-100 transition-all"
+              >
+                <span className="text-2xl shrink-0">{l.emoji}</span>
+                <div className="min-w-0">
+                  <p className="font-semibold text-gray-800 text-sm">{l.name}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{l.desc}</p>
+                </div>
               </a>
             ))}
           </div>
