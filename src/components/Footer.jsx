@@ -12,7 +12,7 @@ const links = [
 
 export default function Footer({ navigate }) {
   return (
-    <footer className="bg-amber-900 text-amber-100 pt-12 pb-6 px-4 mt-auto">
+    <footer className="bg-morandi-dark text-morandi-primary-light pt-12 pb-6 px-4 mt-auto">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
@@ -20,24 +20,24 @@ export default function Footer({ navigate }) {
             <div className="flex items-center gap-3 mb-3">
               <span className="text-4xl">👶</span>
               <div>
-                <p className="font-bold text-white text-lg leading-tight">幼兒衛教專區</p>
-                <p className="text-xs text-amber-300">0–3歲照護指南</p>
+                <p className="font-semibold tracking-[0.05em] text-white text-lg leading-tight">幼兒衛教專區</p>
+                <p className="text-xs text-morandi-accent">0–3歲照護指南</p>
               </div>
             </div>
-            <p className="text-sm text-amber-300 leading-relaxed">
+            <p className="text-sm text-morandi-primary-light leading-[1.75]">
               專為新手爸媽與托育人員設計，提供實用的幼兒健康照護參考資訊。
             </p>
           </div>
 
           {/* Quick links */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-3 uppercase tracking-wider">衛教主題</h3>
+            <h3 className="text-sm font-semibold tracking-[0.05em] text-white mb-3 uppercase">衛教主題</h3>
             <div className="grid grid-cols-2 gap-y-1.5 gap-x-2">
               {links.map(l => (
                 <button
                   key={l.id}
                   onClick={() => navigate(l.id)}
-                  className="text-left text-sm text-amber-300 hover:text-white transition-colors"
+                  className="text-left text-sm text-morandi-primary-light hover:text-white transition-colors"
                 >
                   {l.emoji} {l.label}
                 </button>
@@ -47,18 +47,18 @@ export default function Footer({ navigate }) {
 
           {/* Emergency contacts */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-3 uppercase tracking-wider">緊急聯絡</h3>
+            <h3 className="text-sm font-semibold tracking-[0.05em] text-white mb-3 uppercase">緊急聯絡</h3>
             <div className="space-y-2.5">
               {[
                 { num: '119', desc: '緊急醫療救護', emoji: '🚑', color: 'text-red-300' },
-                { num: '1922', desc: '疾管署防疫專線', emoji: '☎️', color: 'text-blue-300' },
-                { num: '1966', desc: '長期照顧服務', emoji: '📞', color: 'text-green-300' },
+                { num: '1922', desc: '疾管署防疫專線', emoji: '☎️', color: 'text-morandi-accent' },
+                { num: '1966', desc: '長期照顧服務', emoji: '📞', color: 'text-morandi-primary-light' },
               ].map(c => (
                 <div key={c.num} className="flex items-center gap-2.5">
                   <span className={`text-xl ${c.color}`}>{c.emoji}</span>
                   <div>
-                    <p className="font-bold text-white text-sm">{c.num}</p>
-                    <p className="text-xs text-amber-400">{c.desc}</p>
+                    <p className="font-semibold text-white text-sm">{c.num}</p>
+                    <p className="text-xs text-morandi-primary-light">{c.desc}</p>
                   </div>
                 </div>
               ))}
@@ -66,14 +66,14 @@ export default function Footer({ navigate }) {
           </div>
         </div>
 
-        <div className="border-t border-amber-800 pt-6 text-center space-y-2">
-          <p className="text-xs text-amber-400">
+        <div className="border-t border-white/10 pt-6 text-center space-y-2">
+          <p className="text-xs text-morandi-accent">
             ⚠️ 本網站資訊僅供衛教參考，不得作為醫療診斷依據。若有健康疑慮，請諮詢合格醫師。
           </p>
-          <p className="text-xs text-amber-500">
+          <p className="text-xs text-morandi-primary-light">
             📅 內容持續由護理及托育專業人員審閱更新，各頁面來源標註區可查看該主題參考資料；本站最後整理日期：{SITE_UPDATED}
           </p>
-          <p className="text-xs text-amber-600">
+          <p className="text-xs text-morandi-primary-light/70">
             © {new Date().getFullYear()} 幼兒衛教專區 · 內容參考：衛生福利部、疾病管制署、台灣兒科醫學會
           </p>
         </div>

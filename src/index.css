@@ -1,10 +1,23 @@
 @import "tailwindcss";
 
+/* 網站框架視覺識別（莫蘭迪色系）：僅套用於 Navbar／Footer／首頁框架，
+   內容頁沿用既有語意色（紅=緊急、琥珀=注意、綠=正常）與各主題分類色，不動 */
+@theme {
+  --color-morandi-primary: #7895b2;
+  --color-morandi-primary-light: #aebdca;
+  --color-morandi-secondary: #f5ebe0;
+  --color-morandi-accent: #e8c4c4;
+  --color-morandi-dark: #3e5266;
+}
+
 @layer base {
   html {
     font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei",
       "Noto Sans TC", sans-serif;
     scroll-behavior: smooth;
+  }
+  body {
+    line-height: 1.75;
   }
   * {
     -webkit-tap-highlight-color: transparent;

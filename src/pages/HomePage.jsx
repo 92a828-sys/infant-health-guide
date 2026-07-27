@@ -217,32 +217,32 @@ export default function HomePage({ navigate }) {
   return (
     <div>
       {/* ── Hero ── */}
-      <section className="relative bg-gradient-to-br from-pink-100 via-orange-50 to-amber-100 py-20 px-6 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-morandi-secondary via-morandi-secondary to-morandi-primary-light/30 py-20 px-6 overflow-hidden">
         <span className="absolute top-6 right-10 text-8xl opacity-10 select-none pointer-events-none">🍼</span>
         <span className="absolute bottom-6 left-10 text-7xl opacity-10 select-none pointer-events-none">🌸</span>
         <span className="absolute top-1/2 right-1/4 text-5xl opacity-5 select-none pointer-events-none">⭐</span>
 
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <div className="text-7xl mb-5" style={{ animation: 'bounce 2s infinite' }}>👶</div>
-          <h1 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-[0.05em] text-morandi-dark mb-4 leading-tight">
             0–3歲幼兒衛教專區
           </h1>
-          <p className="text-lg md:text-xl text-amber-700 mb-2">
-            專為<strong className="text-orange-600">新手爸媽</strong>與<strong className="text-orange-600">托育人員</strong>設計的健康指南
+          <p className="text-lg md:text-xl text-morandi-primary mb-2">
+            專為<strong className="text-morandi-dark">新手爸媽</strong>與<strong className="text-morandi-dark">托育人員</strong>設計的健康指南
           </p>
-          <p className="text-sm text-amber-500 mb-10">
+          <p className="text-sm text-morandi-primary-light mb-10">
             內容參考衛生福利部、台灣兒科醫學會等官方資料
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate('growth')}
-              className="bg-orange-500 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-orange-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 text-base"
+              className="bg-morandi-primary text-white px-8 py-3.5 rounded-3xl font-semibold hover:bg-morandi-dark transition-all shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 text-base"
             >
               🌱 開始探索
             </button>
             <button
               onClick={() => navigate('emergency')}
-              className="bg-white text-red-600 border-2 border-red-300 px-8 py-3.5 rounded-full font-semibold hover:bg-red-50 transition-all shadow-md text-base"
+              className="bg-white text-red-600 border-2 border-red-300 px-8 py-3.5 rounded-3xl font-semibold hover:bg-red-50 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.08)] text-base"
             >
               🚑 緊急狀況
             </button>
@@ -251,30 +251,30 @@ export default function HomePage({ navigate }) {
       </section>
 
       {/* ── Quote ── */}
-      <section className="bg-pink-50 border-y border-pink-100 py-7 px-6">
+      <section className="bg-morandi-accent/25 border-y border-morandi-accent/40 py-7 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <div className="text-3xl mb-2">{q.icon}</div>
-          <p className="text-pink-700 font-medium italic text-lg">「{q.text}」</p>
-          <p className="text-pink-400 text-sm mt-1">— 今日育兒小語</p>
+          <p className="text-morandi-dark font-medium italic text-lg">「{q.text}」</p>
+          <p className="text-morandi-primary text-sm mt-1">— 今日育兒小語</p>
         </div>
       </section>
 
       {/* ── Age-based quick nav ── */}
-      <section className="py-12 px-6 bg-white border-b border-amber-100">
+      <section className="py-12 px-6 bg-white border-b border-morandi-secondary">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold text-amber-900 text-center mb-2">🎯 依月齡快速導覽</h2>
-          <p className="text-amber-600 text-center mb-6 text-sm">選擇寶寶目前月齡，直接前往對應內容</p>
+          <h2 className="text-xl md:text-2xl font-semibold tracking-[0.05em] text-morandi-dark text-center mb-2">🎯 依月齡快速導覽</h2>
+          <p className="text-morandi-primary text-center mb-6 text-sm">選擇寶寶目前月齡，直接前往對應內容</p>
 
           <div className="flex items-center gap-4 mb-6">
             <input
               type="range" min="0" max="36" value={ageMonths}
               onChange={e => setAgeMonths(Number(e.target.value))}
-              className="flex-1 accent-orange-500"
+              className="flex-1 accent-morandi-primary"
             />
-            <span className="text-lg font-bold text-orange-600 w-20 text-right shrink-0">{ageMonths} 個月</span>
+            <span className="text-lg font-semibold text-morandi-primary w-20 text-right shrink-0">{ageMonths} 個月</span>
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-5 text-sm text-amber-700">
+          <div className="bg-morandi-secondary border border-morandi-primary-light/40 rounded-3xl p-4 mb-5 text-sm text-morandi-dark shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             🥣 這個階段的飲食：{dietStageLabel(ageMonths)}
           </div>
 
@@ -312,10 +312,10 @@ export default function HomePage({ navigate }) {
       </section>
 
       {/* ── Nav Cards ── */}
-      <section className="py-16 px-6 bg-amber-50">
+      <section className="py-16 px-6 bg-morandi-secondary">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-amber-900 text-center mb-2">📌 快速導覽</h2>
-          <p className="text-amber-600 text-center mb-10 text-sm">選擇您需要的衛教主題</p>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-morandi-dark text-center mb-2">📌 快速導覽</h2>
+          <p className="text-morandi-primary text-center mb-10 text-sm">選擇您需要的衛教主題</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {visibleCards.map(c => (
               <button
@@ -340,8 +340,8 @@ export default function HomePage({ navigate }) {
       {/* ── Official Resources ── */}
       <section className="py-14 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-amber-900 text-center mb-2">🔗 官方參考資源</h2>
-          <p className="text-amber-600 text-center mb-10 text-sm">政府與醫學機構提供的權威健康資訊</p>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-morandi-dark text-center mb-2">🔗 官方參考資源</h2>
+          <p className="text-morandi-primary text-center mb-10 text-sm">政府與醫學機構提供的權威健康資訊</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {officialLinks.map(l => (
               <a
@@ -362,7 +362,7 @@ export default function HomePage({ navigate }) {
             ))}
           </div>
 
-          <h3 className="text-lg font-bold text-amber-900 text-center mt-12 mb-6">📖 官方手冊下載</h3>
+          <h3 className="text-lg font-semibold tracking-[0.05em] text-morandi-dark text-center mt-12 mb-6">📖 官方手冊下載</h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {officialManuals.map(l => (
               <a
@@ -370,7 +370,7 @@ export default function HomePage({ navigate }) {
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 p-4 rounded-2xl border-2 bg-amber-50 border-amber-100 hover:bg-amber-100 transition-all"
+                className="flex items-start gap-3 p-4 rounded-3xl border-2 bg-morandi-secondary border-morandi-primary-light/40 hover:bg-morandi-primary-light/30 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
               >
                 <span className="text-2xl shrink-0">{l.emoji}</span>
                 <div className="min-w-0">
@@ -384,13 +384,13 @@ export default function HomePage({ navigate }) {
       </section>
 
       {/* ── Disclaimer ── */}
-      <section className="py-8 px-6 bg-orange-50 border-t border-orange-100">
+      <section className="py-8 px-6 bg-morandi-secondary border-t border-morandi-primary-light/40">
         <div className="max-w-4xl mx-auto">
-          <div className="flex gap-3 items-start bg-white rounded-2xl p-5 border border-orange-200 shadow-sm">
+          <div className="flex gap-3 items-start bg-white rounded-3xl p-5 border border-morandi-primary-light/50 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             <span className="text-2xl shrink-0">⚠️</span>
             <div>
-              <h3 className="font-bold text-orange-800 mb-1.5 text-sm">免責聲明</h3>
-              <p className="text-sm text-orange-700 leading-relaxed">
+              <h3 className="font-semibold tracking-[0.05em] text-morandi-dark mb-1.5 text-sm">免責聲明</h3>
+              <p className="text-sm text-morandi-primary leading-[1.75]">
                 本網站提供之資訊由護理及托育專業人員整理，
                 <strong>僅供衛教參考，不得作為醫療診斷或治療之依據。</strong>
                 每位幼兒狀況不同，如有健康疑慮請務必諮詢合格醫師或醫療人員。
