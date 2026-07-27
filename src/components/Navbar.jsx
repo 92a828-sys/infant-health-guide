@@ -56,7 +56,7 @@ export default function Navbar({ navigate, currentPage }) {
   }
 
   return (
-    <nav className="bg-white sticky top-0 z-50 border-b border-morandi-secondary shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+    <nav className="bg-white/70 backdrop-blur-[10px] sticky top-0 z-50 border-b border-morandi-secondary shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16 gap-3">
           {/* Logo */}

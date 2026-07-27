@@ -281,28 +281,28 @@ export default function HomePage({ navigate }) {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <button
               onClick={() => navigate('growth', nearestAgeGroupId(ageMonths))}
-              className="bg-emerald-50 border border-emerald-200 rounded-2xl p-3 text-center hover:bg-emerald-100 transition-colors"
+              className="card-hover bg-emerald-50 border border-emerald-200 rounded-2xl p-3 text-center hover:bg-emerald-100"
             >
               <span className="text-2xl block mb-1">📏</span>
               <span className="text-xs font-semibold text-emerald-700">生長里程碑</span>
             </button>
             <button
               onClick={() => navigate('vaccination', 'calculator')}
-              className="bg-violet-50 border border-violet-200 rounded-2xl p-3 text-center hover:bg-violet-100 transition-colors"
+              className="card-hover bg-violet-50 border border-violet-200 rounded-2xl p-3 text-center hover:bg-violet-100"
             >
               <span className="text-2xl block mb-1">💉</span>
               <span className="text-xs font-semibold text-violet-700">疫苗時程試算</span>
             </button>
             <button
               onClick={() => navigate('dietary')}
-              className="bg-orange-50 border border-orange-200 rounded-2xl p-3 text-center hover:bg-orange-100 transition-colors"
+              className="card-hover bg-orange-50 border border-orange-200 rounded-2xl p-3 text-center hover:bg-orange-100"
             >
               <span className="text-2xl block mb-1">🥣</span>
               <span className="text-xs font-semibold text-orange-700">營養與餵食</span>
             </button>
             <button
               onClick={() => navigate('daily-care')}
-              className="bg-rose-50 border border-rose-200 rounded-2xl p-3 text-center hover:bg-rose-100 transition-colors"
+              className="card-hover bg-rose-50 border border-rose-200 rounded-2xl p-3 text-center hover:bg-rose-100"
             >
               <span className="text-2xl block mb-1">🧴</span>
               <span className="text-xs font-semibold text-rose-700">日常照護</span>
@@ -321,7 +321,7 @@ export default function HomePage({ navigate }) {
               <button
                 key={c.id}
                 onClick={() => navigate(c.id)}
-                className={`group bg-gradient-to-br ${c.grad} border-2 ${c.border} rounded-3xl p-6 text-left transition-all duration-200 hover:shadow-xl hover:-translate-y-2`}
+                className={`card-hover group bg-gradient-to-br ${c.grad} border-2 ${c.border} rounded-3xl p-6 text-left`}
               >
                 <div className="text-5xl mb-4 transition-transform duration-200 group-hover:scale-110">
                   {c.emoji}
@@ -349,7 +349,7 @@ export default function HomePage({ navigate }) {
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-start gap-4 p-5 rounded-2xl border-2 transition-all ${l.bg}`}
+                className={`card-hover flex items-start gap-4 p-5 rounded-2xl border-2 ${l.bg}`}
               >
                 <span className="text-3xl shrink-0">{l.emoji}</span>
                 <div className="min-w-0">
@@ -370,7 +370,7 @@ export default function HomePage({ navigate }) {
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 p-4 rounded-3xl border-2 bg-morandi-secondary border-morandi-primary-light/40 hover:bg-morandi-primary-light/30 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
+                className="card-hover flex items-start gap-3 p-4 rounded-3xl border-2 bg-morandi-secondary border-morandi-primary-light/40 hover:bg-morandi-primary-light/30 shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
               >
                 <span className="text-2xl shrink-0">{l.emoji}</span>
                 <div className="min-w-0">

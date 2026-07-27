@@ -23,3 +23,43 @@
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+/* ── 微互動 ── */
+@layer utilities {
+  /* 頁面切換過渡：fade + y軸偏移，作用於 App.jsx 換頁時的 key remount */
+  .page-transition {
+    animation: page-enter 0.35s ease-out;
+  }
+
+  /* 卡片懸停效果：目前套用於首頁的卡片型互動元素 */
+  .card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card-hover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+  .card-hover {
+    transition: none;
+  }
+  .card-hover:hover {
+    transform: none;
+  }
+}

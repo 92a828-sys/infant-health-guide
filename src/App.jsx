@@ -59,7 +59,7 @@ function App() {
       <div className="min-h-screen bg-morandi-secondary flex flex-col">
         <Navbar navigate={navigate} currentPage={currentPage} />
         <EmergencyBar navigate={navigate} />
-        <main className="flex-1">
+        <main key={currentPage} className="flex-1 page-transition">
           {renderPage()}
         </main>
         <Footer navigate={navigate} />
