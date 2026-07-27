@@ -17,6 +17,7 @@ const navItems = [
   { id: 'vitals',    label: '生命徵象',   emoji: '📊' },
   { id: 'early-learning', label: '早期學習', emoji: '🧠' },
   { id: 'caregiver', label: '托育專區',   emoji: '🧑‍🏫' },
+  { id: 'caregiver-professional', label: '托育專業法規', emoji: '📚' },
 ]
 
 export default function Navbar({ navigate, currentPage }) {

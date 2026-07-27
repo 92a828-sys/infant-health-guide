@@ -134,6 +134,15 @@ const cards = [
     border: 'border-sky-200',
     badge: 'bg-sky-100 text-sky-700',
   },
+  {
+    id: 'caregiver-professional',
+    emoji: '📚',
+    title: '托育人員專業與法規',
+    desc: '相關法規摘要、人員配置健康管理、幼兒健康監測、在職訓練、兒少保護通報',
+    grad: 'from-slate-50 to-blue-50',
+    border: 'border-slate-200',
+    badge: 'bg-slate-100 text-slate-700',
+  },
 ]
 
 const quotes = [

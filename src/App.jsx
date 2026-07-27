@@ -17,6 +17,7 @@ import NewbornSafetyPage from './pages/NewbornSafetyPage'
 import HomeSafetyPage from './pages/HomeSafetyPage'
 import DailyCarePage from './pages/DailyCarePage'
 import ParentSupportPage from './pages/ParentSupportPage'
+import CaregiverProfessionalPage from './pages/CaregiverProfessionalPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -44,6 +45,7 @@ function App() {
       case 'home-safety': return <HomeSafetyPage navigate={navigate} />
       case 'daily-care': return <DailyCarePage navigate={navigate} />
       case 'parent-support': return <ParentSupportPage navigate={navigate} />
+      case 'caregiver-professional': return <CaregiverProfessionalPage navigate={navigate} />
       default:           return <HomePage navigate={navigate} />
     }
   }
