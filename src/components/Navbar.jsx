@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRole } from '../RoleContext'
 
 const navItems = [
   { id: 'home',        label: '首頁',      emoji: '🏠' },
@@ -16,12 +17,38 @@ const navItems = [
   { id: 'parent-support', label: '親職支持', emoji: '💗' },
   { id: 'vitals',    label: '生命徵象',   emoji: '📊' },
   { id: 'early-learning', label: '早期學習', emoji: '🧠' },
-  { id: 'caregiver', label: '托育專區',   emoji: '🧑‍🏫' },
-  { id: 'caregiver-professional', label: '托育專業法規', emoji: '📚' },
+  { id: 'caregiver', label: '托育專區',   emoji: '🧑‍🏫', caregiverOnly: true },
+  { id: 'caregiver-professional', label: '托育專業法規', emoji: '📚', caregiverOnly: true },
 ]
+
+function RoleSwitch({ role, setRole, compact }) {
+  return (
+    <div className={`flex items-center bg-orange-50 rounded-full p-1 ${compact ? 'text-xs' : 'text-sm'}`}>
+      <button
+        onClick={() => setRole('parent')}
+        className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-medium transition-all ${
+          role === 'parent' ? 'bg-white text-orange-700 shadow-sm' : 'text-orange-400'
+        }`}
+      >
+        👨‍👩‍👧 家長版
+      </button>
+      <button
+        onClick={() => setRole('caregiver')}
+        className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-medium transition-all ${
+          role === 'caregiver' ? 'bg-white text-orange-700 shadow-sm' : 'text-orange-400'
+        }`}
+      >
+        🧑‍🏫 托育人員版
+      </button>
+    </div>
+  )
+}
 
 export default function Navbar({ navigate, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { role, setRole } = useRole()
+
+  const visibleItems = navItems.filter(item => role === 'caregiver' || !item.caregiverOnly)
 
   const go = (id) => {
     navigate(id)
@@ -31,11 +58,11 @@ export default function Navbar({ navigate, currentPage }) {
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-orange-100">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 gap-3">
           {/* Logo */}
           <button
             onClick={() => go('home')}
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0"
           >
             <span className="text-3xl">👶</span>
             <div className="hidden sm:block leading-tight">
@@ -45,12 +72,12 @@ export default function Navbar({ navigate, currentPage }) {
           </button>
 
           {/* Desktop links */}
-          <div className="hidden xl:flex items-center gap-1">
-            {navItems.slice(1).map(item => (
+          <div className="hidden xl:flex items-center gap-1 overflow-x-auto">
+            {visibleItems.slice(1).map(item => (
               <button
                 key={item.id}
                 onClick={() => go(item.id)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
                   currentPage === item.id
                     ? 'bg-orange-100 text-orange-700'
                     : 'text-gray-600 hover:bg-orange-50 hover:text-orange-600'
@@ -62,33 +89,44 @@ export default function Navbar({ navigate, currentPage }) {
             ))}
           </div>
 
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="xl:hidden flex items-center justify-center w-10 h-10 rounded-xl text-gray-600 hover:bg-orange-50 transition-colors"
-            aria-label="選單"
-          >
-            <span className="text-xl select-none">{menuOpen ? '✕' : '☰'}</span>
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="hidden sm:block">
+              <RoleSwitch role={role} setRole={setRole} compact />
+            </div>
+
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="xl:hidden flex items-center justify-center w-10 h-10 rounded-xl text-gray-600 hover:bg-orange-50 transition-colors"
+              aria-label="選單"
+            >
+              <span className="text-xl select-none">{menuOpen ? '✕' : '☰'}</span>
+            </button>
+          </div>
         </div>
 
         {/* Mobile drawer */}
         {menuOpen && (
-          <div className="xl:hidden py-3 pb-4 border-t border-orange-100 grid grid-cols-2 gap-2">
-            {navItems.slice(1).map(item => (
-              <button
-                key={item.id}
-                onClick={() => go(item.id)}
-                className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-left transition-colors ${
-                  currentPage === item.id
-                    ? 'bg-orange-100 text-orange-700'
-                    : 'text-gray-600 hover:bg-orange-50 hover:text-orange-600'
-                }`}
-              >
-                <span className="text-lg">{item.emoji}</span>
-                <span>{item.label}</span>
-              </button>
-            ))}
+          <div className="xl:hidden py-3 pb-4 border-t border-orange-100">
+            <div className="sm:hidden mb-3 flex justify-center">
+              <RoleSwitch role={role} setRole={setRole} />
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {visibleItems.slice(1).map(item => (
+                <button
+                  key={item.id}
+                  onClick={() => go(item.id)}
+                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-left transition-colors ${
+                    currentPage === item.id
+                      ? 'bg-orange-100 text-orange-700'
+                      : 'text-gray-600 hover:bg-orange-50 hover:text-orange-600'
+                  }`}
+                >
+                  <span className="text-lg">{item.emoji}</span>
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>

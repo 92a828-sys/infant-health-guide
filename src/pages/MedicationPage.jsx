@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRole } from '../RoleContext'
 
 // ── 靜態藥品資料庫 ────────────────────────────────────────────────
 // 圖片放在 public/drugs/ 資料夾，路徑格式：'/drugs/檔名.jpg'
@@ -582,12 +583,16 @@ const MAIN_TABS = [
   { id: 'fever',      label: '🌡️ 退燒藥劑量' },
   { id: 'forbidden',  label: '🚫 禁用藥物' },
   { id: 'database',   label: '💊 幼生藥庫' },
-  { id: 'sop',         label: '🏫 托藥管理SOP' },
+  { id: 'sop',         label: '🏫 托藥管理SOP', caregiverOnly: true },
 ]
 
 export default function MedicationPage({ navigate }) {
+  const { role } = useRole()
+  const visibleTabs = MAIN_TABS.filter(t => role === 'caregiver' || !t.caregiverOnly)
   const [tab, setTab]   = useState('principles')
   const [med, setMed]   = useState('acet')
+
+  const activeTab = visibleTabs.some(t => t.id === tab) ? tab : 'principles'
 
   return (
     <div>
@@ -601,12 +606,12 @@ export default function MedicationPage({ navigate }) {
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Top-level tabs */}
         <div className="flex rounded-2xl bg-teal-50 p-1 mb-10 gap-1 overflow-x-auto">
-          {MAIN_TABS.map(t => (
+          {visibleTabs.map(t => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
-                tab === t.id ? 'bg-white text-teal-700 shadow' : 'text-teal-600 hover:bg-teal-100'
+                activeTab === t.id ? 'bg-white text-teal-700 shadow' : 'text-teal-600 hover:bg-teal-100'
               }`}
             >
               {t.label}
@@ -615,7 +620,7 @@ export default function MedicationPage({ navigate }) {
         </div>
 
         {/* ── 用藥原則 ── */}
-        {tab === 'principles' && (
+        {activeTab === 'principles' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {principles.map(p => (
               <div key={p.title} className="bg-teal-50 border border-teal-200 rounded-2xl p-4 flex gap-3">
@@ -630,7 +635,7 @@ export default function MedicationPage({ navigate }) {
         )}
 
         {/* ── 退燒藥劑量 ── */}
-        {tab === 'fever' && (
+        {activeTab === 'fever' && (
           <div className="space-y-5">
             <div className="flex gap-2">
               {[
@@ -685,7 +690,7 @@ export default function MedicationPage({ navigate }) {
         )}
 
         {/* ── 禁用藥物 ── */}
-        {tab === 'forbidden' && (
+        {activeTab === 'forbidden' && (
           <div className="space-y-3">
             <p className="text-sm text-gray-500 mb-4">以下藥物在特定年齡前應避免給予幼兒</p>
             {forbiddenMeds.map(item => (
@@ -714,7 +719,7 @@ export default function MedicationPage({ navigate }) {
         )}
 
         {/* ── 幼生藥庫 ── */}
-        {tab === 'database' && (
+        {activeTab === 'database' && (
           <div>
             <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 mb-6 flex gap-3">
               <span className="text-xl shrink-0">💊</span>
@@ -728,7 +733,7 @@ export default function MedicationPage({ navigate }) {
         )}
 
         {/* ── 托藥管理 SOP ── */}
-        {tab === 'sop' && (
+        {activeTab === 'sop' && (
           <div className="space-y-8">
             <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 flex gap-3">
               <span className="text-xl shrink-0">🏫</span>

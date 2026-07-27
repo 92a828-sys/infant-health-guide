@@ -339,8 +339,9 @@ const catIcon = {
   '遊戲探索': '🎮',
 }
 
-export default function GrowthMilestonesPage({ navigate }) {
-  const [activeId, setActiveId] = useState('m4')
+export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
+  const validInitial = ageGroups.some(g => g.id === initialAgeId) ? initialAgeId : 'm4'
+  const [activeId, setActiveId] = useState(validInitial)
   const [checked, setChecked] = useState({})
   const group = ageGroups.find(g => g.id === activeId)
 

@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { RoleProvider } from './RoleContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import EmergencyBar from './components/EmergencyBar'
 import HomePage from './pages/HomePage'
 import GrowthMilestonesPage from './pages/GrowthMilestonesPage'
 import GrowthChartPage from './pages/GrowthChartPage'
@@ -21,19 +23,21 @@ import CaregiverProfessionalPage from './pages/CaregiverProfessionalPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
+  const [navParam, setNavParam] = useState(null)
 
-  const navigate = (page) => {
+  const navigate = (page, param = null) => {
     setCurrentPage(page)
+    setNavParam(param)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':       return <HomePage navigate={navigate} />
-      case 'growth':     return <GrowthMilestonesPage navigate={navigate} />
+      case 'growth':     return <GrowthMilestonesPage navigate={navigate} initialAgeId={navParam} />
       case 'growth-chart': return <GrowthChartPage navigate={navigate} />
       case 'symptoms':   return <CommonSymptomsPage navigate={navigate} />
-      case 'vaccination':return <VaccinationPage navigate={navigate} />
+      case 'vaccination':return <VaccinationPage navigate={navigate} initialTab={navParam} />
       case 'dietary':    return <DietaryPage navigate={navigate} />
       case 'emergency':  return <EmergencyPage navigate={navigate} />
       case 'medication': return <MedicationPage navigate={navigate} />
@@ -44,20 +48,23 @@ function App() {
       case 'newborn-safety': return <NewbornSafetyPage navigate={navigate} />
       case 'home-safety': return <HomeSafetyPage navigate={navigate} />
       case 'daily-care': return <DailyCarePage navigate={navigate} />
-      case 'parent-support': return <ParentSupportPage navigate={navigate} />
+      case 'parent-support': return <ParentSupportPage navigate={navigate} initialTab={navParam} />
       case 'caregiver-professional': return <CaregiverProfessionalPage navigate={navigate} />
       default:           return <HomePage navigate={navigate} />
     }
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 flex flex-col">
-      <Navbar navigate={navigate} currentPage={currentPage} />
-      <main className="flex-1">
-        {renderPage()}
-      </main>
-      <Footer navigate={navigate} />
-    </div>
+    <RoleProvider>
+      <div className="min-h-screen bg-amber-50 flex flex-col">
+        <Navbar navigate={navigate} currentPage={currentPage} />
+        <EmergencyBar navigate={navigate} />
+        <main className="flex-1">
+          {renderPage()}
+        </main>
+        <Footer navigate={navigate} />
+      </div>
+    </RoleProvider>
   )
 }
 

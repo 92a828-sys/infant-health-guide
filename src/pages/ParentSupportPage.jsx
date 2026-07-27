@@ -90,8 +90,8 @@ const hotlines = [
   { name: '孕產婦關懷諮詢專線', number: '0800-870-870', desc: '提供孕產期及育兒相關諮詢' },
 ]
 
-export default function ParentSupportPage({ navigate }) {
-  const [tab, setTab] = useState('mood')
+export default function ParentSupportPage({ navigate, initialTab }) {
+  const [tab, setTab] = useState(initialTab || 'mood')
 
   return (
     <div>

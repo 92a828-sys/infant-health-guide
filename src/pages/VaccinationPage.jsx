@@ -256,8 +256,8 @@ function VaccineCalculator() {
   )
 }
 
-export default function VaccinationPage({ navigate }) {
-  const [tab, setTab] = useState('schedule')
+export default function VaccinationPage({ navigate, initialTab }) {
+  const [tab, setTab] = useState(initialTab || 'schedule')
 
   return (
     <div>

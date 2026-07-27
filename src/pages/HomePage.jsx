@@ -1,3 +1,27 @@
+import { useState } from 'react'
+import { useRole } from '../RoleContext'
+
+const ageGroupTable = [
+  { id: 'm4', m: 4 }, { id: 'm6', m: 6 }, { id: 'm9', m: 9 },
+  { id: 'y1', m: 12 }, { id: 'y1m3', m: 15 }, { id: 'y1m6', m: 18 },
+  { id: 'y2', m: 24 }, { id: 'y2m6', m: 30 }, { id: 'y3', m: 36 },
+]
+
+function nearestAgeGroupId(months) {
+  return ageGroupTable.reduce((closest, t) =>
+    Math.abs(months - t.m) < Math.abs(months - closest.m) ? t : closest
+  ).id
+}
+
+function dietStageLabel(months) {
+  if (months < 6) return '母乳／配方奶為主，準備開始認識副食品'
+  if (months < 9) return '副食品初期：細滑泥狀，優先提供高鐵食物'
+  if (months < 12) return '泥狀至粗泥，可開始嘗試手指食物'
+  if (months < 18) return '軟爛小塊狀，練習自己進食'
+  if (months < 36) return '家庭食物（軟），建立規律三餐加點心'
+  return '接近成人飲食，均衡攝取六大類食物'
+}
+
 const cards = [
   {
     id: 'growth',
@@ -133,6 +157,7 @@ const cards = [
     grad: 'from-sky-50 to-blue-50',
     border: 'border-sky-200',
     badge: 'bg-sky-100 text-sky-700',
+    caregiverOnly: true,
   },
   {
     id: 'caregiver-professional',
@@ -142,6 +167,7 @@ const cards = [
     grad: 'from-slate-50 to-blue-50',
     border: 'border-slate-200',
     badge: 'bg-slate-100 text-slate-700',
+    caregiverOnly: true,
   },
 ]
 
@@ -184,6 +210,9 @@ const officialManuals = [
 export default function HomePage({ navigate }) {
   // UTC+8 台灣時間的第幾天，確保午夜 12 點換句
   const q = quotes[Math.floor((Date.now() + 8 * 3600000) / 86400000) % quotes.length]
+  const { role } = useRole()
+  const visibleCards = cards.filter(c => role === 'caregiver' || !c.caregiverOnly)
+  const [ageMonths, setAgeMonths] = useState(6)
 
   return (
     <div>
@@ -230,13 +259,65 @@ export default function HomePage({ navigate }) {
         </div>
       </section>
 
+      {/* ── Age-based quick nav ── */}
+      <section className="py-12 px-6 bg-white border-b border-amber-100">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold text-amber-900 text-center mb-2">🎯 依月齡快速導覽</h2>
+          <p className="text-amber-600 text-center mb-6 text-sm">選擇寶寶目前月齡，直接前往對應內容</p>
+
+          <div className="flex items-center gap-4 mb-6">
+            <input
+              type="range" min="0" max="36" value={ageMonths}
+              onChange={e => setAgeMonths(Number(e.target.value))}
+              className="flex-1 accent-orange-500"
+            />
+            <span className="text-lg font-bold text-orange-600 w-20 text-right shrink-0">{ageMonths} 個月</span>
+          </div>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-5 text-sm text-amber-700">
+            🥣 這個階段的飲食：{dietStageLabel(ageMonths)}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button
+              onClick={() => navigate('growth', nearestAgeGroupId(ageMonths))}
+              className="bg-emerald-50 border border-emerald-200 rounded-2xl p-3 text-center hover:bg-emerald-100 transition-colors"
+            >
+              <span className="text-2xl block mb-1">📏</span>
+              <span className="text-xs font-semibold text-emerald-700">生長里程碑</span>
+            </button>
+            <button
+              onClick={() => navigate('vaccination', 'calculator')}
+              className="bg-violet-50 border border-violet-200 rounded-2xl p-3 text-center hover:bg-violet-100 transition-colors"
+            >
+              <span className="text-2xl block mb-1">💉</span>
+              <span className="text-xs font-semibold text-violet-700">疫苗時程試算</span>
+            </button>
+            <button
+              onClick={() => navigate('dietary')}
+              className="bg-orange-50 border border-orange-200 rounded-2xl p-3 text-center hover:bg-orange-100 transition-colors"
+            >
+              <span className="text-2xl block mb-1">🥣</span>
+              <span className="text-xs font-semibold text-orange-700">營養與餵食</span>
+            </button>
+            <button
+              onClick={() => navigate('daily-care')}
+              className="bg-rose-50 border border-rose-200 rounded-2xl p-3 text-center hover:bg-rose-100 transition-colors"
+            >
+              <span className="text-2xl block mb-1">🧴</span>
+              <span className="text-xs font-semibold text-rose-700">日常照護</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* ── Nav Cards ── */}
       <section className="py-16 px-6 bg-amber-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-amber-900 text-center mb-2">📌 快速導覽</h2>
           <p className="text-amber-600 text-center mb-10 text-sm">選擇您需要的衛教主題</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {cards.map(c => (
+            {visibleCards.map(c => (
               <button
                 key={c.id}
                 onClick={() => navigate(c.id)}

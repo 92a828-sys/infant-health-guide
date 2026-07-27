@@ -1,3 +1,6 @@
+// 重大內容更新時請手動更新此日期
+const SITE_UPDATED = '2026年7月'
+
 const links = [
   { id: 'growth',      label: '生長發育里程碑', emoji: '📏' },
   { id: 'symptoms',    label: '常見症狀處理',   emoji: '🌡️' },
@@ -67,8 +70,11 @@ export default function Footer({ navigate }) {
           <p className="text-xs text-amber-400">
             ⚠️ 本網站資訊僅供衛教參考，不得作為醫療診斷依據。若有健康疑慮，請諮詢合格醫師。
           </p>
+          <p className="text-xs text-amber-500">
+            📅 內容持續由護理及托育專業人員審閱更新，各頁面來源標註區可查看該主題參考資料；本站最後整理日期：{SITE_UPDATED}
+          </p>
           <p className="text-xs text-amber-600">
-            © 2025 幼兒衛教專區 · 內容參考：衛生福利部、疾病管制署、台灣兒科醫學會
+            © {new Date().getFullYear()} 幼兒衛教專區 · 內容參考：衛生福利部、疾病管制署、台灣兒科醫學會
           </p>
         </div>
       </div>
