@@ -81,6 +81,15 @@ const cards = [
     badge: 'bg-emerald-100 text-emerald-700',
   },
   {
+    id: 'daily-care',
+    emoji: '🧴',
+    title: '日常照護與生活習慣',
+    desc: '洗澡與清潔、如廁訓練、睡眠作息與夜醒處理、視力聽力口腔保健',
+    grad: 'from-rose-50 to-pink-50',
+    border: 'border-rose-200',
+    badge: 'bg-rose-100 text-rose-700',
+  },
+  {
     id: 'vitals',
     emoji: '📊',
     title: '0–3 歲生命徵象',

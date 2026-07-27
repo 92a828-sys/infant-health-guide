@@ -181,6 +181,29 @@ const incidentScripts = [
   },
 ]
 
+const dailyCareSteps = [
+  { phase: '抵園／入托', desc: '健康觀察（測量體溫、詢問在家狀況）、檢查隨身物品與交接聯絡簿' },
+  { phase: '用餐', desc: '洗手→安全坐姿→依分齡協助進食→餐後清潔（臉、手、桌面）' },
+  { phase: '午休', desc: '安全睡眠環境佈置→定時巡視（建議每15–20分鐘一次並記錄）→起床後清潔與過渡活動' },
+  { phase: '換尿布／如廁協助', desc: '依標準動線與衛生流程執行（手部衛生時機詳見感染管制章節）' },
+  { phase: '接送', desc: '核對接送人身分，轉交當日照顧紀錄予家長' },
+]
+
+const icpElements = [
+  '適用對象：過敏體質、特殊飲食需求、發展遲緩、慢性疾病（如氣喘、癲癇）等幼兒',
+  '內容應包含：個別過敏原／禁忌清單、特殊餵食或如廁需求、緊急聯絡方式與用藥計畫、發展目標與介入策略',
+  '訂定方式：與家長、必要時與治療師或醫師共同討論訂定',
+  '應定期（如每學期）檢視並更新計畫內容，確保與幼兒目前狀況相符',
+]
+
+const growthJournalTips = [
+  '目的：記錄幼兒每日生活與發展狀況，作為與家長溝通、專業轉銜（升班、轉校）的重要依據',
+  '撰寫原則：具體描述行為而非主觀評價（例如寫「自己扣上兩顆釦子」而非「手很巧」），與前面「家長溝通話術範本」的原則一致',
+  '圖文並茂有助於家長理解當下情境，但須留意肖像權，僅提供予該幼兒之家長',
+  '避免在紀錄中比較不同幼兒的表現',
+  '建議記錄頻率：嬰幼兒班可每日簡要記錄，較大班可每週或依機構規定彙整重點',
+]
+
 const activities = [
   {
     age: '0～1歲', domain: '粗動作／感官',
@@ -285,7 +308,7 @@ export default function CaregiverToolsPage({ navigate }) {
         <div className="text-6xl mb-4">🧑‍🏫</div>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">托育人員專區</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
-          日常觀察紀錄、團體膳食與備餐衛生、感染管制與停托標準、空間安全與事故通報、發展活動設計與家長溝通參考工具
+          日常照顧SOP、個別化照顧計畫、團體膳食與備餐衛生、感染管制與停托標準、空間安全與事故通報、發展活動設計與家長溝通參考工具
         </p>
       </div>
 
@@ -696,6 +719,50 @@ export default function CaregiverToolsPage({ navigate }) {
           </div>
           <SourceNote>
             資料參考：兒童及少年福利機構重大偶發事件通報規定、一般托育機構事故傷害處理實務。通報時限與表單格式請依所屬機構及地方主管機關規定辦理。
+          </SourceNote>
+        </section>
+
+        {/* Daily care SOP */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🗓️</span> 日常照顧標準流程
+          </h2>
+          <div className="space-y-3">
+            {dailyCareSteps.map((s, i) => (
+              <div key={s.phase} className="flex gap-3 items-start bg-rose-50 border border-rose-100 rounded-2xl p-4">
+                <span className="text-xs font-bold bg-rose-500 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                <div>
+                  <p className="font-semibold text-rose-700 text-sm mb-1">{s.phase}</p>
+                  <p className="text-sm text-gray-600">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mt-3">
+            清潔與衛生細節可對照「日常照護與生活習慣」頁的洗澡、口腔、尿布章節。
+          </p>
+        </section>
+
+        {/* Individualized care plan */}
+        <section className="bg-white border-2 border-violet-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🗂️</span> 個別化照顧計畫
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {icpElements.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+        </section>
+
+        {/* Growth journal */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>📔</span> 成長日誌撰寫
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {growthJournalTips.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+          <SourceNote>
+            資料參考：托育機構日常照顧實務、兒童及少年福利機構個別化服務計畫相關規範。實際流程與表單請依所屬機構制度辦理。
           </SourceNote>
         </section>
 
