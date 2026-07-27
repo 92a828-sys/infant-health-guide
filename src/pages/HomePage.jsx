@@ -90,6 +90,15 @@ const cards = [
     badge: 'bg-rose-100 text-rose-700',
   },
   {
+    id: 'parent-support',
+    emoji: '💗',
+    title: '心理與親職支持',
+    desc: '產後情緒與伴侶分工、依附關係與正向教養、特殊家庭資源、求助管道',
+    grad: 'from-fuchsia-50 to-pink-50',
+    border: 'border-fuchsia-200',
+    badge: 'bg-fuchsia-100 text-fuchsia-700',
+  },
+  {
     id: 'vitals',
     emoji: '📊',
     title: '0–3 歲生命徵象',

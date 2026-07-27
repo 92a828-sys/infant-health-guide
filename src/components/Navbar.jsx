@@ -13,6 +13,7 @@ const navItems = [
   { id: 'newborn-safety', label: '新生兒安全', emoji: '🛡️' },
   { id: 'home-safety', label: '居家安全',   emoji: '🧯' },
   { id: 'daily-care', label: '日常照護',   emoji: '🧴' },
+  { id: 'parent-support', label: '親職支持', emoji: '💗' },
   { id: 'vitals',    label: '生命徵象',   emoji: '📊' },
   { id: 'early-learning', label: '早期學習', emoji: '🧠' },
   { id: 'caregiver', label: '托育專區',   emoji: '🧑‍🏫' },

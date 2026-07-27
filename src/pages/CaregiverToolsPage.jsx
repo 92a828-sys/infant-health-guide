@@ -204,6 +204,40 @@ const growthJournalTips = [
   '建議記錄頻率：嬰幼兒班可每日簡要記錄，較大班可每週或依機構規定彙整重點',
 ]
 
+const liftingTips = [
+  '蹲下抱起，非彎腰：抱起地上的孩子時應蹲下、屈膝，用腿部力量站起，避免只彎腰造成腰椎壓力',
+  '貼近身體：抱著孩子時盡量讓孩子貼近自己身體重心，減少手臂與腰部的力矩負擔',
+  '避免長時間單側抱：左右手／髖部交替，避免固定同一側造成肌肉不平衡',
+  '善用輔具：適度使用推車、揹巾分散負擔，避免長時間手抱',
+]
+
+const momThumbTips = [
+  '媽媽手（狹窄性肌腱滑膜炎）好發於反覆用大拇指出力的動作，如抱嬰兒時虎口過度張開撐住頭部',
+  '預防：練習用前臂與手掌整體托住嬰兒，而非單靠拇指與虎口施力',
+  '出現手腕近拇指側疼痛、腫脹、活動時加劇，應及早休息並就醫評估，避免拖延惡化',
+  '平時可搭配伸展運動放鬆腕部與前臂肌肉，工作間隔適度活動手腕',
+]
+
+const stressReliefTips = [
+  '托育工作屬情緒勞動高強度職業，長時間面對高需求幼兒與家長溝通，容易累積情緒疲勞',
+  '每日安排短暫喘息時間（如與同事交替輪班休息），不需硬撐整天',
+  '與同事互相支持、分享甘苦，團隊氛圍是重要的情緒緩衝',
+  '下班後從事真正能放鬆的活動，建立工作與生活的界線',
+]
+
+const burnoutSigns = [
+  { title: '情緒耗竭', desc: '長期感到疲憊，休息後仍無法恢復精力' },
+  { title: '去人格化', desc: '對服務對象（幼兒、家長）逐漸變得冷漠疏離，失去耐心' },
+  { title: '成就感低落', desc: '覺得工作沒有意義、努力得不到回饋' },
+]
+
+const burnoutPrevention = [
+  '機構應合理排班，避免長期過度負荷',
+  '建立同儕支持與督導機制，讓人員有管道抒發工作壓力',
+  '定期安排在職教育增能，提升專業自信與應對能力',
+  '適時尋求專業心理協助（如機構提供之員工協助方案EAP），或洽詢各縣市心理衛生中心',
+]
+
 const activities = [
   {
     age: '0～1歲', domain: '粗動作／感官',
@@ -308,7 +342,7 @@ export default function CaregiverToolsPage({ navigate }) {
         <div className="text-6xl mb-4">🧑‍🏫</div>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">托育人員專區</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
-          日常照顧SOP、個別化照顧計畫、團體膳食與備餐衛生、感染管制與停托標準、空間安全與事故通報、發展活動設計與家長溝通參考工具
+          日常照顧SOP、職業安全與心理健康、團體膳食與備餐衛生、感染管制與停托標準、空間安全與事故通報、發展活動設計與家長溝通參考工具
         </p>
       </div>
 
@@ -763,6 +797,56 @@ export default function CaregiverToolsPage({ navigate }) {
           </ul>
           <SourceNote>
             資料參考：托育機構日常照顧實務、兒童及少年福利機構個別化服務計畫相關規範。實際流程與表單請依所屬機構制度辦理。
+          </SourceNote>
+        </section>
+
+        {/* Occupational health & mental wellbeing */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🏋️</span> 抱小孩正確姿勢與腰部保護
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {liftingTips.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+        </section>
+
+        <section className="bg-white border-2 border-amber-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🖐️</span> 媽媽手預防
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {momThumbTips.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+        </section>
+
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🌤️</span> 情緒紓壓
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            {stressReliefTips.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+        </section>
+
+        <section className="bg-white border-2 border-red-100 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🔥</span> 職業倦怠預防
+          </h2>
+          <p className="text-sm font-semibold text-gray-600 mb-2">三大徵兆</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+            {burnoutSigns.map(b => (
+              <div key={b.title} className="bg-red-50 border border-red-100 rounded-2xl p-4">
+                <p className="font-semibold text-red-700 text-sm mb-1">{b.title}</p>
+                <p className="text-xs text-gray-600">{b.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm font-semibold text-gray-600 mb-2">預防與因應</p>
+          <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+            {burnoutPrevention.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+          <SourceNote>
+            資料參考：職業安全衛生相關人因工程建議、Maslach職業倦怠三面向理論（情緒耗竭／去人格化／成就感低落）。若情緒困擾持續，可參考「心理與親職支持」頁的求助管道。
           </SourceNote>
         </section>
 
