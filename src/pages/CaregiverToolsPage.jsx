@@ -1,3 +1,12 @@
+function SourceNote({ children }) {
+  return (
+    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+      <span className="shrink-0">📋</span>
+      <p>{children}</p>
+    </div>
+  )
+}
+
 const activities = [
   {
     age: '0～1歲', domain: '粗動作／感官',
@@ -15,6 +24,58 @@ const activities = [
     steps: ['安排2～3位幼兒進行簡單桌遊或說故事時間', '引導孩子輪流發言、練習等待', '對主動分享或表達的孩子給予具體稱讚'],
   },
 ]
+
+const menuDesignPrinciples = [
+  '六大類食物均衡搭配，每週菜色盡量不重複，主食可米飯／麵食交替',
+  '質地依班級分齡調整：小月齡班需切碎、剁泥或軟爛處理，避免整顆、圓形、黏牙食材',
+  '控制鹽糖用量，盡量以食材原味與天然辛香料調味',
+  '優先使用當季食材，兼顧成本與新鮮度',
+  '菜單需標明主要過敏原，供家長與教保人員核對幼兒個別過敏史',
+]
+
+const sampleWeekMenu = [
+  { day: '星期一', morning: '地瓜粥＋豆漿', lunch: '滷雞腿肉、炒高麗菜、白飯、味噌湯', snack: '香蕉切片' },
+  { day: '星期二', morning: '蔬菜蛋餅（含蛋、麩質）', lunch: '紅燒魚片、炒青江菜、糙米飯、玉米濃湯', snack: '無糖優格' },
+  { day: '星期三', morning: '牛奶燕麥粥（含乳）', lunch: '番茄豆腐燴飯、燙花椰菜、蛤蜊湯（含貝類）', snack: '蒸南瓜' },
+  { day: '星期四', morning: '全麥吐司＋起司（含麩質、乳）', lunch: '滷豬肉末、炒菠菜、白飯、蘿蔔排骨湯', snack: '蘋果泥' },
+  { day: '星期五', morning: '小米粥＋蒸蛋（含蛋）', lunch: '清蒸鱈魚、炒櫛瓜、五穀飯、紫菜蛋花湯', snack: '米餅' },
+]
+
+const hygieneRules = [
+  '備餐人員需完成健康檢查（含糞便檢查）並定期更新，作業前落實七步洗手法與戴帽戴口罩',
+  '生食、熟食砧板與刀具分開使用並標示，避免交叉污染',
+  '食物中心溫度：熱食應達 75°C 以上，冷藏食材保存於 7°C 以下',
+  '依規定留存當日供膳「留樣」（一般建議冷藏保存48小時），供疑似食品中毒時查驗',
+  '食材、成品應標示製作日期，先進先出，逾期或異味立即丟棄不供餐',
+]
+
+const allergenLabels = [
+  '甲殼類（蝦、蟹）', '芒果', '花生', '牛奶／乳製品', '蛋', '堅果類（如杏仁、核桃）',
+  '芝麻', '含麩質之穀物（小麥、大麥、黑麥等）', '大豆', '魚類及其製品', '使用亞硫酸鹽類等添加物之食品',
+]
+
+const emergencySteps = [
+  {
+    name: '異物哽塞（1歲以上，意識清楚）',
+    emoji: '🆘',
+    tone: 'bg-red-50 border-red-200 text-red-800',
+    steps: ['立即施行哈姆立克法（腹部推擠法）：站／跪於幼兒身後，雙手環抱上腹部，快速向內向上推擠', '重複推擠直到異物排出或幼兒失去意識', '若失去意識，立即讓幼兒平躺並施行CPR，同時撥打119並準備AED'],
+  },
+  {
+    name: '異物哽塞（未滿1歲嬰兒）',
+    emoji: '👶',
+    tone: 'bg-orange-50 border-orange-200 text-orange-800',
+    steps: ['採取「拍背壓胸法」：讓嬰兒趴於前臂上、頭低於身體，於肩胛骨間拍背5次', '翻身讓嬰兒仰躺，以兩指於胸骨下半段快速下壓5次', '交替進行拍背與壓胸，直到異物排出或嬰兒失去反應，並立即撥打119'],
+  },
+  {
+    name: '過敏性休克（Anaphylaxis）',
+    emoji: '🚨',
+    tone: 'bg-purple-50 border-purple-200 text-purple-800',
+    steps: ['警覺徵兆：嘴唇／臉部腫脹、大片蕁麻疹、喘鳴或呼吸困難、嘔吐合併意識改變', '立即撥打119並同時通知家長，說明幼兒過敏史與可疑食物', '若幼兒有醫囑備藥（如腎上腺素自動注射器），依機構急救流程與訓練協助使用', '協助幼兒採取舒適姿勢（呼吸困難者採坐姿，勿平躺），持續觀察生命徵象直到救護人員到場'],
+  },
+]
+
+const feedingLogColumns = ['日期', '餐別', '攝食比例', '有無異常反應', '備註']
 
 const scripts = [
   {
@@ -50,7 +111,7 @@ export default function CaregiverToolsPage({ navigate }) {
         <div className="text-6xl mb-4">🧑‍🏫</div>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">托育人員專區</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
-          日常觀察紀錄、發展活動設計與家長溝通參考工具
+          日常觀察紀錄、團體膳食與備餐衛生、發展活動設計與家長溝通參考工具
         </p>
       </div>
 
@@ -110,6 +171,149 @@ export default function CaregiverToolsPage({ navigate }) {
             建議每日固定時段填寫，長期累積可作為與家長溝通、或轉介評估時的具體觀察依據。
           </p>
         </section>
+
+        {/* Group meal menu template */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <span>🍱</span> 團體膳食菜單範本
+            </h2>
+            <button
+              onClick={() => window.print()}
+              className="text-xs bg-sky-500 text-white px-3 py-1.5 rounded-full hover:bg-sky-600 transition-colors print:hidden"
+            >
+              🖨️ 列印
+            </button>
+          </div>
+
+          <p className="text-sm font-semibold text-gray-600 mb-2">菜單設計原則</p>
+          <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside mb-5">
+            {menuDesignPrinciples.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+
+          <p className="text-sm font-semibold text-gray-600 mb-2">週菜單範例（1～2歲班，通用格式）</p>
+          <div className="overflow-x-auto mb-3">
+            <table className="w-full text-xs sm:text-sm border-collapse">
+              <thead>
+                <tr className="bg-sky-50 text-sky-800">
+                  <th className="border border-sky-200 p-2">星期</th>
+                  <th className="border border-sky-200 p-2">早點</th>
+                  <th className="border border-sky-200 p-2">午餐</th>
+                  <th className="border border-sky-200 p-2">午點</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sampleWeekMenu.map(row => (
+                  <tr key={row.day}>
+                    <td className="border border-gray-200 p-2 font-medium text-gray-700 whitespace-nowrap">{row.day}</td>
+                    <td className="border border-gray-200 p-2 text-gray-600">{row.morning}</td>
+                    <td className="border border-gray-200 p-2 text-gray-600">{row.lunch}</td>
+                    <td className="border border-gray-200 p-2 text-gray-600">{row.snack}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-400 mb-4">
+            菜色內文括號內為主要過敏原標示範例，實際供餐請依當日採購食材確認並更新標示。
+          </p>
+
+          <div className="bg-sky-50 border border-sky-200 rounded-2xl p-4">
+            <p className="text-sm text-sky-800 leading-relaxed">
+              📎 本頁提供之月菜單為<strong>通用參考範例</strong>；若貴機構（如 NIDO／IC 班）已建置專屬的月菜單系統，
+              建議與該系統相互連結參照，以確保菜色與班級實際供餐內容一致。
+              <span className="italic text-sky-500">（連結位置預留，待補上實際連結）</span>
+            </p>
+          </div>
+        </section>
+
+        {/* Food safety, allergen labeling & emergency response */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🧼</span> 備餐衛生規範重點
+          </h2>
+          <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside mb-2">
+            {hygieneRules.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+        </section>
+
+        <section className="bg-white border border-gray-200 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🏷️</span> 過敏原標示
+          </h2>
+          <p className="text-sm text-gray-500 mb-3">依食品安全衛生管理法規定應標示之常見過敏原類別：</p>
+          <div className="flex flex-wrap gap-2 mb-2">
+            {allergenLabels.map(a => (
+              <span key={a} className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-3 py-1.5">{a}</span>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mt-3">
+            供餐前應對照幼兒個別過敏史清單確認，並於菜單／餐點標示中明確列出當餐使用之過敏原食材。
+          </p>
+        </section>
+
+        <section className="bg-white border-2 border-red-100 rounded-3xl p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span>🚑</span> 緊急處理流程
+          </h2>
+          <div className="space-y-4">
+            {emergencySteps.map(e => (
+              <div key={e.name} className={`border-2 rounded-2xl p-5 ${e.tone}`}>
+                <p className="font-bold text-sm mb-2 flex items-center gap-2">
+                  <span className="text-xl">{e.emoji}</span> {e.name}
+                </p>
+                <ol className="text-sm space-y-1 list-decimal list-inside opacity-90">
+                  {e.steps.map((s, i) => <li key={i}>{s}</li>)}
+                </ol>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mt-4">
+            以上為一般性衛教流程說明，非正式急救訓練；建議托育人員定期參加合格單位（如紅十字會、消防局）之心肺復甦術與異物梗塞急救訓練並取得證照。
+          </p>
+        </section>
+
+        {/* Feeding observation log */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <span>🍴</span> 餵食觀察與紀錄表
+            </h2>
+            <button
+              onClick={() => window.print()}
+              className="text-xs bg-sky-500 text-white px-3 py-1.5 rounded-full hover:bg-sky-600 transition-colors print:hidden"
+            >
+              🖨️ 列印
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs sm:text-sm border-collapse">
+              <thead>
+                <tr className="bg-sky-50 text-sky-800">
+                  {feedingLogColumns.map(c => (
+                    <th key={c} className="border border-sky-200 p-2">{c}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <tr key={i}>
+                    {feedingLogColumns.map(c => (
+                      <td key={c} className="border border-gray-200 p-3 h-10">&nbsp;</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-400 mt-3">
+            建議每餐固定記錄攝食比例與反應，若同一食材連續出現異常反應，應提高警覺並主動告知家長。
+          </p>
+        </section>
+
+        <SourceNote>
+          資料參考：食品安全衛生管理法及其過敏原標示相關公告、食品良好衛生規範準則、兒童及少年福利機構設置標準之餐飲衛生規定、台灣兒科醫學會與紅十字會異物梗塞急救衛教資料。緊急處理流程僅供平時衛教參考，正式急救仍應以受過認證訓練之人員操作為準。
+        </SourceNote>
 
         {/* Activity design */}
         <section>

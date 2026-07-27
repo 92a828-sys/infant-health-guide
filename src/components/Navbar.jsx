@@ -6,7 +6,7 @@ const navItems = [
   { id: 'growth-chart', label: '生長曲線',  emoji: '📈' },
   { id: 'symptoms',    label: '常見症狀',   emoji: '🌡️' },
   { id: 'vaccination', label: '疫苗接種',   emoji: '💉' },
-  { id: 'dietary',     label: '飲食副食品', emoji: '🥣' },
+  { id: 'dietary',     label: '營養與餵食', emoji: '🥣' },
   { id: 'emergency',   label: '緊急狀況',   emoji: '🚑' },
   { id: 'medication',  label: '用藥衛教',   emoji: '💊' },
   { id: 'diseases',   label: '常見疾病',   emoji: '🏥' },
