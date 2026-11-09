@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Baby, ArrowRight, Ambulance, Info } from 'lucide-react'
 import { useRole } from '../RoleContext'
+import { pageIcons } from '../pageIcons'
 
 const ageGroupTable = [
   { id: 'm4', m: 4 }, { id: 'm6', m: 6 }, { id: 'm9', m: 9 },
@@ -25,7 +27,6 @@ function dietStageLabel(months) {
 const cards = [
   {
     id: 'growth',
-    emoji: '📏',
     title: '生長發育里程碑',
     desc: '0–3歲各階段動作、語言、社交情緒發展指標與紅旗警訊',
     grad: 'from-emerald-50 to-teal-50',
@@ -34,7 +35,6 @@ const cards = [
   },
   {
     id: 'symptoms',
-    emoji: '🌡️',
     title: '常見症狀處理',
     desc: '發燒、感冒、腹瀉、咳嗽等居家照護與就醫時機判斷',
     grad: 'from-sky-50 to-blue-50',
@@ -43,7 +43,6 @@ const cards = [
   },
   {
     id: 'vaccination',
-    emoji: '💉',
     title: '預防接種',
     desc: '公費/自費疫苗時程、反應與禁忌、個人化試算、預防保健與新生兒篩檢',
     grad: 'from-violet-50 to-purple-50',
@@ -52,7 +51,6 @@ const cards = [
   },
   {
     id: 'dietary',
-    emoji: '🥣',
     title: '營養與餵食',
     desc: '母乳、配方奶、副食品添加（含BLW）、1-3歲均衡飲食與斷奶轉銜',
     grad: 'from-amber-50 to-orange-50',
@@ -61,7 +59,6 @@ const cards = [
   },
   {
     id: 'emergency',
-    emoji: '🚑',
     title: '緊急狀況判斷',
     desc: '哪些症狀需立即就醫？熱痙攣、異物哽塞緊急處理步驟',
     grad: 'from-red-50 to-rose-50',
@@ -70,7 +67,6 @@ const cards = [
   },
   {
     id: 'medication',
-    emoji: '💊',
     title: '用藥與托藥管理',
     desc: '退燒藥劑量計算、禁用藥物、幼生藥庫、三讀五對托藥SOP',
     grad: 'from-teal-50 to-cyan-50',
@@ -79,7 +75,6 @@ const cards = [
   },
   {
     id: 'diseases',
-    emoji: '🏥',
     title: '認識常見疾病',
     desc: '腸病毒、RSV、肺炎、流感等幼兒常見疾病症狀與照護',
     grad: 'from-indigo-50 to-violet-50',
@@ -88,7 +83,6 @@ const cards = [
   },
   {
     id: 'newborn-safety',
-    emoji: '🛡️',
     title: '新生兒安全與警訊',
     desc: 'SIDS安全睡眠圖解、大便顏色卡、何時必須就醫的紅旗症狀',
     grad: 'from-cyan-50 to-blue-50',
@@ -97,7 +91,6 @@ const cards = [
   },
   {
     id: 'home-safety',
-    emoji: '🧯',
     title: '居家安全與意外預防',
     desc: '居家安全陷阱檢查、窒息燒燙傷跌倒車禍溺水預防、玩具安全標準',
     grad: 'from-emerald-50 to-teal-50',
@@ -106,7 +99,6 @@ const cards = [
   },
   {
     id: 'daily-care',
-    emoji: '🧴',
     title: '日常照護與生活習慣',
     desc: '洗澡與清潔、如廁訓練、睡眠作息與夜醒處理、視力聽力口腔保健',
     grad: 'from-rose-50 to-pink-50',
@@ -115,7 +107,6 @@ const cards = [
   },
   {
     id: 'parent-support',
-    emoji: '💗',
     title: '心理與親職支持',
     desc: '產後情緒與伴侶分工、依附關係與正向教養、特殊家庭資源、求助管道',
     grad: 'from-fuchsia-50 to-pink-50',
@@ -124,7 +115,6 @@ const cards = [
   },
   {
     id: 'vitals',
-    emoji: '📊',
     title: '0–3 歲生命徵象',
     desc: '體溫、心跳、呼吸、血氧正常值對照表與測量方式，爸媽也看得懂',
     grad: 'from-cyan-50 to-sky-50',
@@ -133,7 +123,6 @@ const cards = [
   },
   {
     id: 'growth-chart',
-    emoji: '📈',
     title: '生長曲線知多少',
     desc: 'WHO生長曲線教學＋線上百分位估算器，早產兒矯正年齡換算',
     grad: 'from-lime-50 to-emerald-50',
@@ -142,7 +131,6 @@ const cards = [
   },
   {
     id: 'early-learning',
-    emoji: '🧠',
     title: '早期學習與親子共讀',
     desc: '大腦開發三原則、分齡共讀技巧、感官刺激遊戲活動',
     grad: 'from-fuchsia-50 to-purple-50',
@@ -151,7 +139,6 @@ const cards = [
   },
   {
     id: 'caregiver',
-    emoji: '🧑‍🏫',
     title: '托育人員專區',
     desc: '團體膳食菜單、感染管制與停托標準、空間安全檢核與事故通報、活動設計',
     grad: 'from-sky-50 to-blue-50',
@@ -161,7 +148,6 @@ const cards = [
   },
   {
     id: 'caregiver-professional',
-    emoji: '📚',
     title: '托育人員專業與法規',
     desc: '相關法規摘要、人員配置健康管理、幼兒健康監測、在職訓練、兒少保護通報',
     grad: 'from-slate-50 to-blue-50',
@@ -207,6 +193,11 @@ const officialManuals = [
   { name: '托嬰中心感染管制手冊', desc: '疾管署發布之機構感染管制指引（供托育人員使用）', url: 'https://at.cdc.gov.tw/3Yg76d', emoji: '📙' },
 ]
 
+const GrowthIcon = pageIcons['growth']
+const VaccinationIcon = pageIcons['vaccination']
+const DietaryIcon = pageIcons['dietary']
+const DailyCareIcon = pageIcons['daily-care']
+
 export default function HomePage({ navigate }) {
   // UTC+8 台灣時間的第幾天，確保午夜 12 點換句
   const q = quotes[Math.floor((Date.now() + 8 * 3600000) / 86400000) % quotes.length]
@@ -217,64 +208,69 @@ export default function HomePage({ navigate }) {
   return (
     <div>
       {/* ── Hero ── */}
-      <section className="relative bg-gradient-to-br from-morandi-secondary via-morandi-secondary to-morandi-primary-light/30 py-20 px-6 overflow-hidden">
-        <span className="absolute top-6 right-10 text-8xl opacity-10 select-none pointer-events-none">🍼</span>
-        <span className="absolute bottom-6 left-10 text-7xl opacity-10 select-none pointer-events-none">🌸</span>
-        <span className="absolute top-1/2 right-1/4 text-5xl opacity-5 select-none pointer-events-none">⭐</span>
+      <section className="relative bg-gradient-to-br from-canvas via-canvas to-brand-soft py-20 px-6 overflow-hidden">
+        {/* 裝飾色塊（accent 僅供裝飾） */}
+        <span aria-hidden="true" className="absolute -top-10 right-6 w-48 h-48 rounded-full bg-accent/15 pointer-events-none" />
+        <span aria-hidden="true" className="absolute -bottom-12 left-4 w-40 h-40 rounded-full bg-accent/10 pointer-events-none" />
+        <span aria-hidden="true" className="absolute top-1/2 right-1/4 w-16 h-16 rounded-full bg-brand/5 pointer-events-none" />
 
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <div className="text-7xl mb-5" style={{ animation: 'bounce 2s infinite' }}>👶</div>
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-[0.05em] text-morandi-dark mb-4 leading-tight">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-surface text-brand shadow-[0_10px_30px_rgba(0,0,0,0.08)] mb-6">
+            <Baby className="w-11 h-11" strokeWidth={2} aria-hidden="true" />
+          </div>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold tracking-[0.05em] text-ink mb-4 leading-tight">
             0–3歲幼兒衛教專區
           </h1>
-          <p className="text-lg md:text-xl text-morandi-primary mb-2">
-            專為<strong className="text-morandi-dark">新手爸媽</strong>與<strong className="text-morandi-dark">托育人員</strong>設計的健康指南
+          <p className="text-lg md:text-xl text-ink-muted mb-2">
+            專為<strong className="text-ink">新手爸媽</strong>與<strong className="text-ink">托育人員</strong>設計的健康指南
           </p>
-          <p className="text-sm text-morandi-primary-light mb-10">
+          <p className="text-sm text-ink-muted mb-10">
             內容參考衛生福利部、台灣兒科醫學會等官方資料
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate('growth')}
-              className="bg-morandi-primary text-white px-8 py-3.5 rounded-3xl font-semibold hover:bg-morandi-dark transition-all shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 text-base"
+              className="inline-flex items-center justify-center gap-2 bg-brand text-on-brand px-8 py-3.5 rounded-3xl font-semibold hover:opacity-90 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 text-base"
             >
-              🌱 開始探索
+              開始探索
+              <ArrowRight className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
             </button>
             <button
               onClick={() => navigate('emergency')}
-              className="bg-white text-red-600 border-2 border-red-300 px-8 py-3.5 rounded-3xl font-semibold hover:bg-red-50 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.08)] text-base"
+              className="inline-flex items-center justify-center gap-2 bg-surface text-danger-fg border-2 border-danger-border px-8 py-3.5 rounded-3xl font-semibold hover:bg-danger-bg transition-all shadow-[0_10px_30px_rgba(0,0,0,0.08)] text-base"
             >
-              🚑 緊急狀況
+              <Ambulance className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
+              緊急狀況
             </button>
           </div>
         </div>
       </section>
 
       {/* ── Quote ── */}
-      <section className="bg-morandi-accent/25 border-y border-morandi-accent/40 py-7 px-6">
+      <section className="bg-accent/10 border-y border-accent/30 py-7 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <div className="text-3xl mb-2">{q.icon}</div>
-          <p className="text-morandi-dark font-medium italic text-lg">「{q.text}」</p>
-          <p className="text-morandi-primary text-sm mt-1">— 今日育兒小語</p>
+          <p className="text-ink font-medium italic text-lg">「{q.text}」</p>
+          <p className="text-ink-muted text-sm mt-1">— 今日育兒小語</p>
         </div>
       </section>
 
       {/* ── Age-based quick nav ── */}
-      <section className="py-12 px-6 bg-white border-b border-morandi-secondary">
+      <section className="py-12 px-6 bg-surface border-b border-border">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-semibold tracking-[0.05em] text-morandi-dark text-center mb-2">🎯 依月齡快速導覽</h2>
-          <p className="text-morandi-primary text-center mb-6 text-sm">選擇寶寶目前月齡，直接前往對應內容</p>
+          <h2 className="text-xl md:text-2xl font-semibold tracking-[0.05em] text-ink text-center mb-2">🎯 依月齡快速導覽</h2>
+          <p className="text-ink-muted text-center mb-6 text-sm">選擇寶寶目前月齡，直接前往對應內容</p>
 
           <div className="flex items-center gap-4 mb-6">
             <input
               type="range" min="0" max="36" value={ageMonths}
               onChange={e => setAgeMonths(Number(e.target.value))}
-              className="flex-1 accent-morandi-primary"
+              className="flex-1 accent-brand"
             />
-            <span className="text-lg font-semibold text-morandi-primary w-20 text-right shrink-0">{ageMonths} 個月</span>
+            <span className="text-lg font-semibold text-brand w-20 text-right shrink-0">{ageMonths} 個月</span>
           </div>
 
-          <div className="bg-morandi-secondary border border-morandi-primary-light/40 rounded-3xl p-4 mb-5 text-sm text-morandi-dark shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+          <div className="bg-surface-muted border border-border rounded-3xl p-4 mb-5 text-sm text-ink shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             🥣 這個階段的飲食：{dietStageLabel(ageMonths)}
           </div>
 
@@ -283,28 +279,28 @@ export default function HomePage({ navigate }) {
               onClick={() => navigate('growth', nearestAgeGroupId(ageMonths))}
               className="card-hover bg-emerald-50 border border-emerald-200 rounded-2xl p-3 text-center hover:bg-emerald-100"
             >
-              <span className="text-2xl block mb-1">📏</span>
+              <GrowthIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
               <span className="text-xs font-semibold text-emerald-700">生長里程碑</span>
             </button>
             <button
               onClick={() => navigate('vaccination', 'calculator')}
               className="card-hover bg-violet-50 border border-violet-200 rounded-2xl p-3 text-center hover:bg-violet-100"
             >
-              <span className="text-2xl block mb-1">💉</span>
+              <VaccinationIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
               <span className="text-xs font-semibold text-violet-700">疫苗時程試算</span>
             </button>
             <button
               onClick={() => navigate('dietary')}
               className="card-hover bg-orange-50 border border-orange-200 rounded-2xl p-3 text-center hover:bg-orange-100"
             >
-              <span className="text-2xl block mb-1">🥣</span>
+              <DietaryIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
               <span className="text-xs font-semibold text-orange-700">營養與餵食</span>
             </button>
             <button
               onClick={() => navigate('daily-care')}
               className="card-hover bg-rose-50 border border-rose-200 rounded-2xl p-3 text-center hover:bg-rose-100"
             >
-              <span className="text-2xl block mb-1">🧴</span>
+              <DailyCareIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
               <span className="text-xs font-semibold text-rose-700">日常照護</span>
             </button>
           </div>
@@ -312,36 +308,39 @@ export default function HomePage({ navigate }) {
       </section>
 
       {/* ── Nav Cards ── */}
-      <section className="py-16 px-6 bg-morandi-secondary">
+      <section className="py-16 px-6 bg-canvas">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-morandi-dark text-center mb-2">📌 快速導覽</h2>
-          <p className="text-morandi-primary text-center mb-10 text-sm">選擇您需要的衛教主題</p>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-ink text-center mb-2">📌 快速導覽</h2>
+          <p className="text-ink-muted text-center mb-10 text-sm">選擇您需要的衛教主題</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {visibleCards.map(c => (
+            {visibleCards.map(c => {
+              const Icon = pageIcons[c.id]
+              return (
               <button
                 key={c.id}
                 onClick={() => navigate(c.id)}
                 className={`card-hover group bg-gradient-to-br ${c.grad} border-2 ${c.border} rounded-3xl p-6 text-left`}
               >
-                <div className="text-5xl mb-4 transition-transform duration-200 group-hover:scale-110">
-                  {c.emoji}
+                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4 transition-transform duration-200 group-hover:scale-110 ${c.badge}`}>
+                  <Icon className="w-7 h-7" strokeWidth={2} aria-hidden="true" />
                 </div>
-                <h3 className="font-bold text-gray-800 text-base mb-2">{c.title}</h3>
-                <p className="text-sm text-gray-500 mb-4 leading-relaxed">{c.desc}</p>
+                <h3 className="font-bold text-ink text-base mb-2">{c.title}</h3>
+                <p className="text-sm text-ink-muted mb-4 leading-relaxed">{c.desc}</p>
                 <span className={`inline-block text-xs font-semibold px-3 py-1.5 rounded-full ${c.badge}`}>
                   了解更多 →
                 </span>
               </button>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
 
       {/* ── Official Resources ── */}
-      <section className="py-14 px-6 bg-white">
+      <section className="py-14 px-6 bg-surface">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-morandi-dark text-center mb-2">🔗 官方參考資源</h2>
-          <p className="text-morandi-primary text-center mb-10 text-sm">政府與醫學機構提供的權威健康資訊</p>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-ink text-center mb-2">🔗 官方參考資源</h2>
+          <p className="text-ink-muted text-center mb-10 text-sm">政府與醫學機構提供的權威健康資訊</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {officialLinks.map(l => (
               <a
@@ -362,7 +361,7 @@ export default function HomePage({ navigate }) {
             ))}
           </div>
 
-          <h3 className="text-lg font-semibold tracking-[0.05em] text-morandi-dark text-center mt-12 mb-6">📖 官方手冊下載</h3>
+          <h3 className="text-lg font-semibold tracking-[0.05em] text-ink text-center mt-12 mb-6">📖 官方手冊下載</h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {officialManuals.map(l => (
               <a
@@ -370,7 +369,7 @@ export default function HomePage({ navigate }) {
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card-hover flex items-start gap-3 p-4 rounded-3xl border-2 bg-morandi-secondary border-morandi-primary-light/40 hover:bg-morandi-primary-light/30 shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
+                className="card-hover flex items-start gap-3 p-4 rounded-3xl border-2 bg-surface-muted border-border hover:bg-brand-soft shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
               >
                 <span className="text-2xl shrink-0">{l.emoji}</span>
                 <div className="min-w-0">
@@ -384,17 +383,17 @@ export default function HomePage({ navigate }) {
       </section>
 
       {/* ── Disclaimer ── */}
-      <section className="py-8 px-6 bg-morandi-secondary border-t border-morandi-primary-light/40">
+      <section className="py-8 px-6 bg-canvas border-t border-border">
         <div className="max-w-4xl mx-auto">
-          <div className="flex gap-3 items-start bg-white rounded-3xl p-5 border border-morandi-primary-light/50 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-            <span className="text-2xl shrink-0">⚠️</span>
+          <div className="flex gap-3 items-start bg-surface rounded-3xl p-5 border border-border shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+            <Info className="w-6 h-6 shrink-0 text-brand mt-0.5" strokeWidth={2} aria-hidden="true" />
             <div>
-              <h3 className="font-semibold tracking-[0.05em] text-morandi-dark mb-1.5 text-sm">免責聲明</h3>
-              <p className="text-sm text-morandi-primary leading-[1.75]">
-                本網站提供之資訊由護理及托育專業人員整理，
+              <h3 className="font-semibold tracking-[0.05em] text-ink mb-1.5 text-sm">免責聲明</h3>
+              <p className="text-sm text-ink-muted leading-[1.75]">
+                本網站提供之資訊由護理師整理，
                 <strong>僅供衛教參考，不得作為醫療診斷或治療之依據。</strong>
                 每位幼兒狀況不同，如有健康疑慮請務必諮詢合格醫師或醫療人員。
-                若遇緊急醫療狀況，請立即撥打 <strong className="text-red-600">119</strong>{' '}
+                若遇緊急醫療狀況，請立即撥打 <strong className="text-danger-fg">119</strong>{' '}
                 或前往最近急診室就醫。
               </p>
             </div>

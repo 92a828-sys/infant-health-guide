@@ -56,7 +56,7 @@ function App() {
 
   return (
     <RoleProvider>
-      <div className="min-h-screen bg-morandi-secondary flex flex-col">
+      <div className="min-h-screen bg-canvas text-ink flex flex-col">
         <Navbar navigate={navigate} currentPage={currentPage} />
         <EmergencyBar navigate={navigate} />
         <main key={currentPage} className="flex-1 page-transition">

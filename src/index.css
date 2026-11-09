@@ -1,23 +1,99 @@
 @import "tailwindcss";
 
-/* 網站框架視覺識別（莫蘭迪色系）：僅套用於 Navbar／Footer／首頁框架，
-   內容頁沿用既有語意色（紅=緊急、琥珀=注意、綠=正常）與各主題分類色，不動 */
+/* 深色模式：以 <html data-theme="dark"> 切換（切換按鈕尚未實作） */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* ── 設計 token：原始值 ──
+   ink-muted 由 #68766F 調深為 #63716A，使其在 canvas／surface-muted 上對比皆 ≥ 4.5:1
+   accent 僅供裝飾（色塊、底紋），不可用於文字 */
+:root {
+  --brand: #3f6b5e;
+  --brand-soft: #dce9e1;
+  --on-brand: #ffffff;
+  --canvas: #f7f6f1;
+  --surface: #ffffff;
+  --surface-muted: #eef2ed;
+  --ink: #26332f;
+  --ink-muted: #63716a;
+  --border: #e1e6e0;
+  --accent: #d08b67;
+
+  /* 警示色（語意固定）：紅=危險、黃=注意、綠=正常 */
+  --danger-bg: #fceae8;
+  --danger-fg: #8b2e2a;
+  --danger-border: #c95b55;
+  --warning-bg: #fff3d9;
+  --warning-fg: #6b4b0f;
+  --warning-border: #d6a13a;
+  --success-bg: #e7f3ea;
+  --success-fg: #235c39;
+  --success-border: #5b9970;
+}
+
+[data-theme="dark"] {
+  --brand: #a4c5b7;
+  --brand-soft: #2b4339;
+  --on-brand: #141d1a;
+  --canvas: #141d1a;
+  --surface: #1d2924;
+  --surface-muted: #273832;
+  --ink: #f3f5f1;
+  --ink-muted: #b1bdb6;
+  --border: #35443d;
+  --accent: #e6ac8d;
+
+  --danger-bg: #3a211f;
+  --danger-fg: #ffb7ae;
+  --danger-border: #b85a54;
+  --warning-bg: #3a2e19;
+  --warning-fg: #f6d58c;
+  --warning-border: #b58a35;
+  --success-bg: #1e3428;
+  --success-fg: #a9d8b7;
+  --success-border: #5c9c72;
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-on-brand: var(--on-brand);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-fg: var(--danger-fg);
+  --color-danger-border: var(--danger-border);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-fg: var(--warning-fg);
+  --color-warning-border: var(--warning-border);
+  --color-success-bg: var(--success-bg);
+  --color-success-fg: var(--success-fg);
+  --color-success-border: var(--success-border);
+}
+
+/* 字型：內文 Sans；Serif 僅用於首頁主標與各頁面大標（h1） */
 @theme {
-  --color-morandi-primary: #7895b2;
-  --color-morandi-primary-light: #aebdca;
-  --color-morandi-secondary: #f5ebe0;
-  --color-morandi-accent: #e8c4c4;
-  --color-morandi-dark: #3e5266;
+  --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
+  --font-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
 }
 
 @layer base {
   html {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei",
-      "Noto Sans TC", sans-serif;
+    font-family: var(--font-sans);
+    font-size: 16px;
     scroll-behavior: smooth;
   }
   body {
+    font-size: 1rem;
     line-height: 1.75;
+    background-color: var(--canvas);
+    color: var(--ink);
   }
   * {
     -webkit-tap-highlight-color: transparent;
