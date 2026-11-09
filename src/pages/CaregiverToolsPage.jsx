@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Alert, ToneIcon } from '../components/Alert'
+import { toneClasses } from '../components/alertTones'
 
 function SourceNote({ children }) {
   return (
@@ -163,19 +165,22 @@ const incidentReportSteps = [
 const incidentScripts = [
   {
     scenario: '輕微擦挫傷通知',
-    tone: 'bg-emerald-50 border-emerald-200 text-emerald-800',
+    tone: 'success',
+    level: '輕微',
     text: '「跟您說一下，○○今天在遊戲場跑步時不小心跌倒，膝蓋擦傷了一點皮，我們已經用生理食鹽水清潔並貼上OK繃，他當下有哭一下，但現在活動力恢復正常、有繼續開心玩耍，請您回家後留意一下傷口狀況。」',
     note: '具體描述事發經過、當下處理方式與目前狀態，讓家長清楚掌握全貌而非模糊帶過',
   },
   {
     scenario: '碰撞頭部通知',
-    tone: 'bg-amber-50 border-amber-200 text-amber-800',
+    tone: 'warning',
+    level: '需觀察',
     text: '「要跟您說一件事，○○剛剛在教室裡不小心撞到頭，額頭有點紅腫，我們已經冰敷處理，這段時間他的意識、活動力都正常、也有正常說話反應，會持續留意觀察到您接回去。接下來24–72小時在家也請多留意他的精神狀況，如有嗜睡、嘔吐、異常等情形請儘速就醫。」',
     note: '頭部撞傷須特別詳細說明觀察重點與時間範圍，並給家長明確的後續注意事項',
   },
   {
     scenario: '需送醫狀況通知',
-    tone: 'bg-red-50 border-red-200 text-red-800',
+    tone: 'danger',
+    level: '緊急',
     text: '「（電話聯繫）您好，跟您報告一個緊急狀況，○○剛才發生……，我們已經立即為他做……處理，目前狀況是……，我們評估後決定叫救護車／由老師陪同送往ＯＯ醫院，麻煩您盡快到醫院與我們會合，路上請小心。」',
     note: '緊急送醫狀況務必第一時間電話聯繫，語氣冷靜但明確傳達已處理的內容與現況',
   },
@@ -342,7 +347,7 @@ export default function CaregiverToolsPage({ navigate }) {
     <div>
       <div className="bg-gradient-to-br from-sky-50 to-blue-100 py-12 px-6 text-center">
         <div className="text-6xl mb-4">🧑‍🏫</div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">托育人員專區</h1>
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">托育人員專區</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
           日常照顧SOP、職業安全與心理健康、團體膳食與備餐衛生、感染管制與停托標準、空間安全與事故通報、發展活動設計與家長溝通參考工具
         </p>
@@ -746,8 +751,11 @@ export default function CaregiverToolsPage({ navigate }) {
           </h2>
           <div className="space-y-4">
             {incidentScripts.map((s, i) => (
-              <div key={i} className={`border-2 rounded-2xl p-5 ${s.tone}`}>
-                <p className="font-bold text-sm mb-2">{s.scenario}</p>
+              <div key={i} className={`border-2 rounded-2xl p-5 ${toneClasses(s.tone)}`}>
+                <p className="font-bold text-sm mb-2 flex items-center gap-1.5">
+                  <ToneIcon tone={s.tone} className="w-4 h-4" />
+                  <span>{s.level}｜{s.scenario}</span>
+                </p>
                 <p className="text-sm leading-relaxed mb-3">「{s.text.replace(/^「|」$/g, '')}」</p>
                 <p className="text-xs opacity-80 border-t border-current/20 pt-2">💡 {s.note}</p>
               </div>
@@ -837,10 +845,9 @@ export default function CaregiverToolsPage({ navigate }) {
           <p className="text-sm font-semibold text-gray-600 mb-2">三大徵兆</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
             {burnoutSigns.map(b => (
-              <div key={b.title} className="bg-red-50 border border-red-100 rounded-2xl p-4">
-                <p className="font-semibold text-red-700 text-sm mb-1">{b.title}</p>
-                <p className="text-xs text-gray-600">{b.desc}</p>
-              </div>
+              <Alert key={b.title} tone="warning" label="徵兆" title={b.title}>
+                <p className="text-xs">{b.desc}</p>
+              </Alert>
             ))}
           </div>
           <p className="text-sm font-semibold text-gray-600 mb-2">預防與因應</p>

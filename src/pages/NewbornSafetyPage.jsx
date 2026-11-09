@@ -1,8 +1,10 @@
+import { Alert, ToneIcon } from '../components/Alert'
+
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -115,17 +117,16 @@ export default function NewbornSafetyPage({ navigate }) {
             ))}
           </div>
 
-          <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-5">
-            <p className="font-bold text-red-700 text-sm mb-3">🚫 睡眠環境應避免</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <Alert tone="danger" label="避免" title="睡眠環境應避免" strong>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
               {sidsAvoid.map(a => (
-                <div key={a.label} className="flex items-center gap-2 bg-white rounded-xl px-3 py-2 border border-red-100">
+                <div key={a.label} className="flex items-center gap-2 bg-surface rounded-xl px-3 py-2 border border-danger-border/40">
                   <span className="text-xl">{a.emoji}</span>
-                  <span className="text-xs text-red-700 font-medium">{a.label}</span>
+                  <span className="text-xs font-medium">{a.label}</span>
                 </div>
               ))}
             </div>
-          </div>
+          </Alert>
 
           <SourceNote>
             資料參考：American Academy of Pediatrics（AAP）Safe Sleep 安全睡眠建議、衛生福利部國民健康署嬰兒猝死症預防衛教資料。
@@ -163,22 +164,23 @@ export default function NewbornSafetyPage({ navigate }) {
               {stoolCards.map(c => (
                 <div key={c.no} className="flex flex-col items-center gap-1">
                   <div
-                    className={`w-full aspect-square rounded-lg border-2 ${c.normal ? 'border-emerald-400' : 'border-red-400'}`}
+                    className={`w-full aspect-square rounded-lg border-2 ${c.normal ? 'border-success-border' : 'border-danger-border'}`}
                     style={{ backgroundColor: c.color }}
                   />
-                  <span className={`text-[10px] font-semibold ${c.normal ? 'text-emerald-600' : 'text-red-500'}`}>
+                  <span className={`inline-flex items-center gap-0.5 text-[10px] font-semibold ${c.normal ? 'text-success-fg' : 'text-danger-fg'}`}>
+                    <ToneIcon tone={c.normal ? 'success' : 'danger'} className="w-3 h-3" />
                     {c.no}{c.normal ? '正常' : '異常'}
                   </span>
                 </div>
               ))}
             </div>
-            <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mt-5">
-              <p className="text-sm text-red-700 leading-relaxed">
-                ⚠️ <strong>螢幕顯示與自行列印的顏色僅供示意參考</strong>，家用印表機色彩也可能失真，實際比對請使用兒童健康手冊中的正版印刷色卡，
+            <Alert tone="danger" label="重要" className="mt-5">
+              <p>
+                <strong>螢幕顯示與自行列印的顏色僅供示意參考</strong>，家用印表機色彩也可能失真，實際比對請使用兒童健康手冊中的正版印刷色卡，
                 於自然光或白色燈光下比對寶寶大便顏色。若比對結果落在1–6號異常範圍，或對顏色判讀有疑慮，
                 請儘速攜帶寶寶及大便顏色卡就醫評估，不要自行等待觀察。
               </p>
-            </div>
+            </Alert>
           </div>
 
           <SourceNote>
@@ -195,12 +197,11 @@ export default function NewbornSafetyPage({ navigate }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {redFlags.map(r => (
-              <div key={r.cat} className="bg-red-50 border-2 border-red-200 rounded-2xl p-4">
-                <p className="font-bold text-red-700 text-sm mb-2">{r.cat}</p>
-                <ul className="text-sm text-red-600 space-y-1.5 list-disc list-inside">
+              <Alert key={r.cat} tone="danger" label="紅旗" title={r.cat}>
+                <ul className="space-y-1.5 list-disc list-inside">
                   {r.items.map((it, i) => <li key={i}>{it}</li>)}
                 </ul>
-              </div>
+              </Alert>
             ))}
           </div>
         </section>

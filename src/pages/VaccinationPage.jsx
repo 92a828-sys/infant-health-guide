@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { Alert, ToneIcon } from '../components/Alert'
+import { toneClasses } from '../components/alertTones'
 
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -213,8 +215,8 @@ function VaccineCalculator() {
     : []
 
   const statusStyle = {
-    overdue: { label: '已達接種年齡', tag: 'bg-red-100 text-red-700 border-red-200' },
-    soon: { label: '30天內到期', tag: 'bg-amber-100 text-amber-700 border-amber-200' },
+    overdue: { label: '已達接種年齡', tone: 'danger', tag: toneClasses('danger') },
+    soon: { label: '30天內到期', tone: 'warning', tag: toneClasses('warning') },
     upcoming: { label: '尚未到期', tag: 'bg-gray-100 text-gray-500 border-gray-200' },
   }
 
@@ -243,7 +245,10 @@ function VaccineCalculator() {
                 <p className="text-sm font-semibold">{r.name}</p>
                 <p className="text-xs opacity-80">{r.label}（建議日期：{r.due.toLocaleDateString('zh-TW')}）</p>
               </div>
-              <span className="text-xs font-semibold whitespace-nowrap">{statusStyle[r.status].label}</span>
+              <span className="inline-flex items-center gap-1 text-xs font-semibold whitespace-nowrap">
+                {statusStyle[r.status].tone && <ToneIcon tone={statusStyle[r.status].tone} className="w-4 h-4" />}
+                {statusStyle[r.status].label}
+              </span>
             </div>
           ))}
         </div>
@@ -320,13 +325,12 @@ export default function VaccinationPage({ navigate, initialTab }) {
               ))}
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex gap-3">
-              <span className="text-xl shrink-0">💡</span>
-              <p className="text-sm text-amber-700 leading-relaxed">
-                <strong>注意：</strong>疫苗時程可能依政策調整（如卡介苗2016年起、A型肝炎疫苗2025年起皆曾調整接種年齡）。
+            <Alert tone="warning" label="注意">
+              <p>
+                疫苗時程可能依政策調整（如卡介苗2016年起、A型肝炎疫苗2025年起皆曾調整接種年齡）。
                 請以您所在縣市衛生局公告及兒科醫師建議為準，並務必攜帶<strong>兒童健康手冊</strong>記錄接種紀錄。
               </p>
-            </div>
+            </Alert>
 
             <SourceNote>
               資料參考：衛生福利部疾病管制署《現行兒童預防接種時程表》（114年1月版，頁面最後更新2026年7月15日）。時程如有更新請以疾管署官網公告為準。
@@ -374,10 +378,9 @@ export default function VaccinationPage({ navigate, initialTab }) {
               </h2>
               <div className="space-y-3">
                 {contraindications.map(c => (
-                  <div key={c.title} className="bg-red-50 border border-red-100 rounded-2xl p-4">
-                    <p className="font-semibold text-red-700 text-sm mb-1">{c.title}</p>
-                    <p className="text-sm text-gray-600">{c.desc}</p>
-                  </div>
+                  <Alert key={c.title} tone="danger" label="禁忌" title={c.title}>
+                    <p>{c.desc}</p>
+                  </Alert>
                 ))}
               </div>
               <p className="text-xs text-gray-400 mt-3">以上僅為一般性原則，個別幼兒是否適合接種仍須由醫師評估。</p>
@@ -395,13 +398,12 @@ export default function VaccinationPage({ navigate, initialTab }) {
         {/* Preventive checkups */}
         {tab === 'checkup' && (
           <div className="space-y-5">
-            <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex gap-3">
-              <span className="text-xl shrink-0">💡</span>
-              <p className="text-sm text-emerald-800 leading-relaxed">
+            <Alert tone="success" label="說明">
+              <p>
                 國健署為7歲以下兒童提供<strong>7次免費兒童預防保健服務</strong>，家長只需負擔醫療院所掛號費，
                 攜帶兒童健康手冊及健保卡至健兒門診即可。
               </p>
-            </div>
+            </Alert>
             <div className="space-y-3">
               {checkups.map(c => (
                 <div key={c.stage} className="bg-white border border-emerald-200 rounded-2xl p-4">

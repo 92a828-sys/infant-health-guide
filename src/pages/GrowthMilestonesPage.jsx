@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Alert, StatusBadge } from '../components/Alert'
 
 const ageGroups = [
   {
@@ -357,7 +358,7 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
       {/* Header */}
       <div className="bg-gradient-to-br from-emerald-50 to-teal-100 py-12 px-6 text-center">
         <div className="text-6xl mb-4">📏</div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">生長發育里程碑</h1>
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">生長發育里程碑</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
           依據臺北市學齡前兒童發展檢核表，涵蓋4個月至3歲共9個年齡段
         </p>
@@ -409,7 +410,7 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
             {/* Milestones */}
             <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
               <h3 className="font-bold text-gray-700 text-sm flex items-center gap-2">
-                <span className="bg-green-100 text-green-700 rounded-full px-2 py-0.5 text-xs">✅ 這個階段可以做到（點擊項目可勾選）</span>
+                <StatusBadge tone="success">這個階段可以做到（點擊項目可勾選）</StatusBadge>
               </h3>
               <div className="flex items-center gap-3 print:hidden">
                 <span className="text-xs text-gray-400">已勾選 {checkedCount} / {totalItems} 項</span>
@@ -456,21 +457,21 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
 
             {/* Red flags */}
             <h3 className="font-bold text-gray-700 text-sm mb-4 flex items-center gap-2">
-              <span className="bg-red-100 text-red-700 rounded-full px-2 py-0.5 text-xs">🚩 紅旗警訊——出現以下情形請盡早就醫評估</span>
+              <StatusBadge tone="danger">紅旗警訊——出現以下情形請盡早就醫評估</StatusBadge>
             </h3>
-            <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-5">
-              <ul className="space-y-2">
+            <Alert tone="danger" label="紅旗警訊" strong>
+              <ul className="space-y-2 mt-1">
                 {group.redFlags.map((flag, i) => (
-                  <li key={i} className="flex gap-2 items-start text-sm text-red-800">
-                    <span className="text-red-400 shrink-0 mt-0.5">★</span>
+                  <li key={i} className="flex gap-2 items-start">
+                    <span aria-hidden="true" className="shrink-0">★</span>
                     <span>{flag}</span>
                   </li>
                 ))}
               </ul>
-              <p className="text-xs text-red-500 mt-4 border-t border-red-200 pt-3">
+              <p className="text-xs mt-4 border-t border-danger-border/50 pt-3">
                 出現任何紅旗警訊，請攜帶「健保卡」及「兒童健康手冊」至兒童發展篩檢服務（PeDS）院所，或至早療評估醫院進一步確認。
               </p>
-            </div>
+            </Alert>
           </div>
         </div>
 
@@ -492,14 +493,13 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
         </div>
 
         {/* General tip */}
-        <div className="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-4 flex gap-3">
-          <span className="text-xl shrink-0">💡</span>
-          <p className="text-sm text-amber-700 leading-relaxed">
-            <strong>提醒：</strong>每位孩子的發展速度不同，里程碑為「大多數孩子」可達到的範圍，並非嚴格標準。
+        <Alert tone="warning" label="提醒" className="mt-8">
+          <p>
+            每位孩子的發展速度不同，里程碑為「大多數孩子」可達到的範圍，並非嚴格標準。
             若孩子僅有個別項目略慢可先觀察；若有多項落後或出現上方紅旗警訊，建議主動向兒科醫師反映，必要時轉介早療資源，
             <strong>早期介入效果最好</strong>。
           </p>
-        </div>
+        </Alert>
 
         {/* Related links */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">

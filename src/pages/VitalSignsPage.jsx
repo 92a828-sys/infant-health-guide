@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Alert, StatusBadge, ToneIcon } from '../components/Alert'
+import { toneClasses } from '../components/alertTones'
 
 // ── 各年齡正常值 ────────────────────────────────────────────
 const ageGroups = [
@@ -93,11 +95,11 @@ const tempData = {
     },
   ],
   ranges: [
-    { label: '體溫偏低', range: '< 36.0°C', color: 'bg-blue-100 text-blue-800', action: '注意保暖，觀察活力', alert: false },
-    { label: '正常體溫', range: '36.0–37.5°C', color: 'bg-green-100 text-green-800', action: '正常，繼續觀察', alert: false },
-    { label: '低燒',     range: '37.6–38.0°C', color: 'bg-yellow-100 text-yellow-800', action: '觀察活力、補充水分', alert: false },
-    { label: '發燒',     range: '38.1–39.9°C', color: 'bg-orange-100 text-orange-800', action: '可給退燒藥，持續觀察', alert: false },
-    { label: '高燒',     range: '≥ 40.0°C',    color: 'bg-red-100 text-red-800',    action: '立即就醫評估', alert: true },
+    { label: '體溫偏低', range: '< 36.0°C', tone: 'warning', action: '注意保暖，觀察活力', alert: false },
+    { label: '正常體溫', range: '36.0–37.5°C', tone: 'success', action: '正常，繼續觀察', alert: false },
+    { label: '低燒',     range: '37.6–38.0°C', tone: 'warning', action: '觀察活力、補充水分', alert: false },
+    { label: '發燒',     range: '38.1–39.9°C', tone: 'warning', action: '可給退燒藥，持續觀察', alert: false },
+    { label: '高燒',     range: '≥ 40.0°C',    tone: 'danger',    action: '立即就醫評估', alert: true },
   ],
   tips: [
     '3 個月以下嬰兒，肛溫 ≥ 38°C → 立即就醫，不要等待',
@@ -116,10 +118,10 @@ const hrData = {
     '最準確：用聽診器聽心尖音（左胸）',
   ],
   ranges: [
-    { label: '過慢',  range: '< 80 次/分（嬰兒）', color: 'bg-blue-100 text-blue-800',   alert: true  },
-    { label: '正常',  range: '依年齡見上表',         color: 'bg-green-100 text-green-800', alert: false },
-    { label: '偏快',  range: '> 160 次/分（嬰兒）', color: 'bg-yellow-100 text-yellow-800', alert: false },
-    { label: '過快',  range: '> 200 次/分',          color: 'bg-red-100 text-red-800',     alert: true  },
+    { label: '過慢',  range: '< 80 次/分（嬰兒）', tone: 'danger',    alert: true  },
+    { label: '正常',  range: '依年齡見上表',         tone: 'success', alert: false },
+    { label: '偏快',  range: '> 160 次/分（嬰兒）', tone: 'warning', alert: false },
+    { label: '過快',  range: '> 200 次/分',          tone: 'danger',     alert: true  },
   ],
   tips: [
     '哭鬧、發燒、剛喝奶後心跳會自然加快，這是正常的',
@@ -138,10 +140,10 @@ const rrData = {
     '注意：不要告訴幼兒你在數，否則呼吸會不自然',
   ],
   ranges: [
-    { label: '正常',     range: '依年齡見上表',           color: 'bg-green-100 text-green-800',  alert: false },
-    { label: '輕度偏快', range: '比正常值多 10 次/分',    color: 'bg-yellow-100 text-yellow-800', alert: false },
-    { label: '呼吸急促', range: '嬰兒 > 60 次/分',        color: 'bg-orange-100 text-orange-800', alert: true  },
-    { label: '危險',     range: '幼兒 > 50 次/分且費力',  color: 'bg-red-100 text-red-800',       alert: true  },
+    { label: '正常',     range: '依年齡見上表',           tone: 'success',  alert: false },
+    { label: '輕度偏快', range: '比正常值多 10 次/分',    tone: 'warning', alert: false },
+    { label: '呼吸急促', range: '嬰兒 > 60 次/分',        tone: 'danger', alert: true  },
+    { label: '危險',     range: '幼兒 > 50 次/分且費力',  tone: 'danger',       alert: true  },
   ],
   warningSigns: [
     { sign: '鼻翼搧動',       desc: '呼吸時鼻孔跟著起伏，表示呼吸費力' },
@@ -168,10 +170,10 @@ const spo2Data = {
     '手腳冰冷或甲油也可能影響準確度',
   ],
   ranges: [
-    { label: '正常',   range: '95–100%',  color: 'bg-green-100 text-green-800',  action: '正常，繼續觀察',     alert: false },
-    { label: '輕度低', range: '91–94%',   color: 'bg-yellow-100 text-yellow-800', action: '觀察，安撫幼兒後重測', alert: false },
-    { label: '偏低',   range: '88–90%',   color: 'bg-orange-100 text-orange-800', action: '立即就醫',           alert: true  },
-    { label: '危險',   range: '< 88%',    color: 'bg-red-100 text-red-800',       action: '撥打 119',           alert: true  },
+    { label: '正常',   range: '95–100%',  tone: 'success',  action: '正常，繼續觀察',     alert: false },
+    { label: '輕度低', range: '91–94%',   tone: 'warning', action: '觀察，安撫幼兒後重測', alert: false },
+    { label: '偏低',   range: '88–90%',   tone: 'danger', action: '立即就醫',           alert: true  },
+    { label: '危險',   range: '< 88%',    tone: 'danger',       action: '撥打 119',           alert: true  },
   ],
   tips: [
     '家中備有血氧機不代表可以取代就醫判斷',
@@ -187,32 +189,28 @@ const awareData = {
     {
       label: 'A — 清醒（Alert）',
       emoji: '😊',
-      color: 'bg-green-50 border-green-200',
-      textColor: 'text-green-800',
+      tone: 'success',
       desc: '幼兒清醒，對聲音、臉孔有反應，哭聲有力，活動力正常',
       action: '正常',
     },
     {
       label: 'V — 對聲音有反應（Voice）',
       emoji: '😐',
-      color: 'bg-yellow-50 border-yellow-200',
-      textColor: 'text-yellow-800',
+      tone: 'warning',
       desc: '閉著眼，但叫名字或出聲會有反應（動一下、睜眼）',
       action: '觀察，嘗試喚醒',
     },
     {
       label: 'P — 對痛有反應（Pain）',
       emoji: '😟',
-      color: 'bg-orange-50 border-orange-200',
-      textColor: 'text-orange-800',
+      tone: 'danger',
       desc: '叫不醒，但捏手背或腳底會有反應（縮手、皺眉）',
       action: '立即就醫',
     },
     {
       label: 'U — 無反應（Unresponsive）',
       emoji: '🚨',
-      color: 'bg-red-50 border-red-200',
-      textColor: 'text-red-800',
+      tone: 'danger',
       desc: '完全無反應，叫不醒，痛刺激也沒反應',
       action: '撥打 119，立即急救',
     },
@@ -234,7 +232,7 @@ function SectionTitle({ children }) {
 
 function AlertTag({ alert }) {
   return alert
-    ? <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-semibold ml-2">⚠️ 就醫</span>
+    ? <StatusBadge tone="danger" className="ml-2">就醫</StatusBadge>
     : null
 }
 
@@ -246,7 +244,7 @@ export default function VitalSignsPage({ navigate }) {
       {/* Header */}
       <div className="bg-gradient-to-br from-cyan-50 to-sky-100 py-12 px-6 text-center">
         <div className="text-6xl mb-4">📊</div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">0–3 歲生命徵象</h1>
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">0–3 歲生命徵象</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">給爸媽與托育人員的生活化參考指南，不需醫療背景也看得懂</p>
       </div>
 
@@ -309,8 +307,9 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>🌡️ 體溫分級</SectionTitle>
               <div className="space-y-2">
                 {tempData.ranges.map(r => (
-                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl ${r.color}`}>
+                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl border ${toneClasses(r.tone)}`}>
                     <div className="flex items-center gap-2">
+                      <ToneIcon tone={r.tone} className="w-4 h-4" />
                       <span className="font-bold text-sm">{r.label}</span>
                       <AlertTag alert={r.alert} />
                     </div>
@@ -348,16 +347,15 @@ export default function VitalSignsPage({ navigate }) {
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-              <p className="font-semibold text-amber-800 text-sm mb-2">💡 注意事項</p>
+            <Alert tone="warning" label="注意事項">
               <ul className="space-y-1.5">
                 {tempData.tips.map((t, i) => (
-                  <li key={i} className="text-sm text-amber-700 flex gap-2">
-                    <span className="shrink-0">•</span><span>{t}</span>
+                  <li key={i} className="flex gap-2">
+                    <span aria-hidden="true" className="shrink-0">•</span><span>{t}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </Alert>
           </div>
         )}
 
@@ -384,8 +382,9 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>📊 心跳速率判斷</SectionTitle>
               <div className="space-y-2">
                 {hrData.ranges.map(r => (
-                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl ${r.color}`}>
+                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl border ${toneClasses(r.tone)}`}>
                     <div className="flex items-center gap-2">
+                      <ToneIcon tone={r.tone} className="w-4 h-4" />
                       <span className="font-bold text-sm">{r.label}</span>
                       <AlertTag alert={r.alert} />
                     </div>
@@ -395,16 +394,15 @@ export default function VitalSignsPage({ navigate }) {
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-              <p className="font-semibold text-amber-800 text-sm mb-2">💡 注意事項</p>
+            <Alert tone="warning" label="注意事項">
               <ul className="space-y-1.5">
                 {hrData.tips.map((t, i) => (
-                  <li key={i} className="text-sm text-amber-700 flex gap-2">
-                    <span className="shrink-0">•</span><span>{t}</span>
+                  <li key={i} className="flex gap-2">
+                    <span aria-hidden="true" className="shrink-0">•</span><span>{t}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </Alert>
           </div>
         )}
 
@@ -431,8 +429,9 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>📊 呼吸速率判斷</SectionTitle>
               <div className="space-y-2">
                 {rrData.ranges.map(r => (
-                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl ${r.color}`}>
+                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl border ${toneClasses(r.tone)}`}>
                     <div className="flex items-center gap-2">
+                      <ToneIcon tone={r.tone} className="w-4 h-4" />
                       <span className="font-bold text-sm">{r.label}</span>
                       <AlertTag alert={r.alert} />
                     </div>
@@ -446,28 +445,23 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>🚨 呼吸費力的警示外觀</SectionTitle>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {rrData.warningSigns.map(w => (
-                  <div key={w.sign} className="bg-red-50 border border-red-200 rounded-2xl p-3 flex gap-3">
-                    <span className="text-red-400 shrink-0">⚠️</span>
-                    <div>
-                      <p className="font-bold text-red-700 text-sm">{w.sign}</p>
-                      <p className="text-xs text-red-600 mt-0.5">{w.desc}</p>
-                    </div>
-                  </div>
+                  <Alert key={w.sign} tone="danger" label="危險" title={w.sign}>
+                    <p className="text-xs">{w.desc}</p>
+                  </Alert>
                 ))}
               </div>
-              <p className="text-xs text-red-500 mt-3 text-center font-semibold">出現任何一項 → 立即就醫，不要等待</p>
+              <p className="flex items-center justify-center gap-1 text-xs text-danger-fg mt-3 font-semibold"><ToneIcon tone="danger" className="w-4 h-4" />出現任何一項 → 立即就醫，不要等待</p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-              <p className="font-semibold text-amber-800 text-sm mb-2">💡 注意事項</p>
+            <Alert tone="warning" label="注意事項">
               <ul className="space-y-1.5">
                 {rrData.tips.map((t, i) => (
-                  <li key={i} className="text-sm text-amber-700 flex gap-2">
-                    <span className="shrink-0">•</span><span>{t}</span>
+                  <li key={i} className="flex gap-2">
+                    <span aria-hidden="true" className="shrink-0">•</span><span>{t}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </Alert>
           </div>
         )}
 
@@ -494,8 +488,9 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>📊 血氧數值判斷</SectionTitle>
               <div className="space-y-2">
                 {spo2Data.ranges.map(r => (
-                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl ${r.color}`}>
+                  <div key={r.label} className={`flex items-center justify-between px-4 py-3 rounded-2xl border ${toneClasses(r.tone)}`}>
                     <div className="flex items-center gap-2">
+                      <ToneIcon tone={r.tone} className="w-4 h-4" />
                       <span className="font-bold text-sm">{r.label}</span>
                       <AlertTag alert={r.alert} />
                     </div>
@@ -508,16 +503,15 @@ export default function VitalSignsPage({ navigate }) {
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-              <p className="font-semibold text-amber-800 text-sm mb-2">💡 注意事項</p>
+            <Alert tone="warning" label="注意事項">
               <ul className="space-y-1.5">
                 {spo2Data.tips.map((t, i) => (
-                  <li key={i} className="text-sm text-amber-700 flex gap-2">
-                    <span className="shrink-0">•</span><span>{t}</span>
+                  <li key={i} className="flex gap-2">
+                    <span aria-hidden="true" className="shrink-0">•</span><span>{t}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </Alert>
           </div>
         )}
 
@@ -532,18 +526,20 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>👀 AVPU 意識評估（4 個等級）</SectionTitle>
               <div className="space-y-3">
                 {awareData.levels.map(l => (
-                  <div key={l.label} className={`border-2 rounded-2xl p-4 ${l.color}`}>
+                  <div key={l.label} className={`border-2 rounded-2xl p-4 ${toneClasses(l.tone)}`}>
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-2xl">{l.emoji}</span>
                       <div>
-                        <p className={`font-bold text-sm ${l.textColor}`}>{l.label}</p>
+                        <p className="font-bold text-sm">{l.label}</p>
                         {l.action === '撥打 119，立即急救' && (
-                          <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full font-bold">緊急</span>
+                          <StatusBadge tone="danger">緊急</StatusBadge>
                         )}
                       </div>
                     </div>
-                    <p className="text-sm text-gray-600">{l.desc}</p>
-                    <p className={`text-xs font-semibold mt-2 ${l.textColor}`}>→ {l.action}</p>
+                    <p className="text-sm">{l.desc}</p>
+                    <p className="inline-flex items-center gap-1 text-xs font-semibold mt-2">
+                      <ToneIcon tone={l.tone} className="w-4 h-4" />→ {l.action}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -553,13 +549,13 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>🚩 意識異常的紅旗警訊</SectionTitle>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {awareData.redFlags.map((f, i) => (
-                  <div key={i} className="flex gap-2 items-start bg-red-50 border border-red-200 rounded-xl px-3 py-2">
-                    <span className="text-red-400 shrink-0 text-sm">🚩</span>
-                    <p className="text-sm text-red-700">{f}</p>
+                  <div key={i} className={`flex gap-2 items-start border rounded-xl px-3 py-2 ${toneClasses('danger')}`}>
+                    <ToneIcon tone="danger" className="w-4 h-4 mt-1" />
+                    <p className="text-sm"><span className="font-bold">紅旗：</span>{f}</p>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-red-500 mt-3 text-center font-semibold">出現任何一項 → 不要觀望，立即就醫</p>
+              <p className="flex items-center justify-center gap-1 text-xs text-danger-fg mt-3 font-semibold"><ToneIcon tone="danger" className="w-4 h-4" />出現任何一項 → 不要觀望，立即就醫</p>
             </div>
           </div>
         )}
@@ -569,7 +565,7 @@ export default function VitalSignsPage({ navigate }) {
           <span className="text-xl shrink-0">⚠️</span>
           <p className="text-xs text-gray-500 leading-relaxed">
             本頁面數值僅供<strong>居家參考</strong>，非醫療診斷工具。每位幼兒狀況不同，
-            若有任何疑慮請諮詢醫師。緊急狀況請撥打 <strong className="text-red-600">119</strong>。
+            若有任何疑慮請諮詢醫師。緊急狀況請撥打 <strong className="text-danger-fg">119</strong>。
           </p>
         </div>
 

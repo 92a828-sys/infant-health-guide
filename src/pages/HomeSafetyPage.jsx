@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Alert } from '../components/Alert'
 
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -206,13 +207,12 @@ export default function HomeSafetyPage({ navigate }) {
                 </ul>
               </div>
             ))}
-            <div className="bg-red-50 border border-red-200 rounded-2xl p-4 flex gap-3">
-              <span className="text-xl shrink-0">🚨</span>
-              <p className="text-sm text-red-700 leading-relaxed">
+            <Alert tone="danger" label="緊急">
+              <p>
                 若意外已經發生（哽塞、燒燙傷、跌落撞頭等），請立即前往「緊急狀況判斷」頁面查看正確處理步驟，
                 嚴重時勿猶豫，直接撥打119。
               </p>
-            </div>
+            </Alert>
             <SourceNote>
               資料參考：衛生福利部國民健康署事故傷害防制五大類（跌墜、燒燙傷、溺水、車禍、異物梗塞）衛教資料、道路交通安全規則兒童安全座椅相關規定。
             </SourceNote>

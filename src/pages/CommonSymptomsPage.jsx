@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Alert } from '../components/Alert'
 
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -300,7 +301,7 @@ function SymptomCard({ s }) {
             <ul className="space-y-2">
               {s.care.map((c, i) => (
                 <li key={i} className="flex gap-2 text-sm text-gray-600">
-                  <span className="text-green-400 shrink-0">✓</span>
+                  <span aria-hidden="true" className="text-success-fg shrink-0">✓</span>
                   <span>{c}</span>
                 </li>
               ))}
@@ -319,17 +320,16 @@ function SymptomCard({ s }) {
               </ul>
             </div>
           )}
-          <div className="bg-red-50/80 border border-red-200 rounded-2xl p-4">
-            <h4 className="font-semibold text-red-700 text-sm mb-3">🚨 立即就醫時機</h4>
-            <ul className="space-y-2">
+          <Alert tone="danger" label="立即就醫" title="立即就醫時機">
+            <ul className="space-y-2 mt-2">
               {s.emergency.map((e, i) => (
-                <li key={i} className="flex gap-2 text-sm text-red-700">
-                  <span className="shrink-0">⚠️</span>
+                <li key={i} className="flex gap-2">
+                  <span aria-hidden="true" className="shrink-0">•</span>
                   <span>{e}</span>
                 </li>
               ))}
             </ul>
-          </div>
+          </Alert>
         </div>
       )}
     </div>
@@ -347,26 +347,21 @@ export default function CommonSymptomsPage({ navigate }) {
       />
 
       <div className="max-w-3xl mx-auto px-6 py-12">
-        <div className="bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-10 flex gap-3 items-start">
-          <span className="text-2xl shrink-0">🚨</span>
-          <div>
-            <p className="font-bold text-red-700 text-sm mb-1">緊急情況請立即撥打 119 或前往急診</p>
-            <p className="text-xs text-red-600">若幼兒出現意識不清、呼吸困難、嚴重過敏等症狀，不要等待，請立即就醫。</p>
-          </div>
-        </div>
+        <Alert tone="danger" label="緊急" title="緊急情況請立即撥打 119 或前往急診" strong className="mb-10">
+          <p>若幼兒出現意識不清、呼吸困難、嚴重過敏等症狀，不要等待，請立即就醫。</p>
+        </Alert>
 
         <div className="space-y-4 mb-10">
           {symptoms.map(s => <SymptomCard key={s.id} s={s} />)}
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex gap-3">
-          <span className="text-xl shrink-0">💡</span>
-          <p className="text-sm text-amber-700 leading-relaxed">
-            <strong>何時應帶幼兒就醫？</strong>若您直覺覺得「不太對勁」，請相信家長的直覺，
+        <Alert tone="warning" label="提醒" title="何時應帶幼兒就醫？">
+          <p>
+            若您直覺覺得「不太對勁」，請相信家長的直覺，
             就算最後什麼都沒有，帶去看醫生也是正確的選擇。
             比較狀況總是可以在下次更準確地判斷。
           </p>
-        </div>
+        </Alert>
 
         <div className="mt-4 bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
           <span className="shrink-0">📋</span>

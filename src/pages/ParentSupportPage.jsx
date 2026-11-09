@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Alert } from '../components/Alert'
 
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -124,12 +125,11 @@ export default function ParentSupportPage({ navigate, initialTab }) {
 
         {tab === 'mood' && (
           <div className="space-y-5">
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex gap-3">
-              <span className="text-xl shrink-0">💡</span>
-              <p className="text-sm text-amber-700 leading-relaxed">
+            <Alert tone="warning" label="提醒">
+              <p>
                 產後情緒困擾不是「不夠愛孩子」或「意志力不夠」，而是荷爾蒙劇烈變化、睡眠剝奪、身份轉換等多重壓力下常見的生理心理反應。
               </p>
-            </div>
+            </Alert>
 
             <section className="space-y-4">
               {moodSpectrum.map(m => (

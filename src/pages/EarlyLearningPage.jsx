@@ -1,3 +1,5 @@
+import { Alert } from '../components/Alert'
+
 const readingStages = [
   {
     age: '0～6個月',
@@ -30,7 +32,7 @@ export default function EarlyLearningPage({ navigate }) {
     <div>
       <div className="bg-gradient-to-br from-fuchsia-50 to-purple-100 py-12 px-6 text-center">
         <div className="text-6xl mb-4">🧠</div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">早期學習與親子共讀</h1>
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">早期學習與親子共讀</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
           0～3歲是大腦發展的黃金期，陪伴與互動就是最好的教材
         </p>
@@ -74,13 +76,12 @@ export default function EarlyLearningPage({ navigate }) {
               </p>
             </div>
           </div>
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-            <p className="text-sm text-amber-800 leading-relaxed">
-              <strong>💡 回應性照護（Serve and Return）：</strong>
+          <Alert tone="warning" label="提醒" title="回應性照護（Serve and Return）">
+            <p>
               當寶寶發出聲音、表情或動作（發球）時，大人及時給予眼神、話語或擁抱回應（接球），
               這一來一往的互動是建構大腦神經連結最有效的方式，比任何昂貴的教具都重要。
             </p>
-          </div>
+          </Alert>
         </section>
 
         {/* Sensory & play activities */}

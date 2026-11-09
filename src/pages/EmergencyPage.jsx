@@ -1,8 +1,11 @@
+import { Phone } from 'lucide-react'
+import { Alert, ToneIcon } from '../components/Alert'
+
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -134,24 +137,28 @@ export default function EmergencyPage({ navigate }) {
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* 119 banner */}
-        <div className="bg-red-600 text-white rounded-3xl p-6 mb-10 text-center shadow-lg">
-          <p className="text-5xl font-black mb-2">📞 119</p>
+        <a href="tel:119" className="block bg-danger-bg text-danger-fg border-2 border-danger-border rounded-3xl p-6 mb-10 text-center shadow-lg hover:opacity-90 transition-opacity">
+          <p className="inline-flex items-center gap-1.5 text-sm font-bold mb-2">
+            <ToneIcon tone="danger" className="w-5 h-5" />緊急
+          </p>
+          <p className="text-5xl font-black mb-2 inline-flex items-center justify-center gap-3 w-full">
+            <Phone className="w-10 h-10" strokeWidth={2} aria-hidden="true" />119
+          </p>
           <p className="text-xl font-bold mb-1">緊急醫療救護</p>
-          <p className="text-red-200 text-sm">遇到緊急醫療狀況，請立即撥打 119</p>
-        </div>
+          <p className="text-sm">遇到緊急醫療狀況，請立即撥打 119</p>
+        </a>
 
         {/* Immediate ER signs */}
-        <div className="bg-red-50 border-2 border-red-300 rounded-3xl p-6 mb-10">
-          <h2 className="font-bold text-red-800 text-xl mb-4">🚨 立即送急診的症狀</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <Alert tone="danger" label="危險" title="立即送急診的症狀" strong className="mb-10">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
             {immediateER.map((s, i) => (
-              <div key={i} className="flex gap-2 items-start text-sm text-red-700">
-                <span className="text-red-400 shrink-0 mt-0.5">⚠️</span>
+              <li key={i} className="flex gap-2 items-start">
+                <span aria-hidden="true" className="shrink-0">•</span>
                 <span>{s}</span>
-              </div>
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </Alert>
 
         {/* Emergency procedures */}
         <h2 className="text-xl font-bold text-gray-800 mb-6">🆘 緊急狀況處理步驟</h2>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRole } from '../RoleContext'
+import { Alert, ToneIcon } from '../components/Alert'
 
 // ── 靜態藥品資料庫 ────────────────────────────────────────────────
 // 圖片放在 public/drugs/ 資料夾，路徑格式：'/drugs/檔名.jpg'
@@ -251,7 +252,7 @@ function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -411,7 +412,9 @@ function DrugCard({ drug }) {
 
           {drug.notes && (
             <div>
-              <p className="text-xs font-semibold text-red-600 mb-1">📋 注意事項</p>
+              <p className="inline-flex items-center gap-1 text-xs font-semibold text-warning-fg mb-1">
+                <ToneIcon tone="warning" className="w-3.5 h-3.5" />注意事項
+              </p>
               <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{drug.notes}</p>
             </div>
           )}
@@ -678,14 +681,10 @@ export default function MedicationPage({ navigate }) {
               </table>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex gap-3">
-              <span className="text-xl shrink-0">💡</span>
-              <div className="text-sm text-amber-700">
-                <p className="font-semibold mb-1">計算 ml 數：需要劑量（mg）÷ 藥水濃度（mg/ml）</p>
-                <p>例：需要 120mg，藥水濃度 24mg/ml → 需要 <strong>5ml</strong></p>
-                <p className="mt-1 text-amber-600 text-xs">每日最大量：乙醯胺酚 75 mg/kg；布洛芬 40 mg/kg</p>
-              </div>
-            </div>
+            <Alert tone="warning" label="提醒" title="計算 ml 數：需要劑量（mg）÷ 藥水濃度（mg/ml）">
+              <p>例：需要 120mg，藥水濃度 24mg/ml → 需要 <strong>5ml</strong></p>
+              <p className="mt-1 text-xs font-semibold">每日最大量：乙醯胺酚 75 mg/kg；布洛芬 40 mg/kg</p>
+            </Alert>
           </div>
         )}
 
@@ -694,19 +693,14 @@ export default function MedicationPage({ navigate }) {
           <div className="space-y-3">
             <p className="text-sm text-gray-500 mb-4">以下藥物在特定年齡前應避免給予幼兒</p>
             {forbiddenMeds.map(item => (
-              <div key={item.name} className={`flex gap-4 items-start p-4 rounded-2xl border-2 ${
-                item.urgent ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-100'
-              }`}>
-                <span className="text-2xl shrink-0">{item.urgent ? '🚨' : '⚠️'}</span>
-                <div>
-                  <p className={`font-bold text-sm mb-0.5 ${item.urgent ? 'text-red-700' : 'text-amber-700'}`}>
-                    {item.name}
-                  </p>
-                  <p className={`text-sm ${item.urgent ? 'text-red-600' : 'text-amber-600'}`}>
-                    {item.reason}
-                  </p>
-                </div>
-              </div>
+              <Alert
+                key={item.name}
+                tone={item.urgent ? 'danger' : 'warning'}
+                label={item.urgent ? '禁用' : '注意'}
+                title={item.name}
+              >
+                <p>{item.reason}</p>
+              </Alert>
             ))}
             <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 mt-4 flex gap-3">
               <span className="text-xl shrink-0">📞</span>

@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Alert } from '../components/Alert'
 
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -255,12 +256,11 @@ export default function DietaryPage({ navigate }) {
                   </div>
                 ))}
               </div>
-              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
-                <p className="font-semibold text-emerald-700 text-sm mb-2">✅ 正確含乳的判斷訊號</p>
-                <ul className="text-sm text-emerald-700 space-y-1 list-disc list-inside">
+              <Alert tone="success" label="正確" title="正確含乳的判斷訊號">
+                <ul className="space-y-1 list-disc list-inside">
                   {latchSigns.map((s, i) => <li key={i}>{s}</li>)}
                 </ul>
-              </div>
+              </Alert>
             </section>
 
             <section className="bg-white border border-gray-200 rounded-3xl p-6">
@@ -386,7 +386,7 @@ export default function DietaryPage({ navigate }) {
                     <ul className="space-y-1">
                       {stage.tips.map((t, i) => (
                         <li key={i} className="text-sm text-gray-600 flex gap-1.5">
-                          <span className="text-green-400">✓</span> {t}
+                          <span aria-hidden="true" className="text-success-fg">✓</span> {t}
                         </li>
                       ))}
                     </ul>
@@ -500,15 +500,14 @@ export default function DietaryPage({ navigate }) {
           <div className="space-y-3">
             <p className="text-sm text-gray-500 mb-4">以下食物在特定年齡前應避免給予</p>
             {avoidFoods.map(item => (
-              <div key={item.food} className={`flex gap-4 items-start p-4 rounded-2xl border-2 ${item.urgent ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-100'}`}>
-                <span className="text-2xl shrink-0">
-                  {item.urgent ? '🚨' : '⚠️'}
-                </span>
-                <div>
-                  <p className={`font-bold text-sm mb-1 ${item.urgent ? 'text-red-700' : 'text-amber-700'}`}>{item.food}</p>
-                  <p className={`text-sm ${item.urgent ? 'text-red-600' : 'text-amber-600'}`}>{item.reason}</p>
-                </div>
-              </div>
+              <Alert
+                key={item.food}
+                tone={item.urgent ? 'danger' : 'warning'}
+                label={item.urgent ? '禁止' : '注意'}
+                title={item.food}
+              >
+                <p>{item.reason}</p>
+              </Alert>
             ))}
           </div>
         )}

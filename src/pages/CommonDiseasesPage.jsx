@@ -1,3 +1,5 @@
+import { Alert } from '../components/Alert'
+
 const diseases = [
   {
     id: 'enterovirus',
@@ -379,35 +381,29 @@ function DiseaseArticle({ d }) {
         </div>
 
         {/* 居家照護 */}
-        <div className="bg-green-50 border border-green-100 rounded-2xl p-4">
-          <h3 className="font-bold text-green-800 text-sm mb-3 flex items-center gap-1.5">
-            🏠 居家照護建議
-          </h3>
-          <ul className="space-y-2">
+        <Alert tone="success" label="建議" title="居家照護建議">
+          <ul className="space-y-2 mt-2">
             {d.care.map((c, i) => (
-              <li key={i} className="flex gap-2 text-sm text-gray-700">
-                <span className="text-green-500 shrink-0 font-bold mt-0.5">✓</span>
+              <li key={i} className="flex gap-2">
+                <span aria-hidden="true" className="shrink-0 font-bold">✓</span>
                 <span>{c}</span>
               </li>
             ))}
           </ul>
-        </div>
+        </Alert>
       </div>
 
       {/* 立即就醫 */}
-      <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-4 mb-2">
-        <h3 className="font-bold text-red-700 text-sm mb-3 flex items-center gap-1.5">
-          🚨 出現以下情況，請立即就醫
-        </h3>
-        <ul className="space-y-2">
+      <Alert tone="danger" label="立即就醫" title="出現以下情況，請立即就醫" strong className="mb-2">
+        <ul className="space-y-2 mt-2">
           {d.emergency.map((e, i) => (
-            <li key={i} className="flex gap-2 text-sm text-red-700">
-              <span className="shrink-0 mt-0.5">⚠️</span>
+            <li key={i} className="flex gap-2">
+              <span aria-hidden="true" className="shrink-0">•</span>
               <span>{e}</span>
             </li>
           ))}
         </ul>
-      </div>
+      </Alert>
     </article>
   )
 }
@@ -418,7 +414,7 @@ export default function CommonDiseasesPage({ navigate }) {
       {/* Header */}
       <div className="bg-gradient-to-br from-indigo-50 to-violet-100 py-12 px-6 text-center">
         <div className="text-6xl mb-4">🏥</div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">認識常見疾病</h1>
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">認識常見疾病</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
           0–5 歲幼兒常見傳染病與疾病說明，包含症狀辨識、居家照護與就醫時機
         </p>
@@ -427,13 +423,9 @@ export default function CommonDiseasesPage({ navigate }) {
       <div className="max-w-3xl mx-auto px-6 py-10">
 
         {/* 緊急提示 */}
-        <div className="bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-8 flex gap-3 items-start">
-          <span className="text-2xl shrink-0">🚨</span>
-          <div>
-            <p className="font-bold text-red-700 text-sm mb-1">緊急情況請立即撥打 119 或前往急診</p>
-            <p className="text-xs text-red-600">幼兒出現意識不清、呼吸困難、嘴唇發紫、持續高燒等症狀，請勿觀望，立即就醫。</p>
-          </div>
-        </div>
+        <Alert tone="danger" label="緊急" title="緊急情況請立即撥打 119 或前往急診" strong className="mb-8">
+          <p>幼兒出現意識不清、呼吸困難、嘴唇發紫、持續高燒等症狀，請勿觀望，立即就醫。</p>
+        </Alert>
 
         {/* 本頁目錄 */}
         <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-10">
@@ -465,14 +457,12 @@ export default function CommonDiseasesPage({ navigate }) {
         </div>
 
         {/* 預防提示 */}
-        <div className="mt-12 bg-amber-50 border border-amber-200 rounded-2xl p-5 flex gap-3">
-          <span className="text-xl shrink-0">💡</span>
-          <p className="text-sm text-amber-700 leading-relaxed">
-            <strong>預防勝於治療：</strong>
+        <Alert tone="warning" label="提醒" title="預防勝於治療" className="mt-12">
+          <p>
             勤洗手、按時接種公費及自費疫苗、避免帶生病幼兒至人多場所，是預防幼兒傳染病最有效的方式。
             若對孩子症狀有任何疑慮，請隨時諮詢醫師，不要等待。
           </p>
-        </div>
+        </Alert>
 
         <div className="mt-4 bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
           <span className="shrink-0">📋</span>

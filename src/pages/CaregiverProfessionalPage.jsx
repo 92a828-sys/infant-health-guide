@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Alert } from '../components/Alert'
 
 function PageHeader({ emoji, title, subtitle, color }) {
   return (
     <div className={`${color} py-12 px-6 text-center`}>
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
@@ -245,13 +246,9 @@ export default function CaregiverProfessionalPage({ navigate }) {
 
         {tab === 'protection' && (
           <div className="space-y-5">
-            <div className="bg-red-50 border-2 border-red-300 rounded-2xl p-4 flex gap-3 items-start">
-              <span className="text-2xl shrink-0">🚨</span>
-              <div>
-                <p className="font-bold text-red-700 text-sm mb-1">托育／教保人員為法定責任通報人</p>
-                <p className="text-xs text-red-600">執行職務時知悉疑似兒少保護事件，應於24小時內完成通報；無正當理由未通報者，可依法處以罰鍰。</p>
-              </div>
-            </div>
+            <Alert tone="danger" label="重要" title="托育／教保人員為法定責任通報人">
+              <p>執行職務時知悉疑似兒少保護事件，應於24小時內完成通報；無正當理由未通報者，可依法處以罰鍰。</p>
+            </Alert>
 
             <section className="bg-white border border-gray-200 rounded-3xl p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🔍</span> 通報範圍</h2>

@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { measurements, lmsZ, zToPercentile } from '../data/whoGrowthData'
+import { ToneIcon } from '../components/Alert'
+import { toneClasses } from '../components/alertTones'
 
 function correctedAgeMonths(chronoMonths, gestWeeks) {
   if (!gestWeeks || gestWeeks >= 37) return chronoMonths
@@ -10,11 +12,11 @@ function correctedAgeMonths(chronoMonths, gestWeeks) {
 }
 
 function percentileZone(p) {
-  if (p < 3) return { key: 'low', label: '低於第3百分位', color: 'text-red-600', bg: 'bg-red-50 border-red-200' }
-  if (p < 15) return { key: 'low2', label: '偏低區間（第3～15百分位）', color: 'text-amber-600', bg: 'bg-amber-50 border-amber-200' }
-  if (p <= 85) return { key: 'mid', label: '正常範圍（第15～85百分位）', color: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-200' }
-  if (p <= 97) return { key: 'high2', label: '偏高區間（第85～97百分位）', color: 'text-amber-600', bg: 'bg-amber-50 border-amber-200' }
-  return { key: 'high', label: '高於第97百分位', color: 'text-red-600', bg: 'bg-red-50 border-red-200' }
+  if (p < 3) return { key: 'low', label: '低於第3百分位', tone: 'danger' }
+  if (p < 15) return { key: 'low2', label: '偏低區間（第3～15百分位）', tone: 'warning' }
+  if (p <= 85) return { key: 'mid', label: '正常範圍（第15～85百分位）', tone: 'success' }
+  if (p <= 97) return { key: 'high2', label: '偏高區間（第85～97百分位）', tone: 'warning' }
+  return { key: 'high', label: '高於第97百分位', tone: 'danger' }
 }
 
 export default function GrowthChartPage({ navigate }) {
@@ -45,7 +47,7 @@ export default function GrowthChartPage({ navigate }) {
     <div>
       <div className="bg-gradient-to-br from-lime-50 to-emerald-100 py-12 px-6 text-center">
         <div className="text-6xl mb-4">📈</div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">生長曲線知多少</h1>
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">生長曲線知多少</h1>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
           看懂體重、身高、頭圍百分位，並試試線上估算小工具
         </p>
@@ -203,26 +205,29 @@ export default function GrowthChartPage({ navigate }) {
           </div>
 
           {result && zone && (
-            <div className={`border-2 rounded-2xl p-5 ${zone.bg}`}>
-              <p className="text-sm text-gray-600 mb-1">估算結果</p>
-              <p className={`text-2xl font-bold ${zone.color}`}>
+            <div className={`border-2 rounded-2xl p-5 ${toneClasses(zone.tone)}`}>
+              <p className="text-sm mb-1">估算結果</p>
+              <p className="text-2xl font-bold">
                 約第 {result.p.toFixed(0)} 百分位
               </p>
-              <p className={`text-sm font-medium mt-1 ${zone.color}`}>{zone.label}</p>
+              <p className="inline-flex items-center gap-1.5 text-sm font-semibold mt-1">
+                <ToneIcon tone={zone.tone} className="w-4 h-4" />
+                {zone.label}
+              </p>
 
               {/* percentile bar */}
-              <div className="relative h-3 bg-gray-100 rounded-full mt-4 mb-1">
+              <div className="relative h-3 bg-surface rounded-full mt-4 mb-1">
                 <div
                   className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-gray-800 border-2 border-white shadow"
                   style={{ left: `calc(${Math.min(100, Math.max(0, result.p))}% - 6px)` }}
                 />
               </div>
-              <div className="flex justify-between text-[10px] text-gray-400">
+              <div className="flex justify-between text-[10px] opacity-80">
                 <span>P3</span><span>P15</span><span>P50</span><span>P85</span><span>P97</span>
               </div>
 
               {(zone.key === 'low' || zone.key === 'high') && (
-                <p className="text-xs text-red-500 mt-3 border-t border-red-200 pt-3">
+                <p className="text-xs mt-3 border-t border-danger-border/50 pt-3">
                   單次量測落在此區間不代表異常，但建議攜帶兒童健康手冊回診，請兒科醫師搭配整體生長曲線走勢評估。
                 </p>
               )}
