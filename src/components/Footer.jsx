@@ -1,17 +1,9 @@
 import { Baby, Ambulance, Phone, PhoneCall, Info, CalendarDays } from 'lucide-react'
 import { pageIcons } from '../pageIcons'
+import { navGroups } from '../navGroups'
 
 // 重大內容更新時請手動更新此日期
 const SITE_UPDATED = '2026年7月'
-
-const links = [
-  { id: 'growth',      label: '生長發育里程碑' },
-  { id: 'symptoms',    label: '常見症狀處理' },
-  { id: 'vaccination', label: '疫苗接種時程' },
-  { id: 'dietary',     label: '飲食與副食品' },
-  { id: 'emergency',   label: '緊急狀況判斷' },
-  { id: 'medication',  label: '用藥衛教' },
-]
 
 const contacts = [
   { num: '119',  desc: '緊急醫療救護',   Icon: Ambulance, color: 'text-danger-fg' },
@@ -23,7 +15,7 @@ export default function Footer({ navigate }) {
   return (
     <footer className="bg-surface-muted border-t border-border text-ink pt-12 pb-6 px-4 mt-auto">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-3">
@@ -40,25 +32,33 @@ export default function Footer({ navigate }) {
             </p>
           </div>
 
-          {/* Quick links */}
-          <div>
+          {/* 衛教主題：依導覽分組列出（資料來自 navGroups） */}
+          <nav aria-label="衛教主題" className="md:col-span-2">
             <h3 className="text-sm font-semibold tracking-[0.05em] text-ink mb-3 uppercase">衛教主題</h3>
-            <div className="grid grid-cols-2 gap-y-1.5 gap-x-2">
-              {links.map(l => {
-                const Icon = pageIcons[l.id]
-                return (
-                  <button
-                    key={l.id}
-                    onClick={() => navigate(l.id)}
-                    className="flex items-center gap-1.5 text-left text-sm text-ink-muted hover:text-brand transition-colors"
-                  >
-                    <Icon className="w-4 h-4 shrink-0" strokeWidth={2} aria-hidden="true" />
-                    {l.label}
-                  </button>
-                )
-              })}
+            <div className="grid grid-cols-2 gap-x-4 gap-y-5">
+              {navGroups.map(g => (
+                <div key={g.id} className="min-w-0">
+                  <p className="text-xs font-bold text-ink mb-1.5">{g.label}</p>
+                  <ul className="space-y-1">
+                    {g.items.map(it => {
+                      const Icon = pageIcons[it.id]
+                      return (
+                        <li key={it.id}>
+                          <button
+                            onClick={() => navigate(it.id)}
+                            className="flex items-center gap-1.5 text-left text-sm text-ink-muted hover:text-brand transition-colors"
+                          >
+                            <Icon className="w-4 h-4 shrink-0" strokeWidth={2} aria-hidden="true" />
+                            {it.label}
+                          </button>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              ))}
             </div>
-          </div>
+          </nav>
 
           {/* Emergency contacts */}
           <div>

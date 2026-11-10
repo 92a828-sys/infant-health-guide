@@ -30,7 +30,7 @@ function App() {
 
   const renderPage = () => {
     switch (currentPage) {
-      case 'home':       return <HomePage navigate={navigate} />
+      case 'home':       return <HomePage navigate={navigate} scrollTarget={navParam} />
       case 'growth':     return <GrowthMilestonesPage navigate={navigate} initialAgeId={navParam} />
       case 'growth-chart': return <GrowthChartPage navigate={navigate} />
       case 'symptoms':   return <CommonSymptomsPage navigate={navigate} />
@@ -51,8 +51,9 @@ function App() {
 
   return (
       <div className="min-h-screen bg-canvas text-ink flex flex-col">
-        <Navbar navigate={navigate} currentPage={currentPage} />
+        {/* 版面順序：緊急資源列 → 導覽列（sticky）→ 頁面內容 */}
         <EmergencyBar navigate={navigate} />
+        <Navbar navigate={navigate} currentPage={currentPage} />
         <main key={currentPage} className="flex-1 page-transition">
           {renderPage()}
         </main>

@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Baby, ArrowRight, Ambulance, Info } from 'lucide-react'
 import { pageIcons } from '../pageIcons'
+import { navGroups, emergencyPage } from '../navGroups'
 
 const ageGroupTable = [
   { id: 'm4', m: 4 }, { id: 'm6', m: 6 }, { id: 'm9', m: 9 },
@@ -22,121 +23,6 @@ function dietStageLabel(months) {
   if (months < 36) return '家庭食物（軟），建立規律三餐加點心'
   return '接近成人飲食，均衡攝取六大類食物'
 }
-
-const cards = [
-  {
-    id: 'growth',
-    title: '生長發育里程碑',
-    desc: '0–3歲各階段動作、語言、社交情緒發展指標與紅旗警訊',
-    grad: 'from-emerald-50 to-teal-50',
-    border: 'border-emerald-200',
-    badge: 'bg-emerald-100 text-emerald-700',
-  },
-  {
-    id: 'symptoms',
-    title: '常見症狀處理',
-    desc: '發燒、感冒、腹瀉、咳嗽等居家照護與就醫時機判斷',
-    grad: 'from-sky-50 to-blue-50',
-    border: 'border-sky-200',
-    badge: 'bg-sky-100 text-sky-700',
-  },
-  {
-    id: 'vaccination',
-    title: '預防接種',
-    desc: '公費/自費疫苗時程、反應與禁忌、個人化試算、預防保健與新生兒篩檢',
-    grad: 'from-violet-50 to-purple-50',
-    border: 'border-violet-200',
-    badge: 'bg-violet-100 text-violet-700',
-  },
-  {
-    id: 'dietary',
-    title: '營養與餵食',
-    desc: '母乳、配方奶、副食品添加（含BLW）、1-3歲均衡飲食與斷奶轉銜',
-    grad: 'from-amber-50 to-orange-50',
-    border: 'border-amber-200',
-    badge: 'bg-amber-100 text-amber-700',
-  },
-  {
-    id: 'emergency',
-    title: '緊急狀況判斷',
-    desc: '哪些症狀需立即就醫？熱痙攣、異物哽塞緊急處理步驟',
-    grad: 'from-red-50 to-rose-50',
-    border: 'border-red-200',
-    badge: 'bg-red-100 text-red-700',
-  },
-  {
-    id: 'medication',
-    title: '用藥衛教',
-    desc: '用藥原則、退燒藥劑量計算、禁用藥物與幼生藥庫',
-    grad: 'from-teal-50 to-cyan-50',
-    border: 'border-teal-200',
-    badge: 'bg-teal-100 text-teal-700',
-  },
-  {
-    id: 'diseases',
-    title: '認識常見疾病',
-    desc: '腸病毒、RSV、肺炎、流感等幼兒常見疾病症狀與照護',
-    grad: 'from-indigo-50 to-violet-50',
-    border: 'border-indigo-200',
-    badge: 'bg-indigo-100 text-indigo-700',
-  },
-  {
-    id: 'newborn-safety',
-    title: '新生兒安全與警訊',
-    desc: 'SIDS安全睡眠圖解、大便顏色卡、何時必須就醫的紅旗症狀',
-    grad: 'from-cyan-50 to-blue-50',
-    border: 'border-cyan-200',
-    badge: 'bg-cyan-100 text-cyan-700',
-  },
-  {
-    id: 'home-safety',
-    title: '居家安全與意外預防',
-    desc: '居家安全陷阱檢查、窒息燒燙傷跌倒車禍溺水預防、玩具安全標準',
-    grad: 'from-emerald-50 to-teal-50',
-    border: 'border-emerald-200',
-    badge: 'bg-emerald-100 text-emerald-700',
-  },
-  {
-    id: 'daily-care',
-    title: '日常照護與生活習慣',
-    desc: '洗澡與清潔、如廁訓練、睡眠作息與夜醒處理、視力聽力口腔保健',
-    grad: 'from-rose-50 to-pink-50',
-    border: 'border-rose-200',
-    badge: 'bg-rose-100 text-rose-700',
-  },
-  {
-    id: 'parent-support',
-    title: '心理與親職支持',
-    desc: '產後情緒與伴侶分工、依附關係與正向教養、特殊家庭資源、求助管道',
-    grad: 'from-fuchsia-50 to-pink-50',
-    border: 'border-fuchsia-200',
-    badge: 'bg-fuchsia-100 text-fuchsia-700',
-  },
-  {
-    id: 'vitals',
-    title: '0–3 歲生命徵象',
-    desc: '體溫、心跳、呼吸、血氧正常值對照表與測量方式，爸媽也看得懂',
-    grad: 'from-cyan-50 to-sky-50',
-    border: 'border-cyan-200',
-    badge: 'bg-cyan-100 text-cyan-700',
-  },
-  {
-    id: 'growth-chart',
-    title: '生長曲線知多少',
-    desc: 'WHO生長曲線教學＋線上百分位估算器，早產兒矯正年齡換算',
-    grad: 'from-lime-50 to-emerald-50',
-    border: 'border-lime-200',
-    badge: 'bg-lime-100 text-lime-700',
-  },
-  {
-    id: 'early-learning',
-    title: '早期學習與親子共讀',
-    desc: '大腦開發三原則、分齡共讀技巧、感官刺激遊戲活動',
-    grad: 'from-fuchsia-50 to-purple-50',
-    border: 'border-fuchsia-200',
-    badge: 'bg-fuchsia-100 text-fuchsia-700',
-  },
-]
 
 const quotes = [
   { text: '每個孩子都有自己的節奏，陪伴比催促更重要。', icon: '🌸' },
@@ -183,8 +69,41 @@ function pickDailyQuote() {
   return quotes[Math.floor((Date.now() + 8 * 3600000) / 86400000) % quotes.length]
 }
 
-export default function HomePage({ navigate }) {
+// 首頁主題卡片依導覽分組呈現；各分組固定一個分類色
+const GROUP_CAT = {
+  growth: 'bg-cat-mist-bg text-cat-mist-fg',
+  health: 'bg-cat-teal-bg text-cat-teal-fg',
+  care:   'bg-cat-sand-bg text-cat-sand-fg',
+  parent: 'bg-cat-mauve-bg text-cat-mauve-fg',
+}
+
+function TopicCard({ page, chip, onClick }) {
+  const Icon = pageIcons[page.id]
+  return (
+    <button onClick={onClick} className="card-hover group bg-surface border border-border rounded-2xl p-6 text-left">
+      <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4 transition-transform duration-200 group-hover:scale-110 ${chip}`}>
+        <Icon className="w-7 h-7" strokeWidth={2} aria-hidden="true" />
+      </div>
+      <h3 className="font-bold text-ink text-base mb-2">{page.title}</h3>
+      <p className="text-sm text-ink-muted mb-4 leading-relaxed">{page.desc}</p>
+      <span className={`inline-block text-xs font-semibold px-3 py-1.5 rounded-full ${chip}`}>
+        了解更多 →
+      </span>
+    </button>
+  )
+}
+
+export default function HomePage({ navigate, scrollTarget }) {
   const [q] = useState(pickDailyQuote)
+
+  // 從導覽列「依月齡探索」進入時，捲動到月齡快速導覽
+  useEffect(() => {
+    if (!scrollTarget) return
+    const t = setTimeout(() => {
+      document.getElementById(scrollTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 0)
+    return () => clearTimeout(t)
+  }, [scrollTarget])
   const [ageMonths, setAgeMonths] = useState(6)
 
   return (
@@ -238,7 +157,7 @@ export default function HomePage({ navigate }) {
       </section>
 
       {/* ── Age-based quick nav ── */}
-      <section className="py-12 px-6 bg-surface border-b border-border">
+      <section id="age-nav" className="scroll-mt-20 py-12 px-6 bg-surface border-b border-border">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xl md:text-2xl font-semibold tracking-[0.05em] text-ink text-center mb-2">🎯 依月齡快速導覽</h2>
           <p className="text-ink-muted text-center mb-6 text-sm">選擇寶寶目前月齡，直接前往對應內容</p>
@@ -294,26 +213,23 @@ export default function HomePage({ navigate }) {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-ink text-center mb-2">📌 快速導覽</h2>
           <p className="text-ink-muted text-center mb-10 text-sm">選擇您需要的衛教主題</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {cards.map(c => {
-              const Icon = pageIcons[c.id]
-              return (
-              <button
-                key={c.id}
-                onClick={() => navigate(c.id)}
-                className={`card-hover group bg-gradient-to-br ${c.grad} border-2 ${c.border} rounded-3xl p-6 text-left`}
-              >
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4 transition-transform duration-200 group-hover:scale-110 ${c.badge}`}>
-                  <Icon className="w-7 h-7" strokeWidth={2} aria-hidden="true" />
+          <div className="space-y-10">
+            {navGroups.map(g => (
+              <section key={g.id} aria-labelledby={`home-group-${g.id}`}>
+                <h3 id={`home-group-${g.id}`} className="flex items-center gap-2 text-lg font-bold text-ink mb-4">
+                  <g.Icon className="w-5 h-5 text-brand" strokeWidth={2} aria-hidden="true" />
+                  {g.label}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {g.items.map(it => (
+                    <TopicCard key={it.id} page={it} chip={GROUP_CAT[g.id]} onClick={() => navigate(it.id)} />
+                  ))}
                 </div>
-                <h3 className="font-bold text-ink text-base mb-2">{c.title}</h3>
-                <p className="text-sm text-ink-muted mb-4 leading-relaxed">{c.desc}</p>
-                <span className={`inline-block text-xs font-semibold px-3 py-1.5 rounded-full ${c.badge}`}>
-                  了解更多 →
-                </span>
-              </button>
-              )
-            })}
+              </section>
+            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <TopicCard page={emergencyPage} chip="bg-danger-bg text-danger-fg" onClick={() => navigate(emergencyPage.id)} />
+            </div>
           </div>
         </div>
       </section>
