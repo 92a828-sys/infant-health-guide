@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Baby, Menu, X, Users, GraduationCap } from 'lucide-react'
-import { useRole } from '../RoleContext'
+import { Baby, Menu, X } from 'lucide-react'
 import { pageIcons } from '../pageIcons'
 
 const navItems = [
@@ -19,38 +18,10 @@ const navItems = [
   { id: 'parent-support', label: '親職支持' },
   { id: 'vitals',    label: '生命徵象' },
   { id: 'early-learning', label: '早期學習' },
-  { id: 'caregiver', label: '托育專區', caregiverOnly: true },
-  { id: 'caregiver-professional', label: '托育專業法規', caregiverOnly: true },
 ]
-
-function RoleSwitch({ role, setRole, compact }) {
-  return (
-    <div className={`flex items-center bg-brand-soft rounded-full p-1 ${compact ? 'text-xs' : 'text-sm'}`}>
-      <button
-        onClick={() => setRole('parent')}
-        className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-medium transition-all ${
-          role === 'parent' ? 'bg-surface text-brand shadow-sm' : 'text-ink-muted hover:text-brand'
-        }`}
-      >
-        <Users className="w-4 h-4" strokeWidth={2} aria-hidden="true" /> 家長版
-      </button>
-      <button
-        onClick={() => setRole('caregiver')}
-        className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-medium transition-all ${
-          role === 'caregiver' ? 'bg-surface text-brand shadow-sm' : 'text-ink-muted hover:text-brand'
-        }`}
-      >
-        <GraduationCap className="w-4 h-4" strokeWidth={2} aria-hidden="true" /> 托育人員版
-      </button>
-    </div>
-  )
-}
 
 export default function Navbar({ navigate, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const { role, setRole } = useRole()
-
-  const visibleItems = navItems.filter(item => role === 'caregiver' || !item.caregiverOnly)
 
   const go = (id) => {
     navigate(id)
@@ -77,7 +48,7 @@ export default function Navbar({ navigate, currentPage }) {
 
           {/* Desktop links */}
           <div className="hidden xl:flex items-center gap-1 overflow-x-auto">
-            {visibleItems.slice(1).map(item => {
+            {navItems.slice(1).map(item => {
               const Icon = pageIcons[item.id]
               return (
               <button
@@ -97,10 +68,6 @@ export default function Navbar({ navigate, currentPage }) {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <div className="hidden sm:block">
-              <RoleSwitch role={role} setRole={setRole} compact />
-            </div>
-
             {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -118,11 +85,8 @@ export default function Navbar({ navigate, currentPage }) {
         {/* Mobile drawer */}
         {menuOpen && (
           <div className="xl:hidden py-3 pb-4 border-t border-border">
-            <div className="sm:hidden mb-3 flex justify-center">
-              <RoleSwitch role={role} setRole={setRole} />
-            </div>
             <div className="grid grid-cols-2 gap-2">
-              {visibleItems.slice(1).map(item => {
+              {navItems.slice(1).map(item => {
                 const Icon = pageIcons[item.id]
                 return (
                 <button

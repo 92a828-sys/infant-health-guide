@@ -36,7 +36,7 @@ export default function Footer({ navigate }) {
               </div>
             </div>
             <p className="text-sm text-ink-muted leading-[1.75]">
-              專為新手爸媽與托育人員設計，提供實用的幼兒健康照護參考資訊。
+              專為新手爸媽設計，由護理師整理實用的幼兒健康照護參考資訊。
             </p>
           </div>
 

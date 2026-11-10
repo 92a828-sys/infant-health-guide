@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useRole } from '../RoleContext'
 import { Alert, ToneIcon } from '../components/Alert'
 
 // ── 靜態藥品資料庫 ────────────────────────────────────────────────
@@ -12,8 +11,8 @@ const DRUG_DATA = [
     categories: ['抗組織胺'],
     symptoms: ['咳嗽', '流鼻水', '濕疹', '皮膚癢', '蕁麻疹'],
     mechanism: '具抗乙醯膽鹼及鎮靜功能，拮抗組織胺與血清素。',
-    sideEffects: ['興奮/躁動（影響午休）', '頭暈/頭痛', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
-    notes: '1. 強力嗜睡：屬於第一代抗組織胺，鎮靜作用強。服藥後幼兒易昏睡，活動時間需特別預防跌倒。\n2. 年齡警示：2歲以下幼兒曾有嚴重副作用案例，若收托2歲以下幼兒使用此藥，務必確認是醫師親自開立。\n3. 交互作用：不可擅自與其他感冒藥水（尤其是含抗組織胺成分）混吃，以免抑制過度。\n4. 特殊禁忌：新生兒、早產兒禁用。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '頭暈/頭痛', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
+    notes: '1. 強力嗜睡：屬於第一代抗組織胺，鎮靜作用強。服藥後幼兒易昏睡，活動時間需特別預防跌倒。\n2. 年齡警示：2歲以下幼兒曾有嚴重副作用案例，2歲以下幼兒使用此藥，務必確認是醫師親自開立。\n3. 交互作用：不可擅自與其他感冒藥水（尤其是含抗組織胺成分）混吃，以免抑制過度。\n4. 特殊禁忌：新生兒、早產兒禁用。',
     storage: '室溫避光',
     keywords: '香草牛奶、鳳梨口味、透明、黃色、想睡覺',
     images: ['/drugs/201005191404367055.jpg'],
@@ -24,8 +23,8 @@ const DRUG_DATA = [
     categories: ['怯痰劑', '抗組織胺', '支氣管擴張'],
     symptoms: ['咳嗽', '怯痰', '打噴嚏', '流鼻水', '鼻塞'],
     mechanism: '綜合感冒藥。含有抗組織胺可緩解過敏流鼻水；支氣管擴張劑可緩解咳嗽；祛痰劑協助排出痰液。',
-    sideEffects: ['興奮/躁動（影響午休）', '心悸/心跳加速', '頭暈/頭痛', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
-    notes: '1. 務必搖勻：使用前須振搖均勻。\n2. 藥物重複檢核：確認家長未同時提供其他綜合感冒藥或抗過敏藥，避免過量。\n3. 特殊族群：含阿斯巴甜（Aspartame），苯酮尿症幼兒禁用。\n4. 觀察重點：含支氣管擴張成分，若幼兒出現心跳過快或情緒躁動需留意。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '心悸/心跳加速', '頭暈/頭痛', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
+    notes: '1. 務必搖勻：使用前須振搖均勻。\n2. 藥物重複檢核：確認沒有同時使用其他綜合感冒藥或抗過敏藥，避免過量。\n3. 特殊族群：含阿斯巴甜（Aspartame），苯酮尿症幼兒禁用。\n4. 觀察重點：含支氣管擴張成分，若幼兒出現心跳過快或情緒躁動需留意。',
     storage: '室溫避光',
     keywords: '紅橘色藥水、紫紅色藥水、感冒糖漿',
     images: ['/drugs/1544513266365.jpg'],
@@ -37,7 +36,7 @@ const DRUG_DATA = [
     symptoms: ['喉嚨痛', '止痛', '發燒', '頭痛'],
     mechanism: '成分為 Acetaminophen（24mg/ml），作用於中樞神經，可阻斷痛覺傳導並降低體溫。',
     sideEffects: ['皮疹/發紅（觀察過敏）', '頭暈/頭痛', '噁心/嘔吐/食慾差'],
-    notes: '1. 嚴格間隔：若症狀持續，需間隔 4–6 小時才可重複使用。\n2. 每日上限：24 小時內不可超過 5 次。\n3. 重複用藥檢核：確認家長未同時使用其他含 Acetaminophen 的止痛退燒藥，過量恐傷肝。\n4. 特殊禁忌：含阿斯巴甜，苯酮尿症幼兒禁用。',
+    notes: '1. 嚴格間隔：若症狀持續，需間隔 4–6 小時才可重複使用。\n2. 每日上限：24 小時內不可超過 5 次。\n3. 重複用藥檢核：確認沒有同時使用其他含 Acetaminophen 的止痛退燒藥，過量恐傷肝。\n4. 特殊禁忌：含阿斯巴甜，苯酮尿症幼兒禁用。',
     storage: '室溫避光',
     keywords: '退燒紅藥水、退燒、紅色藥水、紫色藥水',
     images: ['/drugs/1544506670626.jpg'],
@@ -72,8 +71,8 @@ const DRUG_DATA = [
     categories: ['抗發炎', '類固醇'],
     symptoms: ['哮吼', '嚴重過敏', '支氣管炎', '氣喘'],
     mechanism: '成分為 Prednisolone。具有強力的抗發炎及抗過敏作用，能抑制免疫反應，緩解呼吸道腫脹。',
-    sideEffects: ['興奮/躁動（影響午休）', '腸胃不適（建議飯後）', '免疫力下降（長期使用者）', '噁心/嘔吐/食慾差', '食慾增加'],
-    notes: '1. 不可隨意停藥：若醫生開立療程（如3天），請務必讓家長餵完，不可因為症狀好轉就自行停藥（除非醫生有交代）。\n2. 口味極苦：雖有添加優格香料，但類固醇本體非常苦，建議準備小點心或糖水給藥後服用。\n3. 觀察感染：使用期間幼兒抵抗力可能較差，需留意是否有發燒或其他感染徵兆。\n4. 特殊禁忌：水痘、麻疹感染期間需謹慎評估，若接觸到需回報醫師。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '腸胃不適（建議飯後）', '免疫力下降（長期使用者）', '噁心/嘔吐/食慾差', '食慾增加'],
+    notes: '1. 不可隨意停藥：若醫生開立療程（如3天），請務必按時餵完，不可因為症狀好轉就自行停藥（除非醫生有交代）。\n2. 口味極苦：雖有添加優格香料，但類固醇本體非常苦，建議準備小點心或糖水給藥後服用。\n3. 觀察感染：使用期間幼兒抵抗力可能較差，需留意是否有發燒或其他感染徵兆。\n4. 特殊禁忌：水痘、麻疹感染期間需謹慎評估，若接觸到需回報醫師。',
     storage: '室溫避光',
     keywords: '優格口味、苦藥、類固醇',
     images: ['/drugs/1544509442180.jpg'],
@@ -84,8 +83,8 @@ const DRUG_DATA = [
     categories: ['抗組織胺', '抗過敏'],
     symptoms: ['流鼻水', '皮膚癢', '結膜炎', '蕁麻疹', '過敏性鼻炎'],
     mechanism: '成分為 Cetirizine。屬於抗 H1 受體阻斷劑，作用迅速且長效，較不易通過腦血管障壁，嗜睡副作用較第一代輕微。',
-    sideEffects: ['興奮/躁動（影響午休）', '口乾（鼓勵喝水）', '頭暈/頭痛', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
-    notes: '1. 給藥頻率：通常為一天一次（晚餐時），若發現家長託藥單寫一天三次，請再次與家長或醫師確認（除非有特殊醫囑）。\n2. 特殊族群：腎功能不全幼兒需減半劑量，需留意病史。\n3. 口味辨識：特殊的優格口味，幼兒接受度通常很高。\n4. 交互作用：雖較安全，但仍避免與其他鎮靜劑併用。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '口乾（鼓勵喝水）', '頭暈/頭痛', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
+    notes: '1. 給藥頻率：通常為一天一次（晚餐時），若藥袋寫一天三次，請再次向醫師或藥師確認（除非有特殊醫囑）。\n2. 特殊族群：腎功能不全幼兒需減半劑量，需留意病史。\n3. 口味辨識：特殊的優格口味，幼兒接受度通常很高。\n4. 交互作用：雖較安全，但仍避免與其他鎮靜劑併用。',
     storage: '室溫避光',
     keywords: '優格口味、長效、一天一次、過敏水',
     images: ['/drugs/1544509414743.jpg'],
@@ -96,8 +95,8 @@ const DRUG_DATA = [
     categories: ['去鼻充血劑', '抗組織胺', '綜合鼻炎藥'],
     symptoms: ['打噴嚏', '流鼻水', '過敏性鼻炎', '鼻塞'],
     mechanism: '複方藥水。Triprolidine（抗組織胺）緩解流鼻水；Pseudoephedrine（血管收縮劑）緩解鼻黏膜腫脹與鼻塞。',
-    sideEffects: ['興奮/躁動（影響午休）', '口乾（鼓勵喝水）', '嗜睡/倦怠（需防跌）'],
-    notes: '1. 午睡觀察：因含有 Pseudoephedrine（偽麻黃素），部分體質敏感的幼兒吃完會特別興奮、睡不著，若發生此狀況需紀錄並告知家長。\n2. 給藥天數：仿單建議勿連續服用超過 7 日。\n3. 務必搖勻：使用前須振搖均勻。\n4. 特殊警語：若幼兒出現嚴重突發性頭痛、意識不清需立即停藥就醫（極罕見）。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '口乾（鼓勵喝水）', '嗜睡/倦怠（需防跌）'],
+    notes: '1. 睡眠觀察：因含有 Pseudoephedrine（偽麻黃素），部分體質敏感的幼兒吃完會特別興奮、睡不著，若發生此狀況請記錄下來，回診時告訴醫師。\n2. 給藥天數：仿單建議勿連續服用超過 7 日。\n3. 務必搖勻：使用前須振搖均勻。\n4. 特殊警語：若幼兒出現嚴重突發性頭痛、意識不清需立即停藥就醫（極罕見）。',
     storage: '室溫避光',
     keywords: '橘子口味、黃色、鼻塞',
     images: ['/drugs/actin.jpg'],
@@ -121,7 +120,7 @@ const DRUG_DATA = [
     symptoms: ['咳嗽', '多痰', '怯痰'],
     mechanism: '成分為 Guaifenesin。能增加呼吸道黏液分泌，降低痰液黏稠度，使痰容易咳出。',
     sideEffects: ['皮疹/發紅（觀察過敏）', '頭暈/頭痛', '噁心/嘔吐/食慾差'],
-    notes: '1. 務必搖勻：使用前須振搖均勻。\n2. 特殊禁忌：含阿斯巴甜（Aspartame），苯酮尿症幼兒不宜使用。\n3. 就醫警訊：若幼兒服用後出現高燒、起疹子或咳嗽超過一週未改善，需建議家長回診。',
+    notes: '1. 務必搖勻：使用前須振搖均勻。\n2. 特殊禁忌：含阿斯巴甜（Aspartame），苯酮尿症幼兒不宜使用。\n3. 就醫警訊：若幼兒服用後出現高燒、起疹子或咳嗽超過一週未改善，請帶孩子回診。',
     storage: '室溫避光',
     keywords: '櫻桃口味、深紅色、褐色、化痰',
     images: ['/drugs/GUAPHEN.jpg'],
@@ -132,7 +131,7 @@ const DRUG_DATA = [
     categories: ['抗組織胺'],
     symptoms: ['枯草熱', '流鼻水', '濕疹', '皮膚癢', '蕁麻疹', '過敏性鼻炎'],
     mechanism: '具抗乙醯膽鹼和鎮靜作用，可加強抗組織胺和 Serotonin-antagonist 作用，並有鈣離子阻斷效果。',
-    sideEffects: ['興奮/躁動（影響午休）', '口乾（鼓勵喝水）', '腹瀉/軟便', '皮疹/發紅（觀察過敏）', '嗜睡/倦怠（需防跌）'],
+    sideEffects: ['興奮/躁動（影響睡眠）', '口乾（鼓勵喝水）', '腹瀉/軟便', '皮疹/發紅（觀察過敏）', '嗜睡/倦怠（需防跌）'],
     notes: '1. 強力嗜睡：服藥後應避免操作機械或活動，幼兒需留意防跌。\n2. 年齡警示：2歲以下孩童最好不要服用。\n3. 過量風險：小孩服用過量會造成中樞神經抑制、痙攣，甚至死亡，需嚴格確認劑量。\n4. 特殊禁忌：青光眼、氣喘幼兒禁用。',
     storage: '室溫避光',
     keywords: '國嘉、百香果口味、黃色、喜普',
@@ -145,7 +144,7 @@ const DRUG_DATA = [
     symptoms: ['咳嗽', '多痰', '怯痰'],
     mechanism: '桔梗流浸膏（Platycodon Fluidextract）。桔梗為祛痰劑，藥理證實具止咳作用。',
     sideEffects: ['腸胃不適（建議飯後）', '噁心/嘔吐/食慾差'],
-    notes: '1. 務必搖勻：因含桔梗成分，易有細微沉澱，使用前必須用力振搖均勻。\n2. 腸胃觀察：若是腸胃功能較弱或容易腹瀉的幼兒，服用後需觀察是否有拉肚子情形。\n3. 就醫警訊：若持續高燒、出疹或咳嗽超過一週未改善，需建議家長回診。',
+    notes: '1. 務必搖勻：因含桔梗成分，易有細微沉澱，使用前必須用力振搖均勻。\n2. 腸胃觀察：若是腸胃功能較弱或容易腹瀉的幼兒，服用後需觀察是否有拉肚子情形。\n3. 就醫警訊：若持續高燒、出疹或咳嗽超過一週未改善，請帶孩子回診。',
     storage: '室溫避光',
     keywords: '生達、桔梗、深褐色、橘子焦糖味',
     images: ['/drugs/螢幕擷取畫面_2026-01-02_161323.png'],
@@ -156,8 +155,8 @@ const DRUG_DATA = [
     categories: ['怯痰劑', '支氣管擴張', '複方感冒藥'],
     symptoms: ['卡痰', '咳嗽', '支氣管炎', '氣喘', '流鼻水'],
     mechanism: '1. Orciprenaline：鬆弛支氣管、緩解氣喘。\n2. Bromhexine：溶解稀釋痰液。\n3. Doxylamine：抗過敏、流鼻水、鎮靜。',
-    sideEffects: ['興奮/躁動（影響午休）', '心悸/心跳加速', '腸胃不適（建議飯後）', '口乾（鼓勵喝水）', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
-    notes: '1. 雙重副作用觀察：因含有氣管擴張劑（可能興奮/心跳快）與抗組織胺（可能嗜睡），幼兒反應不一，需觀察個別狀況。\n2. 心跳監測：若幼兒出現臉紅、躁動或主訴心跳很快，應讓其休息並告知家長。\n3. 皮膚觀察：極罕見情況下可能引起嚴重皮膚過敏（SJS），若出現不明皮疹或黏膜潰瘍需立即停藥就醫。\n4. 特殊禁忌：青光眼、心律不整病患需小心投與。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '心悸/心跳加速', '腸胃不適（建議飯後）', '口乾（鼓勵喝水）', '嗜睡/倦怠（需防跌）', '噁心/嘔吐/食慾差'],
+    notes: '1. 雙重副作用觀察：因含有氣管擴張劑（可能興奮/心跳快）與抗組織胺（可能嗜睡），幼兒反應不一，需觀察個別狀況。\n2. 心跳監測：若幼兒出現臉紅、躁動或主訴心跳很快，應讓孩子休息並持續觀察，若未緩解請就醫。\n3. 皮膚觀察：極罕見情況下可能引起嚴重皮膚過敏（SJS），若出現不明皮疹或黏膜潰瘍需立即停藥就醫。\n4. 特殊禁忌：青光眼、心律不整病患需小心投與。',
     storage: '室溫避光',
     keywords: '瑞士、橘子口味、黃色、伏咳',
     images: ['/drugs/lant.jpg'],
@@ -169,7 +168,7 @@ const DRUG_DATA = [
     symptoms: ['咳嗽', '感冒', '支氣管炎'],
     mechanism: '止咳鎮靜劑。能逐漸改善呼吸道受阻程度，增加肺活量。',
     sideEffects: ['腹瀉/軟便（加強屁屁護理）', '皮疹/發紅（觀察過敏）', '頭暈/頭痛', '噁心/嘔吐/食慾差'],
-    notes: '1. 安全性高：屬於非麻醉性鎮咳劑，不具成癮性，可安全抑制咳嗽中樞。\n2. 觀察重點：雖然副作用發生率低（約1%），但若幼兒服用後出現腹瀉或皮疹，仍需紀錄並告知家長。\n3. 過量警示：若不慎過量服用，可能出現噁心、嘔吐、血壓降低等症狀。',
+    notes: '1. 安全性高：屬於非麻醉性鎮咳劑，不具成癮性，可安全抑制咳嗽中樞。\n2. 觀察重點：雖然副作用發生率低（約1%），但若幼兒服用後出現腹瀉或皮疹，仍請記錄下來，回診時告訴醫師。\n3. 過量警示：若不慎過量服用，可能出現噁心、嘔吐、血壓降低等症狀。',
     storage: '室溫避光',
     keywords: '晟德、梅子口味、橘紅色、米瑞',
     images: ['/drugs/1544515716431.jpg'],
@@ -180,8 +179,8 @@ const DRUG_DATA = [
     categories: ['抗生素', '青黴素類'],
     symptoms: ['中耳炎', '泌尿道感染', '細菌感染', '肺炎', '鼻竇炎'],
     mechanism: '複合製劑。Amoxicillin 殺菌，Clavulanic acid 阻斷細菌的抗藥性酵素，擴大殺菌範圍。',
-    sideEffects: ['興奮/躁動（影響午休）', '腹瀉/軟便（加強屁屁護理）', '皮疹/發紅（觀察過敏）', '噁心/嘔吐/食慾差'],
-    notes: '1. 效期嚴格：泡製後的藥水只能保存 7 天。若家長週一帶來，下週一通常已過期，需提醒家長丟棄。\n2. 腸胃照護：此抗生素極易引起腹瀉或軟便，請老師留意幼兒紅臀狀況，並勤換尿布。\n3. 給藥時機：建議飯前服用吸收較佳（但也可併用液體吞服）。\n4. 完整療程：抗生素需按時吃完療程，不可隨意停藥。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '腹瀉/軟便（加強屁屁護理）', '皮疹/發紅（觀察過敏）', '噁心/嘔吐/食慾差'],
+    notes: '1. 效期嚴格：泡製後的藥水只能保存 7 天。若週一泡製，下週一通常已過期，請記得丟棄。\n2. 腸胃照護：此抗生素極易引起腹瀉或軟便，請留意寶寶紅臀狀況，並勤換尿布。\n3. 給藥時機：建議飯前服用吸收較佳（但也可併用液體吞服）。\n4. 完整療程：抗生素需按時吃完療程，不可隨意停藥。',
     storage: '2–8°C 冷藏',
     keywords: 'Sandoz、抗生素、白色藥水、需冷藏',
     images: ['/drugs/A5500422-01.png'],
@@ -192,8 +191,8 @@ const DRUG_DATA = [
     categories: ['去鼻充血劑', '抗組織胺', '綜合鼻炎藥'],
     symptoms: ['打噴嚏', '流鼻水', '過敏性鼻炎', '鼻塞'],
     mechanism: 'Triprolidine（長效抗組織胺）緩解過敏流鼻水；Pseudoephedrine（擬交感神經興奮劑）收縮血管、緩解鼻塞。',
-    sideEffects: ['興奮/躁動（影響午休）', '口乾（鼓勵喝水）', '嗜睡/倦怠（需防跌）'],
-    notes: '1. 午睡觀察：成分含偽麻黃素，部分幼兒吃完會異常興奮、睡不著，若有此狀況請紀錄並告知家長。\n2. 務必搖勻：仿單明確標示「使用前須振搖均勻」。\n3. 特殊禁忌：不得與酒精性飲料併用。\n4. 安全性：6歲以下幼兒需由醫師處方使用。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '口乾（鼓勵喝水）', '嗜睡/倦怠（需防跌）'],
+    notes: '1. 睡眠觀察：成分含偽麻黃素，部分幼兒吃完會異常興奮、睡不著，若有此狀況請記錄下來，回診時告訴醫師。\n2. 務必搖勻：仿單明確標示「使用前須振搖均勻」。\n3. 特殊禁忌：不得與酒精性飲料併用。\n4. 安全性：6歲以下幼兒需由醫師處方使用。',
     storage: '室溫避光',
     keywords: '永信、鼻福、黃色、鼻塞',
     images: ['/drugs/image.png'],
@@ -229,7 +228,7 @@ const DRUG_DATA = [
     symptoms: ['咳嗽', '感冒咳嗽', '支氣管炎', '氣喘性支氣管炎'],
     mechanism: 'Butamirate Citrate。具顯著止咳作用，且能改善呼吸道受阻程度（增加肺活量）。（中樞性非麻醉性）',
     sideEffects: ['腹瀉/軟便（加強屁屁護理）', '皮疹/發紅（觀察過敏）', '頭暈/頭痛', '噁心/嘔吐/食慾差'],
-    notes: '1. 成分雙胞胎：此藥與「必達米瑞」成分相同，若家長同時帶來這兩罐，請確認是否為重複用藥。\n2. 特殊禁忌：含阿斯巴甜（Aspartame），苯酮尿症患者不宜使用。\n3. 非麻醉性：不含鴉片類生物鹼，安全性較高。',
+    notes: '1. 成分雙胞胎：此藥與「必達米瑞」成分相同，若家中同時有這兩罐，請確認是否為重複用藥。\n2. 特殊禁忌：含阿斯巴甜（Aspartame），苯酮尿症患者不宜使用。\n3. 非麻醉性：不含鴉片類生物鹼，安全性較高。',
     storage: '室溫避光',
     keywords: '晟德、葡萄口味、烏梅薄荷口味、止咳',
     images: ['/drugs/image 3.png'],
@@ -240,8 +239,8 @@ const DRUG_DATA = [
     categories: ['抗組織胺'],
     symptoms: ['流鼻水', '濕疹', '皮膚癢', '蕁麻疹', '過敏性鼻炎'],
     mechanism: '具抗乙醯膽鹼和鎮靜作用，能阻斷組織胺接受器，緩解過敏反應。（第一代）',
-    sideEffects: ['興奮/躁動（影響午休）', '口乾（鼓勵喝水）', '腹瀉/軟便（加強屁屁護理）'],
-    notes: '1. 成分雙胞胎：此藥與「希普利敏」、「喜普液」成分相同，皆為強力抗組織胺，請確認家長是否重複給藥。\n2. 強力嗜睡：鎮靜作用強，幼兒服藥後容易昏睡、腳步不穩，需特別預防跌倒。\n3. 劑量確認：2–6 歲每次 5cc，請務必核對藥袋上的醫師醫囑。',
+    sideEffects: ['興奮/躁動（影響睡眠）', '口乾（鼓勵喝水）', '腹瀉/軟便（加強屁屁護理）'],
+    notes: '1. 成分雙胞胎：此藥與「希普利敏」、「喜普液」成分相同，皆為強力抗組織胺，請確認是否重複給藥。\n2. 強力嗜睡：鎮靜作用強，幼兒服藥後容易昏睡、腳步不穩，需特別預防跌倒。\n3. 劑量確認：2–6 歲每次 5cc，請務必核對藥袋上的醫師醫囑。',
     storage: '室溫避光',
     keywords: '抗組織胺、想睡覺、流鼻水、黃色',
     images: ['/drugs/image 4.png'],
@@ -548,68 +547,32 @@ const principles = [
   { icon: '🔒', title: '置於幼兒拿不到處', desc: '藥物外觀鮮豔，幼兒易誤食，請上鎖保存。' },
 ]
 
-// ── 托藥管理 SOP（托育人員） ──────────────────────────────
-
-const threeReads = [
-  { title: '第一讀', desc: '從藥櫃／保存處取出藥品時，核對藥袋或托藥單上的姓名與藥名' },
-  { title: '第二讀', desc: '準備調配、量取劑量時，再次核對藥名與劑量是否相符' },
-  { title: '第三讀', desc: '給藥前於幼兒面前再次核對姓名，確認無誤後才實際給藥' },
-]
-
-const fiveRights = [
-  { icon: '🙋', title: '對姓名', desc: '核對幼兒姓名，可請幼兒自報姓名或核對手圈／座位卡，避免同名或相似臉孔混淆' },
-  { icon: '💊', title: '對藥名', desc: '核對藥袋／托藥單上的藥品名稱與實際藥品是否相符' },
-  { icon: '⚖️', title: '對劑量', desc: '核對托藥單載明之劑量（cc／顆）與實際量取的分量是否一致' },
-  { icon: '⏰', title: '對時間', desc: '核對給藥時段（如午餐後、下午3點）是否為托藥單指定時間' },
-  { icon: '💉', title: '對途徑', desc: '核對給藥方式（口服、外用、滴劑等）是否正確' },
-]
-
-const sopPractices = [
-  '每次僅準備一位幼兒的藥物，餵完再取下一位，避免多位幼兒藥物同時擺放而混淆',
-  '給藥後應立即於托藥單／給藥紀錄表上簽名，並記錄實際給藥時間',
-  '若發現托藥單資訊不清、藥品已過期、外觀與平常不同，或有任何疑慮，應暫緩給藥並聯繫家長或藥師確認，不可自行判斷給藥',
-  '給藥人員應保持專注，避免同時進行其他工作分心而中斷核對流程',
-]
-
-const refusalPoints = [
-  '教保／托育人員僅能依家長提供之「醫師開立處方藥」並填妥正式托藥單後協助給藥，不得代為餵食成藥、健康食品、保健食品或民間偏方',
-  '機構通常於用藥管理相關規範中明訂：僅協助「醫囑用藥」，非醫囑藥品之風險與責任應由家長自行承擔，機構人員無醫療專業判斷資格，不應承擔額外風險',
-  '保健食品、益生菌等雖非藥品，仍可能與其他藥物產生交互作用或引發過敏，機構同樣不建議代為餵食',
-  '若家長要求餵食非處方藥品，可婉轉說明機構政策，並建議家長利用接送時間自行給藥，或於回診時請醫師開立涵蓋在園時段的正式處方',
-  '拒絕不代表不關心：可同時提醒家長留意幼兒狀況，機構如觀察到不適，會立即主動通知家長',
-]
-
-// ── 主頁面 ────────────────────────────────────────────────
-
 const MAIN_TABS = [
   { id: 'principles', label: '📋 用藥原則' },
   { id: 'fever',      label: '🌡️ 退燒藥劑量' },
   { id: 'forbidden',  label: '🚫 禁用藥物' },
   { id: 'database',   label: '💊 幼生藥庫' },
-  { id: 'sop',         label: '🏫 托藥管理SOP', caregiverOnly: true },
 ]
 
 export default function MedicationPage({ navigate }) {
-  const { role } = useRole()
-  const visibleTabs = MAIN_TABS.filter(t => role === 'caregiver' || !t.caregiverOnly)
   const [tab, setTab]   = useState('principles')
   const [med, setMed]   = useState('acet')
 
-  const activeTab = visibleTabs.some(t => t.id === tab) ? tab : 'principles'
+  const activeTab = MAIN_TABS.some(t => t.id === tab) ? tab : 'principles'
 
   return (
     <div>
       <PageHeader
         emoji="💊"
         title="用藥衛教"
-        subtitle="嬰幼兒用藥原則、退燒藥劑量計算、幼生藥庫與托藥管理SOP"
+        subtitle="嬰幼兒用藥原則、退燒藥劑量計算與幼生藥庫"
         color="bg-gradient-to-br from-teal-50 to-cyan-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Top-level tabs */}
         <div className="flex rounded-2xl bg-teal-50 p-1 mb-10 gap-1 overflow-x-auto">
-          {visibleTabs.map(t => (
+          {MAIN_TABS.map(t => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
@@ -718,7 +681,7 @@ export default function MedicationPage({ navigate }) {
             <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 mb-6 flex gap-3">
               <span className="text-xl shrink-0">💊</span>
               <p className="text-sm text-teal-700 leading-relaxed">
-                收錄幼兒常見藥品的分類、適應症、注意事項與保存方式，由護理及托育人員整理維護。
+                收錄幼兒常見藥品的分類、適應症、注意事項與保存方式，由護理師整理維護。
                 點擊藥品名稱可展開詳細資訊。
               </p>
             </div>
@@ -726,107 +689,6 @@ export default function MedicationPage({ navigate }) {
           </div>
         )}
 
-        {/* ── 托藥管理 SOP ── */}
-        {activeTab === 'sop' && (
-          <div className="space-y-8">
-            <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 flex gap-3">
-              <span className="text-xl shrink-0">🏫</span>
-              <p className="text-sm text-teal-700 leading-relaxed">
-                本頁提供托育人員協助給藥時的標準作業流程，適用於機構內多位幼兒同時托藥的情境。
-              </p>
-            </div>
-
-            {/* 三讀五對 */}
-            <section className="bg-white border-2 border-teal-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span>✅</span> 三讀五對餵藥SOP
-              </h2>
-
-              <p className="text-sm font-semibold text-gray-600 mb-3">📖 三讀：每次給藥前檢查三次標籤</p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                {threeReads.map((r, i) => (
-                  <div key={r.title} className="bg-teal-50 border border-teal-100 rounded-2xl p-4">
-                    <p className="font-semibold text-teal-700 text-sm mb-1">{i + 1}. {r.title}</p>
-                    <p className="text-xs text-gray-600 leading-relaxed">{r.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-sm font-semibold text-gray-600 mb-3">🎯 五對：每次核對五個要點</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                {fiveRights.map(r => (
-                  <div key={r.title} className="bg-cyan-50 border border-cyan-100 rounded-2xl p-4 flex gap-3">
-                    <span className="text-xl shrink-0">{r.icon}</span>
-                    <div>
-                      <p className="font-semibold text-cyan-700 text-sm mb-1">{r.title}</p>
-                      <p className="text-xs text-gray-600 leading-relaxed">{r.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-sm font-semibold text-gray-600 mb-2">💡 實務執行要點</p>
-              <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
-                {sopPractices.map((t, i) => <li key={i}>{t}</li>)}
-              </ul>
-            </section>
-
-            {/* 拒絕非處方藥 */}
-            <section className="bg-white border-2 border-red-100 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span>🚫</span> 拒絕餵食非處方藥（成藥、保健食品）
-              </h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
-                {refusalPoints.map((t, i) => <li key={i}>{t}</li>)}
-              </ul>
-            </section>
-
-            {/* 電子托藥單範本 */}
-            <section className="bg-white border border-gray-200 rounded-3xl p-6 print:border-0">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                  <span>📝</span> 托藥單範本
-                </h2>
-                <button
-                  onClick={() => window.print()}
-                  className="text-xs bg-teal-500 text-white px-3 py-1.5 rounded-full hover:bg-teal-600 transition-colors print:hidden"
-                >
-                  🖨️ 列印
-                </button>
-              </div>
-
-              <div className="border-2 border-gray-200 rounded-2xl p-5">
-                <p className="text-center font-bold text-gray-800 mb-4">托藥單 Medication Delivery Form</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-4">
-                  <p className="border-b border-gray-300 pb-1">幼兒姓名：＿＿＿＿＿＿＿＿＿＿</p>
-                  <p className="border-b border-gray-300 pb-1">班級：＿＿＿＿＿＿＿＿＿＿</p>
-                  <p className="border-b border-gray-300 pb-1">日期：＿＿＿＿年＿＿月＿＿日</p>
-                  <p className="border-b border-gray-300 pb-1">開立院所／醫師：＿＿＿＿＿＿＿＿</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-4">
-                  <p className="border-b border-gray-300 pb-1">藥品名稱：＿＿＿＿＿＿＿＿＿＿</p>
-                  <p className="border-b border-gray-300 pb-1">劑型（藥水／藥粉／藥膏等）：＿＿＿＿</p>
-                  <p className="border-b border-gray-300 pb-1">每次劑量：＿＿＿＿＿＿＿＿＿＿</p>
-                  <p className="border-b border-gray-300 pb-1">給藥途徑：口服 ／ 外用 ／ 滴劑 ／ 其他＿＿</p>
-                  <p className="border-b border-gray-300 pb-1 sm:col-span-2">給藥時間（可複選）：□ 早上　□ 午餐後　□ 午睡前　□ 下午　□ 其他＿＿＿＿</p>
-                </div>
-                <p className="text-sm border-b border-gray-300 pb-1 mb-4">特殊注意事項／過敏史：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                  <p className="border-b border-gray-300 pb-1">家長簽名：＿＿＿＿＿＿＿＿　　連絡電話：＿＿＿＿＿＿＿＿</p>
-                  <p className="border-b border-gray-300 pb-1">教保／托育人員給藥確認簽名：＿＿＿＿＿＿＿＿</p>
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 mt-3">
-                本表單為通用範本，實際使用請依機構自訂格式與地方主管機關規定調整；每次給藥皆須完成「三讀五對」核對後由給藥人員簽名確認。
-              </p>
-            </section>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
-              <span className="shrink-0">📋</span>
-              <p>資料參考：護理實務「三讀五對」給藥安全原則、兒童及少年福利機構用藥管理相關規範。實際托藥流程與表單格式請依所屬機構規定辦理。</p>
-            </div>
-          </div>
-        )}
 
         <div className="mt-10 text-center">
           <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">

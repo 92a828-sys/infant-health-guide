@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { RoleProvider } from './RoleContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import EmergencyBar from './components/EmergencyBar'
@@ -14,12 +13,10 @@ import MedicationPage from './pages/MedicationPage'
 import CommonDiseasesPage from './pages/CommonDiseasesPage'
 import VitalSignsPage from './pages/VitalSignsPage'
 import EarlyLearningPage from './pages/EarlyLearningPage'
-import CaregiverToolsPage from './pages/CaregiverToolsPage'
 import NewbornSafetyPage from './pages/NewbornSafetyPage'
 import HomeSafetyPage from './pages/HomeSafetyPage'
 import DailyCarePage from './pages/DailyCarePage'
 import ParentSupportPage from './pages/ParentSupportPage'
-import CaregiverProfessionalPage from './pages/CaregiverProfessionalPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -44,18 +41,15 @@ function App() {
       case 'diseases':   return <CommonDiseasesPage navigate={navigate} />
       case 'vitals':     return <VitalSignsPage navigate={navigate} />
       case 'early-learning': return <EarlyLearningPage navigate={navigate} />
-      case 'caregiver':  return <CaregiverToolsPage navigate={navigate} />
       case 'newborn-safety': return <NewbornSafetyPage navigate={navigate} />
       case 'home-safety': return <HomeSafetyPage navigate={navigate} />
       case 'daily-care': return <DailyCarePage navigate={navigate} />
       case 'parent-support': return <ParentSupportPage navigate={navigate} initialTab={navParam} />
-      case 'caregiver-professional': return <CaregiverProfessionalPage navigate={navigate} />
       default:           return <HomePage navigate={navigate} />
     }
   }
 
   return (
-    <RoleProvider>
       <div className="min-h-screen bg-canvas text-ink flex flex-col">
         <Navbar navigate={navigate} currentPage={currentPage} />
         <EmergencyBar navigate={navigate} />
@@ -64,7 +58,6 @@ function App() {
         </main>
         <Footer navigate={navigate} />
       </div>
-    </RoleProvider>
   )
 }
 

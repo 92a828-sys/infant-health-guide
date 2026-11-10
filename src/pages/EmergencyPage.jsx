@@ -226,7 +226,7 @@ export default function EmergencyPage({ navigate }) {
               <a href="https://www.youtube.com/user/redcrossROC" target="_blank" rel="noopener noreferrer" className="underline font-semibold mx-1">
                 中華民國紅十字會 YouTube 頻道
               </a>
-              搜尋最新嬰幼兒CPR與異物哽塞教學影片。強烈建議家長與托育人員實際報名參加紅十字會、消防局等單位開設的
+              搜尋最新嬰幼兒CPR與異物哽塞教學影片。強烈建議家長與家中照顧者實際報名參加紅十字會、消防局等單位開設的
               <strong>嬰幼兒急救訓練課程</strong>，透過假人操作練習才能真正熟悉正確力道與節奏。
             </p>
           </div>

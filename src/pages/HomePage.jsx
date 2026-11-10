@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Baby, ArrowRight, Ambulance, Info } from 'lucide-react'
-import { useRole } from '../RoleContext'
 import { pageIcons } from '../pageIcons'
 
 const ageGroupTable = [
@@ -67,8 +66,8 @@ const cards = [
   },
   {
     id: 'medication',
-    title: '用藥與托藥管理',
-    desc: '退燒藥劑量計算、禁用藥物、幼生藥庫、三讀五對托藥SOP',
+    title: '用藥衛教',
+    desc: '用藥原則、退燒藥劑量計算、禁用藥物與幼生藥庫',
     grad: 'from-teal-50 to-cyan-50',
     border: 'border-teal-200',
     badge: 'bg-teal-100 text-teal-700',
@@ -137,24 +136,6 @@ const cards = [
     border: 'border-fuchsia-200',
     badge: 'bg-fuchsia-100 text-fuchsia-700',
   },
-  {
-    id: 'caregiver',
-    title: '托育人員專區',
-    desc: '團體膳食菜單、感染管制與停托標準、空間安全檢核與事故通報、活動設計',
-    grad: 'from-sky-50 to-blue-50',
-    border: 'border-sky-200',
-    badge: 'bg-sky-100 text-sky-700',
-    caregiverOnly: true,
-  },
-  {
-    id: 'caregiver-professional',
-    title: '托育人員專業與法規',
-    desc: '相關法規摘要、人員配置健康管理、幼兒健康監測、在職訓練、兒少保護通報',
-    grad: 'from-slate-50 to-blue-50',
-    border: 'border-slate-200',
-    badge: 'bg-slate-100 text-slate-700',
-    caregiverOnly: true,
-  },
 ]
 
 const quotes = [
@@ -190,7 +171,6 @@ const officialLinks = [
 const officialManuals = [
   { name: '兒童健康手冊（電子版）', desc: '生長發育、預防接種紀錄官方手冊', url: 'https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=1139', emoji: '📗' },
   { name: '兒童衛教手冊', desc: '早產兒出院照顧、SIDS預防、副食品等衛教內容', url: 'https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=1459', emoji: '📘' },
-  { name: '托嬰中心感染管制手冊', desc: '疾管署發布之機構感染管制指引（供托育人員使用）', url: 'https://at.cdc.gov.tw/3Yg76d', emoji: '📙' },
 ]
 
 const GrowthIcon = pageIcons['growth']
@@ -201,8 +181,6 @@ const DailyCareIcon = pageIcons['daily-care']
 export default function HomePage({ navigate }) {
   // UTC+8 台灣時間的第幾天，確保午夜 12 點換句
   const q = quotes[Math.floor((Date.now() + 8 * 3600000) / 86400000) % quotes.length]
-  const { role } = useRole()
-  const visibleCards = cards.filter(c => role === 'caregiver' || !c.caregiverOnly)
   const [ageMonths, setAgeMonths] = useState(6)
 
   return (
@@ -222,7 +200,7 @@ export default function HomePage({ navigate }) {
             0–3歲幼兒衛教專區
           </h1>
           <p className="text-lg md:text-xl text-ink-muted mb-2">
-            專為<strong className="text-ink">新手爸媽</strong>與<strong className="text-ink">托育人員</strong>設計的健康指南
+            專為<strong className="text-ink">新手爸媽</strong>設計的幼兒健康指南
           </p>
           <p className="text-sm text-ink-muted mb-10">
             內容參考衛生福利部、台灣兒科醫學會等官方資料
@@ -313,7 +291,7 @@ export default function HomePage({ navigate }) {
           <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-ink text-center mb-2">📌 快速導覽</h2>
           <p className="text-ink-muted text-center mb-10 text-sm">選擇您需要的衛教主題</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {visibleCards.map(c => {
+            {cards.map(c => {
               const Icon = pageIcons[c.id]
               return (
               <button

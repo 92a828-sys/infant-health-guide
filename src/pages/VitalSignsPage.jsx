@@ -245,7 +245,7 @@ export default function VitalSignsPage({ navigate }) {
       <div className="bg-gradient-to-br from-cyan-50 to-sky-100 py-12 px-6 text-center">
         <div className="text-6xl mb-4">📊</div>
         <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">0–3 歲生命徵象</h1>
-        <p className="text-gray-500 text-sm max-w-xl mx-auto">給爸媽與托育人員的生活化參考指南，不需醫療背景也看得懂</p>
+        <p className="text-gray-500 text-sm max-w-xl mx-auto">給爸媽的生活化參考指南，不需醫療背景也看得懂</p>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-10">

@@ -281,13 +281,13 @@ export default function DailyCarePage({ navigate }) {
             <span className="ml-auto text-emerald-400">→</span>
           </button>
           <button
-            onClick={() => navigate('caregiver')}
+            onClick={() => navigate('home-safety')}
             className="flex items-center gap-3 bg-sky-50 border border-sky-200 rounded-2xl p-4 text-left hover:bg-sky-100 transition-colors"
           >
-            <span className="text-2xl">🧑‍🏫</span>
+            <span className="text-2xl">🧯</span>
             <div>
-              <p className="font-semibold text-sky-800 text-sm">托育人員專區</p>
-              <p className="text-xs text-sky-600">日常照顧SOP、個別化照顧計畫</p>
+              <p className="font-semibold text-sky-800 text-sm">居家安全</p>
+              <p className="text-xs text-sky-600">居家安全陷阱、意外預防與玩具安全</p>
             </div>
             <span className="ml-auto text-sky-400">→</span>
           </button>

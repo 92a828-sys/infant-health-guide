@@ -160,13 +160,13 @@ export default function EarlyLearningPage({ navigate }) {
             <span className="ml-auto text-emerald-400">→</span>
           </button>
           <button
-            onClick={() => navigate('caregiver')}
+            onClick={() => navigate('parent-support')}
             className="flex items-center gap-3 bg-sky-50 border border-sky-200 rounded-2xl p-4 text-left hover:bg-sky-100 transition-colors"
           >
-            <span className="text-2xl">🧑‍🏫</span>
+            <span className="text-2xl">💗</span>
             <div>
-              <p className="font-semibold text-sky-800 text-sm">托育人員專區</p>
-              <p className="text-xs text-sky-600">觀察紀錄表、活動設計、溝通話術</p>
+              <p className="font-semibold text-sky-800 text-sm">親職支持</p>
+              <p className="text-xs text-sky-600">產後情緒、正向教養與求助資源</p>
             </div>
             <span className="ml-auto text-sky-400">→</span>
           </button>

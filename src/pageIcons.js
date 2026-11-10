@@ -3,7 +3,7 @@
 import {
   House, Ruler, ChartLine, Thermometer, Syringe, Soup, Ambulance, Pill,
   Hospital, ShieldCheck, FireExtinguisher, Bath, HeartHandshake, Activity,
-  Brain, GraduationCap, BookOpen,
+  Brain,
 } from 'lucide-react'
 
 export const pageIcons = {
@@ -22,6 +22,4 @@ export const pageIcons = {
   'parent-support':         HeartHandshake,
   'vitals':                 Activity,
   'early-learning':         Brain,
-  'caregiver':              GraduationCap,
-  'caregiver-professional': BookOpen,
 }
