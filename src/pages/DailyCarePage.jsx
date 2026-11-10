@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { sleepDurations } from '../data/sleep'
 
 function PageHeader({ emoji, title, subtitle }) {
   return (
@@ -53,13 +54,6 @@ const toiletTraining = [
   { q: '循序漸進原則', a: '不強迫、不因尿褲子責罵，以鼓勵取代處罰；先讓孩子熟悉便器，用簡單語言介紹如廁流程' },
   { q: '常見挫折是正常現象', a: '已經學會又重新尿床（退化）很常見，可能因環境轉換（入托、弟妹出生）引起，耐心陪伴、不過度緊張即可改善' },
   { q: '夜間如廁訓練較晚完成', a: '通常晚於白天訓練，多數孩子要到5–6歲才能穩定整夜不尿床，屬正常生理發展範圍' },
-]
-
-const sleepDurations = [
-  { age: '0–3個月', hours: '約16–18小時／天', note: '含頻繁小睡，尚無明顯日夜節律' },
-  { age: '4–11個月', hours: '約12–15小時／天', note: '含2–3次小睡，逐漸建立較規律作息' },
-  { age: '1–2歲', hours: '約11–14小時／天', note: '含1–2次小睡' },
-  { age: '3歲', hours: '約10–13小時／天', note: '含0–1次小睡，部分孩子開始不需午睡' },
 ]
 
 const routineSteps = ['洗澡', '撫觸／換睡衣', '說故事或搖籃曲', '熄燈、保持安靜']
