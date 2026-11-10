@@ -30,10 +30,10 @@ const readingStages = [
 export default function EarlyLearningPage({ navigate }) {
   return (
     <div>
-      <div className="bg-gradient-to-br from-fuchsia-50 to-purple-100 py-12 px-6 text-center">
+      <div className="bg-canvas border-b border-border py-12 px-6 text-center">
         <div className="text-6xl mb-4">🧠</div>
-        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">早期學習與親子共讀</h1>
-        <p className="text-gray-500 text-sm max-w-xl mx-auto">
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">早期學習與親子共讀</h1>
+        <p className="text-ink-muted text-sm max-w-xl mx-auto">
           0～3歲是大腦發展的黃金期，陪伴與互動就是最好的教材
         </p>
       </div>
@@ -41,9 +41,9 @@ export default function EarlyLearningPage({ navigate }) {
       <div className="max-w-4xl mx-auto px-4 py-10 space-y-10">
 
         {/* Source note */}
-        <div className="bg-purple-50 border border-purple-200 rounded-2xl p-4 flex gap-3">
+        <div className="bg-surface-muted border border-border rounded-2xl p-4 flex gap-3">
           <span className="text-xl shrink-0">📋</span>
-          <p className="text-sm text-purple-800 leading-relaxed">
+          <p className="text-sm text-ink leading-relaxed">
             本頁內容參考：<strong>衛生福利部國民健康署「親子共讀」衛教宣導</strong>、
             Heho親子報導（引小兒神經科醫師郭雲鼎觀點，2021）、
             以及美國哈佛大學兒童發展中心（Center on the Developing Child, Harvard University）提出之
@@ -52,26 +52,26 @@ export default function EarlyLearningPage({ navigate }) {
         </div>
 
         {/* Brain development section */}
-        <section className="bg-white border border-gray-200 rounded-3xl p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <section className="bg-surface border border-border rounded-2xl p-6">
+          <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
             <span>🧠</span> 大腦開發三大原則：陪伴・刺激・營養
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
-            <div className="bg-pink-50 border border-pink-200 rounded-2xl p-4">
-              <p className="font-semibold text-pink-700 text-sm mb-1.5">💞 陪伴</p>
-              <p className="text-xs text-pink-600 leading-relaxed">
+            <div className="border rounded-2xl p-4 bg-cat-mauve-bg border-cat-mauve-fg/20 text-cat-mauve-fg">
+              <p className="font-semibold text-sm mb-1.5">💞 陪伴</p>
+              <p className="text-xs leading-relaxed">
                 多與寶寶互動、眼神交流、回應寶寶的表情與聲音，建構穩固的親子依附關係
               </p>
             </div>
-            <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-4">
-              <p className="font-semibold text-indigo-700 text-sm mb-1.5">🎵 刺激</p>
-              <p className="text-xs text-indigo-600 leading-relaxed">
+            <div className="border rounded-2xl p-4 bg-cat-lav-bg border-cat-lav-fg/20 text-cat-lav-fg">
+              <p className="font-semibold text-sm mb-1.5">🎵 刺激</p>
+              <p className="text-xs leading-relaxed">
                 聽音樂、說故事、多樣的觸摸與探索經驗，不需要昂貴教材，家庭日常互動就是最好的刺激
               </p>
             </div>
-            <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4">
-              <p className="font-semibold text-teal-700 text-sm mb-1.5">🥗 營養</p>
-              <p className="text-xs text-teal-600 leading-relaxed">
+            <div className="border rounded-2xl p-4 bg-cat-teal-bg border-cat-teal-fg/20 text-cat-teal-fg">
+              <p className="font-semibold text-sm mb-1.5">🥗 營養</p>
+              <p className="text-xs leading-relaxed">
                 均衡飲食提供大腦發育所需營養素，詳見「飲食與副食品」頁面的分齡建議
               </p>
             </div>
@@ -85,32 +85,32 @@ export default function EarlyLearningPage({ navigate }) {
         </section>
 
         {/* Sensory & play activities */}
-        <section className="bg-white border border-gray-200 rounded-3xl p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <section className="bg-surface border border-border rounded-2xl p-6">
+          <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
             <span>🎮</span> 感官刺激與遊戲活動建議
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div className="border border-gray-200 rounded-2xl p-4">
-              <p className="font-semibold text-gray-700 mb-2">0～1歲</p>
-              <ul className="text-gray-600 space-y-1.5 list-disc list-inside">
+            <div className="border border-border rounded-2xl p-4">
+              <p className="font-semibold text-ink mb-2">0～1歲</p>
+              <ul className="text-ink-muted space-y-1.5 list-disc list-inside">
                 <li>黑白／高對比圖卡吸引視覺注意</li>
                 <li>搖鈴、布書提供聽覺與觸覺刺激</li>
                 <li>趴姿時間（tummy time）鍛鍊頸部與核心肌力</li>
                 <li>躲貓貓遊戲建立物體恆存概念</li>
               </ul>
             </div>
-            <div className="border border-gray-200 rounded-2xl p-4">
-              <p className="font-semibold text-gray-700 mb-2">1～2歲</p>
-              <ul className="text-gray-600 space-y-1.5 list-disc list-inside">
+            <div className="border border-border rounded-2xl p-4">
+              <p className="font-semibold text-ink mb-2">1～2歲</p>
+              <ul className="text-ink-muted space-y-1.5 list-disc list-inside">
                 <li>堆疊積木、套杯練習手眼協調與因果關係</li>
                 <li>簡單指令遊戲（拿給我、放進去）練習語言理解</li>
                 <li>戶外散步、探索不同材質的物品</li>
                 <li>模仿家事（擦桌子、假裝掃地）</li>
               </ul>
             </div>
-            <div className="border border-gray-200 rounded-2xl p-4 sm:col-span-2">
-              <p className="font-semibold text-gray-700 mb-2">2～3歲</p>
-              <ul className="text-gray-600 space-y-1.5 list-disc list-inside">
+            <div className="border border-border rounded-2xl p-4 sm:col-span-2">
+              <p className="font-semibold text-ink mb-2">2～3歲</p>
+              <ul className="text-ink-muted space-y-1.5 list-disc list-inside">
                 <li>簡單拼圖、配對圖卡練習認知與專注力</li>
                 <li>角色扮演遊戲（扮家家酒）發展想像力與社會情緒</li>
                 <li>塗鴉、著色練習精細動作</li>
@@ -122,23 +122,23 @@ export default function EarlyLearningPage({ navigate }) {
 
         {/* Reading guide by age */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-ink mb-2 flex items-center gap-2">
             <span>📖</span> 親子共讀指南（分齡）
           </h2>
-          <p className="text-sm text-gray-500 mb-5">
-            國健署共讀口訣：<strong className="text-purple-600">共讀零歲就開始・啟動對話式共讀・隨時隨地都共讀・共讀時間由少而多養成好習慣</strong>
+          <p className="text-sm text-ink-muted mb-5">
+            國健署共讀口訣：<strong className="text-brand">共讀零歲就開始・啟動對話式共讀・隨時隨地都共讀・共讀時間由少而多養成好習慣</strong>
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {readingStages.map(s => (
-              <div key={s.age} className="bg-white border-2 border-purple-100 rounded-2xl p-5">
+              <div key={s.age} className="bg-surface border border-border rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">{s.emoji}</span>
-                  <h3 className="font-bold text-gray-800">{s.age}</h3>
+                  <h3 className="font-bold text-ink">{s.age}</h3>
                 </div>
-                <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside mb-3">
+                <ul className="text-sm text-ink-muted space-y-1.5 list-disc list-inside mb-3">
                   {s.tips.map((t, i) => <li key={i}>{t}</li>)}
                 </ul>
-                <p className="text-xs bg-purple-50 text-purple-700 rounded-lg px-3 py-2">
+                <p className="text-xs bg-surface-muted text-ink rounded-lg px-3 py-2">
                   📚 適合繪本：{s.books}
                 </p>
               </div>
@@ -150,32 +150,32 @@ export default function EarlyLearningPage({ navigate }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => navigate('growth')}
-            className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-left hover:bg-emerald-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">📏</span>
             <div>
-              <p className="font-semibold text-emerald-800 text-sm">生長發育里程碑</p>
-              <p className="text-xs text-emerald-600">動作、語言、社會情緒發展指標</p>
+              <p className="font-semibold text-ink text-sm">生長發育里程碑</p>
+              <p className="text-xs text-ink-muted">動作、語言、社會情緒發展指標</p>
             </div>
-            <span className="ml-auto text-emerald-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
           <button
             onClick={() => navigate('parent-support')}
-            className="flex items-center gap-3 bg-sky-50 border border-sky-200 rounded-2xl p-4 text-left hover:bg-sky-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">💗</span>
             <div>
-              <p className="font-semibold text-sky-800 text-sm">親職支持</p>
-              <p className="text-xs text-sky-600">產後情緒、正向教養與求助資源</p>
+              <p className="font-semibold text-ink text-sm">親職支持</p>
+              <p className="text-xs text-ink-muted">產後情緒、正向教養與求助資源</p>
             </div>
-            <span className="ml-auto text-sky-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
         </div>
 
         <div className="text-center">
           <button
             onClick={() => navigate('home')}
-            className="text-sm text-orange-500 hover:text-orange-700 underline"
+            className="text-sm text-brand hover:opacity-80 underline underline-offset-4"
           >
             ← 返回首頁
           </button>

@@ -6,8 +6,6 @@ const diseases = [
     emoji: '🦠',
     title: '腸病毒',
     subtitle: '好發於 5 歲以下幼兒，夏秋季高峰',
-    accent: 'border-red-400',
-    badgeColor: 'bg-red-100 text-red-700',
     intro: '腸病毒是一群病毒的總稱，包含手足口病與疱疹性咽峽炎兩種常見類型。台灣全年均有病例，以夏秋季（4–9 月）最為盛行。5 歲以下幼兒因免疫力尚未成熟，感染後症狀往往較大人嚴重，少數重症可侵犯神經系統，需特別警覺。',
     symptoms: [
       '手、足、口腔黏膜出現小水泡或潰瘍（手足口病）',
@@ -36,8 +34,6 @@ const diseases = [
     emoji: '🫁',
     title: 'RSV（呼吸道融合病毒）',
     subtitle: '2 歲以下嬰幼兒最常見的下呼吸道感染',
-    accent: 'border-sky-400',
-    badgeColor: 'bg-sky-100 text-sky-700',
     intro: 'RSV（Respiratory Syncytial Virus）是造成嬰幼兒細支氣管炎與肺炎最常見的病毒。幾乎所有孩子在 2 歲前都曾感染過，成人感染通常症狀輕微，但對 2 歲以下嬰兒（尤其早產兒、心肺疾病兒）可能造成嚴重呼吸困難，需住院觀察。',
     symptoms: [
       '初期 1–3 天：類似感冒，流鼻水、輕微咳嗽、低燒',
@@ -67,8 +63,6 @@ const diseases = [
     emoji: '🌹',
     title: '玫瑰疹（幼兒急疹）',
     subtitle: '6 個月至 3 歲常見，退燒後才出疹，常讓家長誤以為是藥物過敏',
-    accent: 'border-pink-400',
-    badgeColor: 'bg-pink-100 text-pink-700',
     intro: '玫瑰疹由人類疱疹病毒第 6 型（HHV-6）引起，幾乎所有幼兒在 3 歲前都會感染一次。最大特點是「先高燒、後出疹」——退燒後全身出現粉紅色疹子，此時家長常以為是退燒藥過敏，其實是疾病即將康復的訊號。',
     symptoms: [
       '突然高燒 39–40°C，通常持續 3–5 天',
@@ -96,8 +90,6 @@ const diseases = [
     emoji: '❤️‍🔥',
     title: '川崎病',
     subtitle: '5 歲以下幼兒的血管發炎疾病，須及早診斷以保護心臟',
-    accent: 'border-orange-400',
-    badgeColor: 'bg-orange-100 text-orange-700',
     intro: '川崎病是一種原因不明的全身性血管發炎疾病，好發於 5 歲以下幼兒，台灣男童發生率高於女童。若未及時治療，可能造成冠狀動脈瘤，影響孩子一生的心臟健康。早期症狀與一般發燒相似，關鍵在於「發燒超過 5 天合併特徵性症狀」要高度警覺。',
     symptoms: [
       '持續高燒超過 5 天，退燒藥僅短暫有效',
@@ -124,8 +116,6 @@ const diseases = [
     emoji: '💨',
     title: '細支氣管炎',
     subtitle: '2 歲以下嬰幼兒常見，多由 RSV 或其他病毒引起',
-    accent: 'border-teal-400',
-    badgeColor: 'bg-teal-100 text-teal-700',
     intro: '細支氣管炎是嬰幼兒最常見的下呼吸道感染，指細小支氣管發炎腫脹導致氣道阻塞。初期症狀類似一般感冒，數天後出現喘鳴與呼吸費力。多數幼兒可在家照護，但 6 個月以下嬰兒、早產兒或有潛在疾病者，病情可能較為嚴重。',
     symptoms: [
       '初期 1–3 天：流鼻水、輕微咳嗽、低燒',
@@ -155,8 +145,6 @@ const diseases = [
     emoji: '👂',
     title: '中耳炎',
     subtitle: '嬰幼兒常見，常繼發於感冒之後，哭鬧難安撫時需留意',
-    accent: 'border-yellow-400',
-    badgeColor: 'bg-yellow-100 text-yellow-700',
     intro: '中耳炎是嬰幼兒最常見的細菌感染之一。由於嬰幼兒的耳咽管（連接耳朵與鼻咽的通道）較短且水平，感冒時病菌容易由鼻腔上行至中耳，造成積液與發炎。嬰兒無法言語，常以「感冒後新出現發燒」或「躺下哭鬧加劇」為早期訊號。',
     symptoms: [
       '感冒之後出現新一波高燒（感冒本來有改善卻又發燒）',
@@ -184,8 +172,6 @@ const diseases = [
     emoji: '🌀',
     title: '輪狀病毒腸胃炎',
     subtitle: '5 歲以下幼兒最常見的嚴重腸胃炎，可自費接種疫苗預防',
-    accent: 'border-violet-400',
-    badgeColor: 'bg-violet-100 text-violet-700',
     intro: '輪狀病毒（Rotavirus）是全球造成嬰幼兒嚴重腸胃炎最常見的病毒。台灣全年均有病例，冬春季（11–3 月）為高峰。幾乎所有 5 歲以下兒童都會感染。感染後腹瀉次數多且水分大量流失，嬰幼兒特別容易發生危險的脫水。目前有自費口服疫苗可有效預防。',
     symptoms: [
       '突然大量水瀉，每天可達 10–20 次以上',
@@ -216,8 +202,6 @@ const diseases = [
     emoji: '🫀',
     title: '肺炎',
     subtitle: '下呼吸道感染，可能由病毒或細菌引起，嬰幼兒須留意呼吸型態變化',
-    accent: 'border-rose-400',
-    badgeColor: 'bg-rose-100 text-rose-700',
     intro: '肺炎是肺部組織發炎，嬰幼兒常由病毒（如RSV、流感、腺病毒）引起，也可能續發細菌感染（如肺炎鏈球菌）。與感冒最大的不同在於呼吸型態：肺炎幼兒常出現呼吸明顯費力、胸凹、呼吸急促等現象，而非單純流鼻水咳嗽。',
     symptoms: [
       '持續發燒，感冒症狀好轉後又再度發燒或惡化',
@@ -246,8 +230,6 @@ const diseases = [
     emoji: '🤒',
     title: '流感',
     subtitle: '流感病毒引起，症狀較一般感冒來得急且嚴重，幼兒為高風險族群',
-    accent: 'border-fuchsia-400',
-    badgeColor: 'bg-fuchsia-100 text-fuchsia-700',
     intro: '流行性感冒由流感病毒引起，好發於秋冬季節。與一般感冒相比，流感通常症狀來得急、發燒較高且合併明顯的全身痠痛倦怠感。5歲以下（尤其2歲以下）幼兒為流感併發重症的高風險族群，公費疫苗可有效降低重症風險。',
     symptoms: [
       '突然發高燒（可達39–40°C），常為第一個症狀',
@@ -276,8 +258,6 @@ const diseases = [
     emoji: '🤮',
     title: '病毒性腸胃炎',
     subtitle: '輪狀、諾羅病毒等皆可引起，嬰幼兒須特別注意脫水風險',
-    accent: 'border-lime-400',
-    badgeColor: 'bg-lime-100 text-lime-700',
     intro: '病毒性腸胃炎除了輪狀病毒外，諾羅病毒、腺病毒等也是常見病因，全年皆可能發生，冬季為高峰期。核心照護原則與輪狀病毒腸胃炎相同：預防脫水是首要任務，嬰幼兒體重輕、代償能力差，脫水速度比大人快很多。',
     symptoms: [
       '嘔吐（通常先出現），之後合併水瀉',
@@ -309,40 +289,30 @@ const relatedLinks = [
     emoji: '🌡️',
     title: '常見症狀處理',
     desc: '發燒、咳嗽、腹瀉等居家照護與就醫時機',
-    color: 'bg-sky-50 border-sky-200 hover:bg-sky-100',
-    textColor: 'text-sky-700',
   },
   {
     id: 'emergency',
     emoji: '🚑',
     title: '緊急狀況判斷',
     desc: '熱痙攣、異物哽塞、意識不清等緊急處理',
-    color: 'bg-red-50 border-red-200 hover:bg-red-100',
-    textColor: 'text-red-700',
   },
   {
     id: 'vaccination',
     emoji: '💉',
     title: '疫苗接種時程',
     desc: '輪狀病毒、流感等自費疫苗接種建議',
-    color: 'bg-violet-50 border-violet-200 hover:bg-violet-100',
-    textColor: 'text-violet-700',
   },
   {
     id: 'medication',
     emoji: '💊',
     title: '用藥衛教',
     desc: '退燒藥劑量計算與幼兒禁用藥物一覽',
-    color: 'bg-teal-50 border-teal-200 hover:bg-teal-100',
-    textColor: 'text-teal-700',
   },
   {
     id: 'vitals',
     emoji: '📊',
     title: '生命徵象參考',
     desc: '各年齡正常體溫、心跳、呼吸速率對照',
-    color: 'bg-cyan-50 border-cyan-200 hover:bg-cyan-100',
-    textColor: 'text-cyan-700',
   },
 ]
 
@@ -350,30 +320,30 @@ function DiseaseArticle({ d }) {
   return (
     <article id={d.id} className="scroll-mt-20">
       {/* 疾病標題列 */}
-      <div className={`border-l-4 ${d.accent} pl-4 mb-5`}>
+      <div className="border-l-4 border-brand pl-4 mb-5">
         <div className="flex items-center gap-3 mb-1">
           <span className="text-3xl">{d.emoji}</span>
-          <h2 className="text-xl font-bold text-gray-800">{d.title}</h2>
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${d.badgeColor}`}>
+          <h2 className="text-xl font-bold text-ink">{d.title}</h2>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-soft text-brand">
             幼兒常見
           </span>
         </div>
-        <p className="text-sm text-gray-500 ml-12">{d.subtitle}</p>
+        <p className="text-sm text-ink-muted ml-12">{d.subtitle}</p>
       </div>
 
       {/* 疾病說明 */}
-      <p className="text-sm text-gray-600 leading-relaxed mb-5 ml-1">{d.intro}</p>
+      <p className="text-sm text-ink-muted leading-relaxed mb-5 ml-1">{d.intro}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
         {/* 常見症狀 */}
-        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4">
-          <h3 className="font-bold text-blue-800 text-sm mb-3 flex items-center gap-1.5">
+        <div className="bg-surface-muted border border-border rounded-2xl p-4">
+          <h3 className="font-bold text-ink text-sm mb-3 flex items-center gap-1.5">
             🔍 常見症狀
           </h3>
           <ul className="space-y-2">
             {d.symptoms.map((s, i) => (
-              <li key={i} className="flex gap-2 text-sm text-gray-700">
-                <span className="text-blue-400 shrink-0 mt-0.5">•</span>
+              <li key={i} className="flex gap-2 text-sm text-ink">
+                <span className="text-ink-muted shrink-0 mt-0.5">•</span>
                 <span>{s}</span>
               </li>
             ))}
@@ -412,10 +382,10 @@ export default function CommonDiseasesPage({ navigate }) {
   return (
     <div>
       {/* Header */}
-      <div className="bg-gradient-to-br from-indigo-50 to-violet-100 py-12 px-6 text-center">
+      <div className="bg-canvas border-b border-border py-12 px-6 text-center">
         <div className="text-6xl mb-4">🏥</div>
-        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">認識常見疾病</h1>
-        <p className="text-gray-500 text-sm max-w-xl mx-auto">
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">認識常見疾病</h1>
+        <p className="text-ink-muted text-sm max-w-xl mx-auto">
           0–5 歲幼兒常見傳染病與疾病說明，包含症狀辨識、居家照護與就醫時機
         </p>
       </div>
@@ -428,14 +398,14 @@ export default function CommonDiseasesPage({ navigate }) {
         </Alert>
 
         {/* 本頁目錄 */}
-        <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-indigo-700 mb-3 uppercase tracking-wide">本頁疾病目錄</p>
+        <div className="bg-surface-muted border border-border rounded-2xl p-5 mb-10">
+          <p className="text-xs font-bold text-ink mb-3 uppercase tracking-wide">本頁疾病目錄</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {diseases.map(d => (
               <button
                 key={d.id}
                 onClick={() => document.getElementById(d.id)?.scrollIntoView({ behavior: 'smooth' })}
-                className="flex items-center gap-2 text-left px-3 py-2 rounded-xl bg-white hover:bg-indigo-100 border border-indigo-100 transition-colors text-sm text-indigo-700 font-medium"
+                className="flex items-center gap-2 text-left px-3 py-2 rounded-xl bg-surface hover:bg-brand-soft border border-border transition-colors text-sm text-ink font-medium"
               >
                 <span>{d.emoji}</span>
                 <span className="truncate">{d.title}</span>
@@ -450,7 +420,7 @@ export default function CommonDiseasesPage({ navigate }) {
             <div key={d.id}>
               <DiseaseArticle d={d} />
               {i < diseases.length - 1 && (
-                <hr className="mt-10 border-gray-100" />
+                <hr className="mt-10 border-border" />
               )}
             </div>
           ))}
@@ -464,34 +434,34 @@ export default function CommonDiseasesPage({ navigate }) {
           </p>
         </Alert>
 
-        <div className="mt-4 bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+        <div className="mt-4 bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
           <span className="shrink-0">📋</span>
           <p>資料參考：衛生福利部疾病管制署各項疾病衛教資料、腸病毒停課停托標準公告（以醫師診斷日或發病日為第1天起算7日）。個別病情仍請以醫師診斷與地方衛生局最新公告為準。</p>
         </div>
 
         {/* 相關資訊連結 */}
         <div className="mt-10">
-          <h2 className="text-base font-bold text-gray-700 mb-4">📎 相關衛教資訊</h2>
+          <h2 className="text-base font-bold text-ink mb-4">📎 相關衛教資訊</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {relatedLinks.map(l => (
               <button
                 key={l.id}
                 onClick={() => navigate(l.id)}
-                className={`flex items-start gap-3 p-4 rounded-2xl border-2 text-left transition-all ${l.color}`}
+                className="flex items-start gap-3 p-4 rounded-2xl border border-border bg-surface text-left hover:bg-brand-soft transition-colors"
               >
                 <span className="text-2xl shrink-0">{l.emoji}</span>
                 <div>
-                  <p className={`font-bold text-sm ${l.textColor}`}>{l.title}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{l.desc}</p>
+                  <p className="font-bold text-sm text-ink">{l.title}</p>
+                  <p className="text-xs text-ink-muted mt-0.5">{l.desc}</p>
                 </div>
-                <span className="ml-auto text-gray-300 shrink-0">›</span>
+                <span className="ml-auto text-brand shrink-0">›</span>
               </button>
             ))}
           </div>
         </div>
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

@@ -1,18 +1,18 @@
 import { Alert, ToneIcon } from '../components/Alert'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
 
 function SourceNote({ children }) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+    <div className="bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
       <span className="shrink-0">📋</span>
       <p>{children}</p>
     </div>
@@ -69,19 +69,18 @@ export default function NewbornSafetyPage({ navigate }) {
         emoji="🛡️"
         title="新生兒安全與警訊"
         subtitle="安全睡眠環境、黃疸與大便顏色卡、何時必須就醫的紅旗症狀"
-        color="bg-gradient-to-br from-cyan-50 to-blue-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12 space-y-14">
 
         {/* SIDS safe sleep */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-ink mb-2 flex items-center gap-2">
             <span>😴</span> 嬰兒猝死症（SIDS）預防：安全睡眠環境
           </h2>
-          <p className="text-sm text-gray-500 mb-5">把握 A-B-C 三原則，可大幅降低嬰兒猝死症風險</p>
+          <p className="text-sm text-ink-muted mb-5">把握 A-B-C 三原則，可大幅降低嬰兒猝死症風險</p>
 
-          <div className="bg-white border-2 border-cyan-200 rounded-3xl p-6 mb-5">
+          <div className="bg-surface border border-border rounded-2xl p-6 mb-5">
             <svg viewBox="0 0 320 190" className="w-full max-w-md mx-auto" role="img" aria-label="安全睡眠嬰兒床示意圖">
               <rect x="0" y="0" width="320" height="190" fill="#EFF8FB" rx="12" />
               {/* crib frame */}
@@ -110,9 +109,9 @@ export default function NewbornSafetyPage({ navigate }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
             {sidsPrinciples.map(p => (
-              <div key={p.title} className="bg-cyan-50 border border-cyan-200 rounded-2xl p-4">
-                <p className="font-semibold text-cyan-800 text-sm mb-1">{p.title}</p>
-                <p className="text-xs text-cyan-700 leading-relaxed">{p.desc}</p>
+              <div key={p.title} className="bg-surface-muted border border-border rounded-2xl p-4">
+                <p className="font-semibold text-ink text-sm mb-1">{p.title}</p>
+                <p className="text-xs text-ink-muted leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -135,31 +134,31 @@ export default function NewbornSafetyPage({ navigate }) {
 
         {/* Jaundice & stool color card */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-ink mb-2 flex items-center gap-2">
             <span>💛</span> 黃疸與膽道閉鎖：大便顏色卡
           </h2>
-          <p className="text-sm text-gray-500 mb-5">台灣官方「嬰兒黃金九色卡」是及早發現膽道閉鎖最重要的居家篩檢工具</p>
+          <p className="text-sm text-ink-muted mb-5">台灣官方「嬰兒黃金九色卡」是及早發現膽道閉鎖最重要的居家篩檢工具</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
             {jaundiceFacts.map(f => (
-              <div key={f.q} className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-                <p className="font-semibold text-amber-800 text-sm mb-1">{f.q}</p>
-                <p className="text-xs text-gray-600 leading-relaxed">{f.a}</p>
+              <div key={f.q} className="bg-surface-muted border border-border rounded-2xl p-4">
+                <p className="font-semibold text-ink text-sm mb-1">{f.q}</p>
+                <p className="text-xs text-ink-muted leading-relaxed">{f.a}</p>
               </div>
             ))}
           </div>
 
-          <div className="bg-white border-2 border-amber-200 rounded-3xl p-6 print:border-0">
+          <div className="bg-surface border border-border rounded-2xl p-6 print:border-0">
             <div className="flex items-center justify-between mb-1">
-              <p className="font-bold text-gray-800 text-sm">嬰兒黃金九色卡（示意）</p>
+              <p className="font-bold text-ink text-sm">嬰兒黃金九色卡（示意）</p>
               <button
                 onClick={() => window.print()}
-                className="text-xs bg-amber-500 text-white px-3 py-1.5 rounded-full hover:bg-amber-600 transition-colors print:hidden"
+                className="text-xs bg-brand text-on-brand px-3 py-1.5 rounded-full hover:opacity-90 transition-opacity print:hidden"
               >
                 🖨️ 列印
               </button>
             </div>
-            <p className="text-xs text-gray-400 mb-4">1–6號為異常（淡黃／灰白），7–9號為正常（黃／綠）</p>
+            <p className="text-xs text-ink-muted mb-4">1–6號為異常（淡黃／灰白），7–9號為正常（黃／綠）</p>
             <div className="grid grid-cols-3 sm:grid-cols-9 gap-2">
               {stoolCards.map(c => (
                 <div key={c.no} className="flex flex-col items-center gap-1">
@@ -190,10 +189,10 @@ export default function NewbornSafetyPage({ navigate }) {
 
         {/* Red flag summary */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-ink mb-2 flex items-center gap-2">
             <span>🚨</span> 何時必須就醫的紅旗症狀總表
           </h2>
-          <p className="text-sm text-gray-500 mb-5">彙整各主題頁面中的緊急警訊，出現以下任一情況請立即就醫或撥打119</p>
+          <p className="text-sm text-ink-muted mb-5">彙整各主題頁面中的緊急警訊，出現以下任一情況請立即就醫或撥打119</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {redFlags.map(r => (
@@ -209,30 +208,30 @@ export default function NewbornSafetyPage({ navigate }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => navigate('diseases')}
-            className="flex items-center gap-3 bg-indigo-50 border border-indigo-200 rounded-2xl p-4 text-left hover:bg-indigo-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">🏥</span>
             <div>
-              <p className="font-semibold text-indigo-800 text-sm">認識常見疾病</p>
-              <p className="text-xs text-indigo-600">腸病毒、肺炎、流感等辨識與照護</p>
+              <p className="font-semibold text-ink text-sm">認識常見疾病</p>
+              <p className="text-xs text-ink-muted">腸病毒、肺炎、流感等辨識與照護</p>
             </div>
-            <span className="ml-auto text-indigo-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
           <button
             onClick={() => navigate('emergency')}
-            className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-2xl p-4 text-left hover:bg-red-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">🚑</span>
             <div>
-              <p className="font-semibold text-red-800 text-sm">緊急狀況判斷</p>
-              <p className="text-xs text-red-600">熱痙攣、異物哽塞等緊急處理</p>
+              <p className="font-semibold text-ink text-sm">緊急狀況判斷</p>
+              <p className="text-xs text-ink-muted">熱痙攣、異物哽塞等緊急處理</p>
             </div>
-            <span className="ml-auto text-red-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
         </div>
 
         <div className="text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

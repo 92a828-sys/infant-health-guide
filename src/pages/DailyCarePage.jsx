@@ -1,18 +1,18 @@
 import { useState } from 'react'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
 
 function SourceNote({ children }) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+    <div className="bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
       <span className="shrink-0">📋</span>
       <p>{children}</p>
     </div>
@@ -102,11 +102,10 @@ export default function DailyCarePage({ navigate }) {
         emoji="🧴"
         title="日常照護與生活習慣"
         subtitle="洗澡與清潔、如廁訓練、睡眠作息、視力聽力口腔保健"
-        color="bg-gradient-to-br from-rose-50 to-pink-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="flex rounded-2xl bg-rose-100 p-1 mb-10 gap-1 overflow-x-auto">
+        <div className="flex rounded-2xl bg-surface-muted border border-border p-1 mb-10 gap-1 overflow-x-auto">
           {[
             { id: 'hygiene', label: '🛁 清潔與如廁' },
             { id: 'sleep', label: '😴 睡眠與作息' },
@@ -116,7 +115,7 @@ export default function DailyCarePage({ navigate }) {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
-                tab === t.id ? 'bg-white text-rose-700 shadow' : 'text-rose-600 hover:bg-rose-50'
+                tab === t.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               {t.label}
@@ -126,42 +125,42 @@ export default function DailyCarePage({ navigate }) {
 
         {tab === 'hygiene' && (
           <div className="space-y-5">
-            <section className="bg-white border border-rose-200 rounded-3xl p-6">
-              <h2 className="font-bold text-rose-800 text-lg mb-4 flex items-center gap-2"><span>🛁</span> 洗澡</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-lg mb-4 flex items-center gap-2"><span>🛁</span> 洗澡</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {bathingTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border border-rose-200 rounded-3xl p-6">
-              <h2 className="font-bold text-rose-800 text-lg mb-4 flex items-center gap-2"><span>🧴</span> 皮膚清潔與保養</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-lg mb-4 flex items-center gap-2"><span>🧴</span> 皮膚清潔與保養</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {skinTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
-              <p className="text-xs text-gray-400 mt-3">尿布疹、濕疹等皮膚問題詳細照護請見「常見症狀處理」頁。</p>
+              <p className="text-xs text-ink-muted mt-3">尿布疹、濕疹等皮膚問題詳細照護請見「常見症狀處理」頁。</p>
             </section>
 
-            <section className="bg-white border border-rose-200 rounded-3xl p-6">
-              <h2 className="font-bold text-rose-800 text-lg mb-4 flex items-center gap-2"><span>🦷</span> 口腔清潔</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-lg mb-4 flex items-center gap-2"><span>🦷</span> 口腔清潔</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {oralTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border border-rose-200 rounded-3xl p-6">
-              <h2 className="font-bold text-rose-800 text-lg mb-4 flex items-center gap-2"><span>👶</span> 尿布更換</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-lg mb-4 flex items-center gap-2"><span>👶</span> 尿布更換</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {diaperTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border-2 border-pink-200 rounded-3xl p-6">
-              <h2 className="font-bold text-pink-800 text-lg mb-4 flex items-center gap-2"><span>🚽</span> 如廁訓練</h2>
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-lg mb-4 flex items-center gap-2"><span>🚽</span> 如廁訓練</h2>
               <div className="space-y-3">
                 {toiletTraining.map(item => (
-                  <div key={item.q} className="bg-pink-50 border border-pink-100 rounded-2xl p-4">
-                    <p className="font-semibold text-pink-700 text-sm mb-1">{item.q}</p>
-                    <p className="text-sm text-gray-600">{item.a}</p>
+                  <div key={item.q} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{item.q}</p>
+                    <p className="text-sm text-ink-muted">{item.a}</p>
                   </div>
                 ))}
               </div>
@@ -175,9 +174,9 @@ export default function DailyCarePage({ navigate }) {
 
         {tab === 'sleep' && (
           <div className="space-y-5">
-            <div className="bg-cyan-50 border border-cyan-200 rounded-2xl p-4 flex gap-3">
+            <div className="bg-surface-muted border border-border rounded-2xl p-4 flex gap-3">
               <span className="text-xl shrink-0">🛡️</span>
-              <p className="text-sm text-cyan-800 leading-relaxed">
+              <p className="text-sm text-ink leading-relaxed">
                 安全睡眠環境（仰睡、獨自睡、床鋪淨空）請見
                 <button onClick={() => navigate('newborn-safety')} className="underline font-semibold mx-1">
                   「新生兒安全與警訊」頁的SIDS安全睡眠圖解
@@ -186,23 +185,23 @@ export default function DailyCarePage({ navigate }) {
               </p>
             </div>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>⏱️</span> 各年齡建議睡眠時數</h2>
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>⏱️</span> 各年齡建議睡眠時數</h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className="bg-rose-50 text-rose-800">
-                      <th className="border border-rose-200 p-2 text-left">年齡</th>
-                      <th className="border border-rose-200 p-2 text-left">建議時數</th>
-                      <th className="border border-rose-200 p-2 text-left">說明</th>
+                    <tr className="bg-surface-muted text-ink">
+                      <th className="border border-border p-2 text-left">年齡</th>
+                      <th className="border border-border p-2 text-left">建議時數</th>
+                      <th className="border border-border p-2 text-left">說明</th>
                     </tr>
                   </thead>
                   <tbody>
                     {sleepDurations.map(s => (
                       <tr key={s.age}>
-                        <td className="border border-gray-200 p-2 font-medium text-gray-700 whitespace-nowrap">{s.age}</td>
-                        <td className="border border-gray-200 p-2 text-gray-600">{s.hours}</td>
-                        <td className="border border-gray-200 p-2 text-gray-500 text-xs">{s.note}</td>
+                        <td className="border border-border p-2 font-medium text-ink whitespace-nowrap">{s.age}</td>
+                        <td className="border border-border p-2 text-ink-muted">{s.hours}</td>
+                        <td className="border border-border p-2 text-ink-muted text-xs">{s.note}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -210,25 +209,25 @@ export default function DailyCarePage({ navigate }) {
               </div>
             </section>
 
-            <section className="bg-white border-2 border-rose-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🌙</span> 建立固定睡前儀式</h2>
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🌙</span> 建立固定睡前儀式</h2>
               <div className="flex flex-wrap items-center gap-2">
                 {routineSteps.map((s, i) => (
                   <div key={s} className="flex items-center gap-2">
-                    <span className="text-sm font-medium bg-rose-100 text-rose-700 rounded-full px-3 py-1.5">{s}</span>
-                    {i < routineSteps.length - 1 && <span className="text-rose-300">→</span>}
+                    <span className="text-sm font-medium bg-brand-soft text-brand rounded-full px-3 py-1.5">{s}</span>
+                    {i < routineSteps.length - 1 && <span className="text-ink-muted" aria-hidden="true">→</span>}
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-gray-600 mt-4">
+              <p className="text-sm text-ink-muted mt-4">
                 新生兒尚無明顯日夜節律，約3–4個月後開始逐漸建立較規律作息。固定重複的睡前流程能形成「入睡提示訊號」，
                 幫助孩子預期並進入睡眠狀態；睡眠環境宜昏暗、安靜、涼爽（約24–26°C），並避免睡前使用螢幕／3C產品。
               </p>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🌛</span> 夜醒處理</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🌛</span> 夜醒處理</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {nightWakingTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
@@ -241,23 +240,23 @@ export default function DailyCarePage({ navigate }) {
 
         {tab === 'senses' && (
           <div className="space-y-5">
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>👁️</span> 視力保健重點</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>👁️</span> 視力保健重點</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {visionTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>👂</span> 聽力保健重點</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>👂</span> 聽力保健重點</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {hearingTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🦷</span> 口腔保健重點</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🦷</span> 口腔保健重點</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {dentalTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
@@ -271,30 +270,30 @@ export default function DailyCarePage({ navigate }) {
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => navigate('growth')}
-            className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-left hover:bg-emerald-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">📏</span>
             <div>
-              <p className="font-semibold text-emerald-800 text-sm">生長發育里程碑</p>
-              <p className="text-xs text-emerald-600">動作、語言、社會情緒發展指標</p>
+              <p className="font-semibold text-ink text-sm">生長發育里程碑</p>
+              <p className="text-xs text-ink-muted">動作、語言、社會情緒發展指標</p>
             </div>
-            <span className="ml-auto text-emerald-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
           <button
             onClick={() => navigate('home-safety')}
-            className="flex items-center gap-3 bg-sky-50 border border-sky-200 rounded-2xl p-4 text-left hover:bg-sky-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">🧯</span>
             <div>
-              <p className="font-semibold text-sky-800 text-sm">居家安全</p>
-              <p className="text-xs text-sky-600">居家安全陷阱、意外預防與玩具安全</p>
+              <p className="font-semibold text-ink text-sm">居家安全</p>
+              <p className="text-xs text-ink-muted">居家安全陷阱、意外預防與玩具安全</p>
             </div>
-            <span className="ml-auto text-sky-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
         </div>
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

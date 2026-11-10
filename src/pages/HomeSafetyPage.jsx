@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { Alert } from '../components/Alert'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
 
 function SourceNote({ children }) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+    <div className="bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
       <span className="shrink-0">📋</span>
       <p>{children}</p>
     </div>
@@ -155,11 +155,10 @@ export default function HomeSafetyPage({ navigate }) {
         emoji="🏠"
         title="居家安全與意外預防"
         subtitle="居家安全陷阱檢查、五大意外類型預防、玩具與環境安全標準"
-        color="bg-gradient-to-br from-emerald-50 to-teal-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="flex rounded-2xl bg-emerald-100 p-1 mb-10 gap-1 overflow-x-auto">
+        <div className="flex rounded-2xl bg-surface-muted border border-border p-1 mb-10 gap-1 overflow-x-auto">
           {[
             { id: 'rooms', label: '🏠 居家安全陷阱' },
             { id: 'prevention', label: '🚸 意外預防' },
@@ -169,7 +168,7 @@ export default function HomeSafetyPage({ navigate }) {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
-                tab === t.id ? 'bg-white text-emerald-700 shadow' : 'text-emerald-600 hover:bg-emerald-50'
+                tab === t.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               {t.label}
@@ -180,11 +179,11 @@ export default function HomeSafetyPage({ navigate }) {
         {tab === 'rooms' && (
           <div className="space-y-4">
             {rooms.map(r => (
-              <div key={r.room} className="bg-white border border-emerald-200 rounded-2xl p-5">
-                <p className="font-bold text-emerald-800 text-sm mb-3 flex items-center gap-2">
+              <div key={r.room} className="bg-surface border border-border rounded-2xl p-5">
+                <p className="font-bold text-ink text-sm mb-3 flex items-center gap-2">
                   <span className="text-xl">{r.emoji}</span> {r.room}
                 </p>
-                <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+                <ul className="text-sm text-ink-muted space-y-1.5 list-disc list-inside">
                   {r.tips.map((t, i) => <li key={i}>{t}</li>)}
                 </ul>
               </div>
@@ -198,11 +197,11 @@ export default function HomeSafetyPage({ navigate }) {
         {tab === 'prevention' && (
           <div className="space-y-4">
             {preventionCategories.map(c => (
-              <div key={c.title} className="bg-white border-2 border-teal-200 rounded-2xl p-5">
-                <p className="font-bold text-teal-800 text-sm mb-3 flex items-center gap-2">
+              <div key={c.title} className="bg-surface border border-border rounded-2xl p-5">
+                <p className="font-bold text-ink text-sm mb-3 flex items-center gap-2">
                   <span className="text-xl">{c.emoji}</span> {c.title}
                 </p>
-                <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+                <ul className="text-sm text-ink-muted space-y-1.5 list-disc list-inside">
                   {c.tips.map((t, i) => <li key={i}>{t}</li>)}
                 </ul>
               </div>
@@ -221,9 +220,9 @@ export default function HomeSafetyPage({ navigate }) {
 
         {tab === 'toys' && (
           <div className="space-y-4">
-            <div className="bg-white border-2 border-purple-200 rounded-3xl p-6">
-              <h2 className="font-bold text-purple-800 text-lg mb-4">🧸 玩具與環境安全標準</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <div className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-lg mb-4">🧸 玩具與環境安全標準</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {toySafety.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </div>
@@ -236,30 +235,30 @@ export default function HomeSafetyPage({ navigate }) {
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => navigate('emergency')}
-            className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-2xl p-4 text-left hover:bg-red-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">🚑</span>
             <div>
-              <p className="font-semibold text-red-800 text-sm">緊急狀況判斷</p>
-              <p className="text-xs text-red-600">CPR、異物哽塞、燒燙傷、頭部撞傷處理</p>
+              <p className="font-semibold text-ink text-sm">緊急狀況判斷</p>
+              <p className="text-xs text-ink-muted">CPR、異物哽塞、燒燙傷、頭部撞傷處理</p>
             </div>
-            <span className="ml-auto text-red-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
           <button
             onClick={() => navigate('newborn-safety')}
-            className="flex items-center gap-3 bg-cyan-50 border border-cyan-200 rounded-2xl p-4 text-left hover:bg-cyan-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">🛡️</span>
             <div>
-              <p className="font-semibold text-cyan-800 text-sm">新生兒安全與警訊</p>
-              <p className="text-xs text-cyan-600">SIDS安全睡眠環境圖解</p>
+              <p className="font-semibold text-ink text-sm">新生兒安全與警訊</p>
+              <p className="text-xs text-ink-muted">SIDS安全睡眠環境圖解</p>
             </div>
-            <span className="ml-auto text-cyan-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
         </div>
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

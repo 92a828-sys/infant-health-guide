@@ -227,7 +227,7 @@ const awareData = {
 
 // ── 子元件 ────────────────────────────────────────────────────
 function SectionTitle({ children }) {
-  return <h3 className="font-bold text-gray-700 text-sm mb-3">{children}</h3>
+  return <h3 className="font-bold text-ink text-sm mb-3">{children}</h3>
 }
 
 function AlertTag({ alert }) {
@@ -242,57 +242,57 @@ export default function VitalSignsPage({ navigate }) {
   return (
     <div>
       {/* Header */}
-      <div className="bg-gradient-to-br from-cyan-50 to-sky-100 py-12 px-6 text-center">
+      <div className="bg-canvas border-b border-border py-12 px-6 text-center">
         <div className="text-6xl mb-4">📊</div>
-        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">0–3 歲生命徵象</h1>
-        <p className="text-gray-500 text-sm max-w-xl mx-auto">給爸媽的生活化參考指南，不需醫療背景也看得懂</p>
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">0–3 歲生命徵象</h1>
+        <p className="text-ink-muted text-sm max-w-xl mx-auto">給爸媽的生活化參考指南，不需醫療背景也看得懂</p>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-10">
 
         {/* ── 快速對照表 ── */}
         <div className="mb-10">
-          <h2 className="text-lg font-bold text-gray-800 mb-1">📋 正常值快速對照表</h2>
-          <p className="text-xs text-gray-400 mb-4">以下為平靜休息時的參考範圍，哭鬧、發燒時數值會自然偏高</p>
-          <div className="overflow-x-auto rounded-3xl border-2 border-sky-200">
+          <h2 className="text-lg font-bold text-ink mb-1">📋 正常值快速對照表</h2>
+          <p className="text-xs text-ink-muted mb-4">以下為平靜休息時的參考範圍，哭鬧、發燒時數值會自然偏高</p>
+          <div className="overflow-x-auto rounded-2xl border border-border">
             <table className="w-full text-sm min-w-[560px]">
               <thead>
-                <tr className="bg-sky-50">
-                  <th className="text-left px-4 py-3 text-sky-800 font-bold">年齡</th>
-                  <th className="text-center px-4 py-3 text-sky-800 font-bold">❤️ 心跳<br/><span className="font-normal text-xs">次/分</span></th>
-                  <th className="text-center px-4 py-3 text-sky-800 font-bold">🫁 呼吸<br/><span className="font-normal text-xs">次/分</span></th>
-                  <th className="text-center px-4 py-3 text-sky-800 font-bold">🌡️ 體溫<br/><span className="font-normal text-xs">°C（肛溫）</span></th>
-                  <th className="text-center px-4 py-3 text-sky-800 font-bold">💍 血氧<br/><span className="font-normal text-xs">%</span></th>
+                <tr className="bg-surface-muted">
+                  <th className="text-left px-4 py-3 text-ink font-bold">年齡</th>
+                  <th className="text-center px-4 py-3 text-ink font-bold">❤️ 心跳<br/><span className="font-normal text-xs">次/分</span></th>
+                  <th className="text-center px-4 py-3 text-ink font-bold">🫁 呼吸<br/><span className="font-normal text-xs">次/分</span></th>
+                  <th className="text-center px-4 py-3 text-ink font-bold">🌡️ 體溫<br/><span className="font-normal text-xs">°C（肛溫）</span></th>
+                  <th className="text-center px-4 py-3 text-ink font-bold">💍 血氧<br/><span className="font-normal text-xs">%</span></th>
                 </tr>
               </thead>
               <tbody>
                 {ageGroups.map((g, i) => (
-                  <tr key={g.label} className={i % 2 === 0 ? 'bg-white' : 'bg-sky-50/40'}>
+                  <tr key={g.label} className={i % 2 === 0 ? 'bg-surface' : 'bg-surface-muted/60'}>
                     <td className="px-4 py-3">
-                      <p className="font-bold text-gray-800">{g.label}</p>
-                      <p className="text-xs text-gray-400">{g.range}</p>
+                      <p className="font-bold text-ink">{g.label}</p>
+                      <p className="text-xs text-ink-muted">{g.range}</p>
                     </td>
-                    <td className="px-4 py-3 text-center font-semibold text-rose-600">{g.hr}</td>
-                    <td className="px-4 py-3 text-center font-semibold text-teal-600">{g.rr}</td>
-                    <td className="px-4 py-3 text-center font-semibold text-orange-600">{g.temp}</td>
-                    <td className="px-4 py-3 text-center font-semibold text-violet-600">{g.spo2}%</td>
+                    <td className="px-4 py-3 text-center font-semibold text-cat-mauve-fg">{g.hr}</td>
+                    <td className="px-4 py-3 text-center font-semibold text-cat-teal-fg">{g.rr}</td>
+                    <td className="px-4 py-3 text-center font-semibold text-cat-sand-fg">{g.temp}</td>
+                    <td className="px-4 py-3 text-center font-semibold text-cat-lav-fg">{g.spo2}%</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400 mt-2 text-right">資料來源參考：台灣兒科醫學會、Pediatric Advanced Life Support（PALS）</p>
+          <p className="text-xs text-ink-muted mt-2 text-right">資料來源參考：台灣兒科醫學會、Pediatric Advanced Life Support（PALS）</p>
         </div>
 
         {/* ── 分項說明 Tab ── */}
-        <h2 className="text-lg font-bold text-gray-800 mb-4">🔍 各項說明與測量方式</h2>
-        <div className="flex rounded-2xl bg-sky-50 p-1 mb-8 gap-1 overflow-x-auto">
+        <h2 className="text-lg font-bold text-ink mb-4">🔍 各項說明與測量方式</h2>
+        <div className="flex rounded-2xl bg-surface-muted border border-border p-1 mb-8 gap-1 overflow-x-auto">
           {TABS.map(t => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
-                tab === t.id ? 'bg-white text-sky-700 shadow' : 'text-sky-600 hover:bg-sky-100'
+                tab === t.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               {t.emoji} {t.label}
@@ -326,18 +326,18 @@ export default function VitalSignsPage({ navigate }) {
               <SectionTitle>📏 測量方式說明</SectionTitle>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {tempData.methods.map(m => (
-                  <div key={m.name} className="bg-white border-2 border-gray-100 rounded-2xl p-4">
+                  <div key={m.name} className="bg-surface border border-border rounded-2xl p-4">
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-xl">{m.icon}</span>
                       <div>
-                        <p className="font-bold text-gray-800 text-sm">{m.name}</p>
-                        <p className="text-xs text-gray-400">{m.note}</p>
+                        <p className="font-bold text-ink text-sm">{m.name}</p>
+                        <p className="text-xs text-ink-muted">{m.note}</p>
                       </div>
                     </div>
                     <ol className="space-y-1.5">
                       {m.steps.map((s, i) => (
-                        <li key={i} className="flex gap-2 text-xs text-gray-600">
-                          <span className="text-sky-400 font-bold shrink-0">{i + 1}.</span>
+                        <li key={i} className="flex gap-2 text-xs text-ink-muted">
+                          <span className="text-cat-sand-fg font-bold shrink-0">{i + 1}.</span>
                           <span>{s}</span>
                         </li>
                       ))}
@@ -362,19 +362,19 @@ export default function VitalSignsPage({ navigate }) {
         {/* ── 心跳 ── */}
         {tab === 'hr' && (
           <div className="space-y-6">
-            <div className="bg-rose-50 border-2 border-rose-100 rounded-2xl p-5">
+            <div className="bg-cat-mauve-bg border border-cat-mauve-fg/20 rounded-2xl p-5">
               <SectionTitle>❤️ 如何測量心跳／脈搏</SectionTitle>
               <ol className="space-y-2">
                 {hrData.howTo.map((s, i) => (
-                  <li key={i} className="flex gap-2 text-sm text-gray-700">
-                    <span className="text-rose-400 font-bold shrink-0">{i + 1}.</span>
+                  <li key={i} className="flex gap-2 text-sm text-ink">
+                    <span className="text-cat-mauve-fg font-bold shrink-0">{i + 1}.</span>
                     <span>{s}</span>
                   </li>
                 ))}
               </ol>
-              <div className="mt-4 bg-white rounded-xl p-3 border border-rose-100">
-                <p className="text-xs text-gray-500 text-center">數 15 秒 × 4 = 每分鐘心跳次數</p>
-                <p className="text-xs text-gray-400 text-center mt-1">例：15 秒數到 35 下 → 35 × 4 = 140 次/分</p>
+              <div className="mt-4 bg-surface rounded-xl p-3 border border-cat-mauve-fg/20">
+                <p className="text-xs text-ink-muted text-center">數 15 秒 × 4 = 每分鐘心跳次數</p>
+                <p className="text-xs text-ink-muted text-center mt-1">例：15 秒數到 35 下 → 35 × 4 = 140 次/分</p>
               </div>
             </div>
 
@@ -409,19 +409,19 @@ export default function VitalSignsPage({ navigate }) {
         {/* ── 呼吸 ── */}
         {tab === 'rr' && (
           <div className="space-y-6">
-            <div className="bg-teal-50 border-2 border-teal-100 rounded-2xl p-5">
+            <div className="bg-cat-teal-bg border border-cat-teal-fg/20 rounded-2xl p-5">
               <SectionTitle>🫁 如何計算呼吸次數</SectionTitle>
               <ol className="space-y-2">
                 {rrData.howTo.map((s, i) => (
-                  <li key={i} className="flex gap-2 text-sm text-gray-700">
-                    <span className="text-teal-500 font-bold shrink-0">{i + 1}.</span>
+                  <li key={i} className="flex gap-2 text-sm text-ink">
+                    <span className="text-cat-teal-fg font-bold shrink-0">{i + 1}.</span>
                     <span>{s}</span>
                   </li>
                 ))}
               </ol>
-              <div className="mt-4 bg-white rounded-xl p-3 border border-teal-100">
-                <p className="text-xs text-gray-500 text-center">胸部或腹部起伏一次（上+下）= 1 次呼吸</p>
-                <p className="text-xs text-gray-400 text-center mt-1">建議計數完整的 60 秒，不要只算 15 或 30 秒</p>
+              <div className="mt-4 bg-surface rounded-xl p-3 border border-cat-teal-fg/20">
+                <p className="text-xs text-ink-muted text-center">胸部或腹部起伏一次（上+下）= 1 次呼吸</p>
+                <p className="text-xs text-ink-muted text-center mt-1">建議計數完整的 60 秒，不要只算 15 或 30 秒</p>
               </div>
             </div>
 
@@ -468,16 +468,16 @@ export default function VitalSignsPage({ navigate }) {
         {/* ── 血氧 ── */}
         {tab === 'spo2' && (
           <div className="space-y-6">
-            <div className="bg-violet-50 border-2 border-violet-100 rounded-2xl p-4">
-              <p className="text-sm text-violet-700 leading-relaxed">{spo2Data.intro}</p>
+            <div className="bg-cat-lav-bg border border-cat-lav-fg/20 rounded-2xl p-4">
+              <p className="text-sm text-cat-lav-fg leading-relaxed">{spo2Data.intro}</p>
             </div>
 
-            <div className="bg-violet-50 border-2 border-violet-100 rounded-2xl p-5">
+            <div className="bg-cat-lav-bg border border-cat-lav-fg/20 rounded-2xl p-5">
               <SectionTitle>💍 如何使用血氧機</SectionTitle>
               <ol className="space-y-2">
                 {spo2Data.howTo.map((s, i) => (
-                  <li key={i} className="flex gap-2 text-sm text-gray-700">
-                    <span className="text-violet-400 font-bold shrink-0">{i + 1}.</span>
+                  <li key={i} className="flex gap-2 text-sm text-ink">
+                    <span className="text-cat-lav-fg font-bold shrink-0">{i + 1}.</span>
                     <span>{s}</span>
                   </li>
                 ))}
@@ -518,8 +518,8 @@ export default function VitalSignsPage({ navigate }) {
         {/* ── 意識 ── */}
         {tab === 'aware' && (
           <div className="space-y-6">
-            <div className="bg-indigo-50 border-2 border-indigo-100 rounded-2xl p-4">
-              <p className="text-sm text-indigo-700 leading-relaxed">{awareData.intro}</p>
+            <div className="bg-cat-slate-bg border border-cat-slate-fg/20 rounded-2xl p-4">
+              <p className="text-sm text-cat-slate-fg leading-relaxed">{awareData.intro}</p>
             </div>
 
             <div>
@@ -561,16 +561,16 @@ export default function VitalSignsPage({ navigate }) {
         )}
 
         {/* ── 免責聲明 ── */}
-        <div className="mt-10 bg-gray-50 border border-gray-200 rounded-2xl p-4 flex gap-3">
+        <div className="mt-10 bg-surface-muted border border-border rounded-2xl p-4 flex gap-3">
           <span className="text-xl shrink-0">⚠️</span>
-          <p className="text-xs text-gray-500 leading-relaxed">
+          <p className="text-xs text-ink-muted leading-relaxed">
             本頁面數值僅供<strong>居家參考</strong>，非醫療診斷工具。每位幼兒狀況不同，
             若有任何疑慮請諮詢醫師。緊急狀況請撥打 <strong className="text-danger-fg">119</strong>。
           </p>
         </div>
 
         <div className="mt-6 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

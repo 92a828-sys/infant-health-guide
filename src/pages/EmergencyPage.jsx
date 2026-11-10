@@ -1,12 +1,12 @@
 import { Phone } from 'lucide-react'
 import { Alert, ToneIcon } from '../components/Alert'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
@@ -31,8 +31,7 @@ const emergencies = [
     id: 'choking',
     emoji: '😮',
     title: '異物哽塞（嗆到）',
-    color: 'bg-red-50 border-red-200',
-    head: 'text-red-700',
+    color: 'bg-cat-mist-bg border-cat-mist-fg/20 text-cat-mist-fg',
     steps: [
       {
         phase: '確認嚴重程度',
@@ -56,8 +55,7 @@ const emergencies = [
     id: 'seizure',
     emoji: '⚡',
     title: '熱痙攣（發燒抽搐）',
-    color: 'bg-orange-50 border-orange-200',
-    head: 'text-orange-700',
+    color: 'bg-cat-lav-bg border-cat-lav-fg/20 text-cat-lav-fg',
     steps: [
       {
         phase: '發作當下',
@@ -81,8 +79,7 @@ const emergencies = [
     id: 'head',
     emoji: '🤕',
     title: '頭部撞傷',
-    color: 'bg-yellow-50 border-yellow-200',
-    head: 'text-yellow-700',
+    color: 'bg-cat-sand-bg border-cat-sand-fg/20 text-cat-sand-fg',
     steps: [
       {
         phase: '立即觀察（撞傷後最初 24 小時，密集觀察期）',
@@ -106,8 +103,7 @@ const emergencies = [
     id: 'burn',
     emoji: '🔥',
     title: '燙傷',
-    color: 'bg-amber-50 border-amber-200',
-    head: 'text-amber-700',
+    color: 'bg-cat-mauve-bg border-cat-mauve-fg/20 text-cat-mauve-fg',
     steps: [
       {
         phase: '5 字訣：沖脫泡蓋送',
@@ -132,12 +128,11 @@ export default function EmergencyPage({ navigate }) {
         emoji="🚑"
         title="緊急狀況判斷"
         subtitle="遇到緊急狀況時，保持冷靜、迅速判斷，必要時立即撥打 119"
-        color="bg-gradient-to-br from-red-50 to-rose-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* 119 banner */}
-        <a href="tel:119" className="block bg-danger-bg text-danger-fg border-2 border-danger-border rounded-3xl p-6 mb-10 text-center shadow-lg hover:opacity-90 transition-opacity">
+        <a href="tel:119" className="block bg-danger-bg text-danger-fg border-2 border-danger-border rounded-2xl p-6 mb-10 text-center shadow-lg hover:opacity-90 transition-opacity">
           <p className="inline-flex items-center gap-1.5 text-sm font-bold mb-2">
             <ToneIcon tone="danger" className="w-5 h-5" />緊急
           </p>
@@ -161,19 +156,19 @@ export default function EmergencyPage({ navigate }) {
         </Alert>
 
         {/* Emergency procedures */}
-        <h2 className="text-xl font-bold text-gray-800 mb-6">🆘 緊急狀況處理步驟</h2>
+        <h2 className="text-xl font-bold text-ink mb-6">🆘 緊急狀況處理步驟</h2>
         <div className="space-y-6 mb-10">
           {emergencies.map(e => (
-            <div key={e.id} className={`${e.color} border-2 rounded-3xl p-6`}>
+            <div key={e.id} className={`border rounded-2xl p-6 ${e.color}`}>
               <div className="flex items-center gap-3 mb-5">
                 <span className="text-4xl">{e.emoji}</span>
-                <h3 className={`font-bold text-xl ${e.head}`}>{e.title}</h3>
+                <h3 className="font-bold text-xl">{e.title}</h3>
               </div>
               <div className="space-y-4">
                 {e.steps.map((step, i) => (
-                  <div key={i} className="bg-white/70 rounded-2xl p-4">
-                    <p className="font-semibold text-gray-700 text-sm mb-2">步驟 {i + 1}：{step.phase}</p>
-                    <p className="text-sm text-gray-600 leading-relaxed">{step.content}</p>
+                  <div key={i} className="bg-surface rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-2">步驟 {i + 1}：{step.phase}</p>
+                    <p className="text-sm text-ink-muted leading-relaxed">{step.content}</p>
                   </div>
                 ))}
               </div>
@@ -182,26 +177,26 @@ export default function EmergencyPage({ navigate }) {
         </div>
 
         {/* CPR full walkthrough */}
-        <div className="bg-purple-50 border-2 border-purple-200 rounded-3xl p-6 mb-6">
-          <h2 className="font-bold text-purple-800 text-lg mb-3">💜 嬰幼兒 CPR 完整步驟</h2>
+        <div className="bg-surface border border-border rounded-2xl p-6 mb-6">
+          <h2 className="font-bold text-ink text-lg mb-3">💜 嬰幼兒 CPR 完整步驟</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
             {[
               { step: '評估環境安全', icon: '👀', desc: '確保現場安全，不讓救助者受傷' },
               { step: '確認反應與呼吸', icon: '📢', desc: '輕拍腳底（嬰兒）或肩膀，大聲呼喚；觀察胸部起伏5–10秒' },
               { step: '叫人撥 119、取 AED', icon: '📞', desc: '立即請人求助；若僅一人在場，先施行約2分鐘CPR再打電話' },
             ].map(c => (
-              <div key={c.step} className="bg-white rounded-2xl p-4 text-center">
+              <div key={c.step} className="bg-surface-muted rounded-2xl p-4 text-center">
                 <span className="text-3xl mb-2 block">{c.icon}</span>
-                <p className="font-semibold text-purple-700 text-sm mb-1">{c.step}</p>
-                <p className="text-xs text-gray-500">{c.desc}</p>
+                <p className="font-semibold text-ink text-sm mb-1">{c.step}</p>
+                <p className="text-xs text-ink-muted">{c.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-            <div className="bg-white rounded-2xl p-4">
-              <p className="font-semibold text-purple-700 text-sm mb-2">👶 嬰兒（未滿1歲）CPR</p>
-              <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+            <div className="bg-surface-muted rounded-2xl p-4">
+              <p className="font-semibold text-ink text-sm mb-2">👶 嬰兒（未滿1歲）CPR</p>
+              <ul className="text-sm text-ink-muted space-y-1.5 list-disc list-inside">
                 <li>按壓位置：胸骨下半部（兩乳頭連線中點下方），以兩指或雙手環繞拇指法按壓</li>
                 <li>按壓深度：約4公分（胸廓前後徑約1/3）</li>
                 <li>按壓速率：每分鐘100–120下</li>
@@ -209,9 +204,9 @@ export default function EmergencyPage({ navigate }) {
                 <li>持續施行直到專業救護人員抵達、患者恢復反應，或施救者體力無法負荷</li>
               </ul>
             </div>
-            <div className="bg-white rounded-2xl p-4">
-              <p className="font-semibold text-purple-700 text-sm mb-2">🧒 幼兒（1–8歲）CPR</p>
-              <ul className="text-sm text-gray-600 space-y-1.5 list-disc list-inside">
+            <div className="bg-surface-muted rounded-2xl p-4">
+              <p className="font-semibold text-ink text-sm mb-2">🧒 幼兒（1–8歲）CPR</p>
+              <ul className="text-sm text-ink-muted space-y-1.5 list-disc list-inside">
                 <li>按壓位置同為胸骨下半部，依孩子體型以單手或雙手按壓</li>
                 <li>按壓深度：約5公分（胸廓前後徑約1/3）</li>
                 <li>按壓速率與比例（100–120下/分，30:2）與嬰兒相同</li>
@@ -220,8 +215,8 @@ export default function EmergencyPage({ navigate }) {
             </div>
           </div>
 
-          <div className="bg-white border border-purple-200 rounded-2xl p-4">
-            <p className="text-sm text-purple-700 leading-relaxed">
+          <div className="bg-surface-muted border border-border rounded-2xl p-4">
+            <p className="text-sm text-ink leading-relaxed">
               🎥 <strong>影片教學：</strong>可至
               <a href="https://www.youtube.com/user/redcrossROC" target="_blank" rel="noopener noreferrer" className="underline font-semibold mx-1">
                 中華民國紅十字會 YouTube 頻道
@@ -232,13 +227,13 @@ export default function EmergencyPage({ navigate }) {
           </div>
         </div>
 
-        <div className="mb-6 bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+        <div className="mb-6 bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
           <span className="shrink-0">📋</span>
           <p>資料參考：中華民國紅十字會、台灣兒科醫學會CPR教學指引；頭部撞傷觀察期原則參考一般兒科臨床衛教建議。實際急救仍以受過認證訓練之人員操作為準，本頁僅供事前熟悉流程使用。</p>
         </div>
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

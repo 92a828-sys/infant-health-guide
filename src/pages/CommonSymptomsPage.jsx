@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Alert } from '../components/Alert'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
@@ -17,9 +17,6 @@ const symptoms = [
     emoji: '🌡️',
     title: '發燒',
     subtitle: '體溫 ≥ 38°C（肛溫）',
-    color: 'from-red-50 to-rose-50',
-    border: 'border-red-200',
-    badge: 'bg-red-100 text-red-700',
     concept: [
       '發燒是身體對抗感染的正常免疫反應：體溫上升有助抑制病原體繁殖、活化免疫細胞，是身體正在「作戰」的訊號，不等於疾病本身',
       '體溫的「高低」不直接等於病情嚴重度，觀察孩子的精神活力、食慾、呼吸狀況，比單看溫度數字更重要',
@@ -55,9 +52,6 @@ const symptoms = [
     emoji: '🤧',
     title: '感冒 / 流鼻水',
     subtitle: '病毒性上呼吸道感染',
-    color: 'from-blue-50 to-sky-50',
-    border: 'border-blue-200',
-    badge: 'bg-blue-100 text-blue-700',
     care: [
       '多休息、補充水分（母乳或開水）',
       '使用生理食鹽水滴鼻液舒緩鼻塞',
@@ -78,9 +72,6 @@ const symptoms = [
     emoji: '😮‍💨',
     title: '咳嗽',
     subtitle: '區分不同類型的咳嗽',
-    color: 'from-teal-50 to-emerald-50',
-    border: 'border-teal-200',
-    badge: 'bg-teal-100 text-teal-700',
     care: [
       '補充水分，保持喉嚨濕潤',
       '1 歲以上幼兒可少量蜂蜜（每次 2–5ml）舒緩喉嚨',
@@ -101,9 +92,6 @@ const symptoms = [
     emoji: '💧',
     title: '腹瀉',
     subtitle: '大便次數增加且水分增多',
-    color: 'from-amber-50 to-yellow-50',
-    border: 'border-amber-200',
-    badge: 'bg-amber-100 text-amber-700',
     care: [
       '持續哺乳（母乳或配方奶），不需稀釋',
       '補充口服電解質液（ORS）預防脫水',
@@ -125,9 +113,6 @@ const symptoms = [
     emoji: '🤢',
     title: '嘔吐',
     subtitle: '注意與吐奶的區別',
-    color: 'from-green-50 to-lime-50',
-    border: 'border-green-200',
-    badge: 'bg-green-100 text-green-700',
     care: [
       '嘔吐後 30 分鐘先禁食，讓腸胃休息',
       '少量多次補充口服電解質液',
@@ -148,9 +133,6 @@ const symptoms = [
     emoji: '🌸',
     title: '皮膚疹',
     subtitle: '濕疹、蕁麻疹、痱子等',
-    color: 'from-pink-50 to-rose-50',
-    border: 'border-pink-200',
-    badge: 'bg-pink-100 text-pink-700',
     care: [
       '保持皮膚清潔乾燥，沐浴後立即塗抹保濕乳液',
       '剪短指甲，避免幼兒搔抓',
@@ -171,9 +153,6 @@ const symptoms = [
     emoji: '🍑',
     title: '尿布疹',
     subtitle: '尿布包覆範圍內的刺激性皮膚炎，需與念珠菌感染區分',
-    color: 'from-orange-50 to-amber-50',
-    border: 'border-orange-200',
-    badge: 'bg-orange-100 text-orange-700',
     signs: [
       '好發於尿布包覆的屁股、鼠蹊部，皮膚皺褶處通常不受影響',
       '皮膚泛紅、局部脫皮，嚴重時可能破皮或滲液',
@@ -198,9 +177,6 @@ const symptoms = [
     emoji: '🧴',
     title: '濕疹',
     subtitle: '嬰幼兒常見的皮膚乾燥發炎，好發於臉頰與四肢伸側',
-    color: 'from-yellow-50 to-orange-50',
-    border: 'border-yellow-200',
-    badge: 'bg-yellow-100 text-yellow-700',
     signs: [
       '好發於臉頰、頭皮、四肢伸側，皮膚乾燥粗糙、泛紅',
       '可能有細小丘疹，搔癢明顯，寶寶會磨蹭或搔抓',
@@ -224,9 +200,6 @@ const symptoms = [
     emoji: '🌿',
     title: '異位性皮膚炎',
     subtitle: '慢性反覆發作的過敏體質皮膚病，目標為長期穩定控制',
-    color: 'from-emerald-50 to-teal-50',
-    border: 'border-emerald-200',
-    badge: 'bg-emerald-100 text-emerald-700',
     signs: [
       '屬於慢性、反覆發作的皮膚疾病，常與過敏體質（氣喘、過敏性鼻炎）家族史相關',
       '嬰兒期好發於臉頰、頭皮及四肢伸側；較大幼兒常轉為肘窩、膝窩等關節屈側',
@@ -251,19 +224,19 @@ function SymptomCard({ s }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className={`bg-gradient-to-br ${s.color} border-2 ${s.border} rounded-3xl overflow-hidden`}>
+    <div className="bg-surface border border-border rounded-2xl overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-6 text-left hover:opacity-90 transition-opacity"
+        className="w-full flex items-center justify-between p-6 text-left hover:bg-surface-muted transition-colors"
       >
         <div className="flex items-center gap-4">
           <span className="text-4xl">{s.emoji}</span>
           <div>
-            <h3 className="font-bold text-gray-800 text-lg">{s.title}</h3>
-            <p className="text-sm text-gray-500">{s.subtitle}</p>
+            <h3 className="font-bold text-ink text-lg">{s.title}</h3>
+            <p className="text-sm text-ink-muted">{s.subtitle}</p>
           </div>
         </div>
-        <span className="text-gray-400 text-xl transition-transform duration-200" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0)' }}>
+        <span className="text-ink-muted text-xl transition-transform duration-200" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0)' }}>
           ▾
         </span>
       </button>
@@ -271,11 +244,11 @@ function SymptomCard({ s }) {
       {open && (
         <div className="px-6 pb-6 space-y-4">
           {s.concept && (
-            <div className="bg-indigo-50/80 border border-indigo-200 rounded-2xl p-4">
-              <h4 className="font-semibold text-indigo-700 text-sm mb-3">💡 正確觀念</h4>
+            <div className="bg-cat-lav-bg border border-cat-lav-fg/20 rounded-2xl p-4">
+              <h4 className="font-semibold text-cat-lav-fg text-sm mb-3">💡 正確觀念</h4>
               <ul className="space-y-2">
                 {s.concept.map((c, i) => (
-                  <li key={i} className="flex gap-2 text-sm text-indigo-700">
+                  <li key={i} className="flex gap-2 text-sm text-cat-lav-fg">
                     <span className="shrink-0">•</span>
                     <span>{c}</span>
                   </li>
@@ -284,23 +257,23 @@ function SymptomCard({ s }) {
             </div>
           )}
           {s.signs && (
-            <div className="bg-white/70 rounded-2xl p-4">
-              <h4 className="font-semibold text-gray-700 text-sm mb-3">🔍 辨識重點</h4>
+            <div className="bg-surface-muted rounded-2xl p-4">
+              <h4 className="font-semibold text-ink text-sm mb-3">🔍 辨識重點</h4>
               <ul className="space-y-2">
                 {s.signs.map((c, i) => (
-                  <li key={i} className="flex gap-2 text-sm text-gray-600">
-                    <span className="text-gray-400 shrink-0">•</span>
+                  <li key={i} className="flex gap-2 text-sm text-ink-muted">
+                    <span className="text-ink-muted shrink-0">•</span>
                     <span>{c}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
-          <div className="bg-white/70 rounded-2xl p-4">
-            <h4 className="font-semibold text-gray-700 text-sm mb-3">🏠 居家照護建議</h4>
+          <div className="bg-surface-muted rounded-2xl p-4">
+            <h4 className="font-semibold text-ink text-sm mb-3">🏠 居家照護建議</h4>
             <ul className="space-y-2">
               {s.care.map((c, i) => (
-                <li key={i} className="flex gap-2 text-sm text-gray-600">
+                <li key={i} className="flex gap-2 text-sm text-ink-muted">
                   <span aria-hidden="true" className="text-success-fg shrink-0">✓</span>
                   <span>{c}</span>
                 </li>
@@ -308,11 +281,11 @@ function SymptomCard({ s }) {
             </ul>
           </div>
           {s.medication && (
-            <div className="bg-teal-50/80 border border-teal-200 rounded-2xl p-4">
-              <h4 className="font-semibold text-teal-700 text-sm mb-3">💊 退燒藥使用順序（防過量給藥）</h4>
+            <div className="bg-cat-teal-bg border border-cat-teal-fg/20 rounded-2xl p-4">
+              <h4 className="font-semibold text-cat-teal-fg text-sm mb-3">💊 退燒藥使用順序（防過量給藥）</h4>
               <ul className="space-y-2">
                 {s.medication.map((m, i) => (
-                  <li key={i} className="flex gap-2 text-sm text-teal-700">
+                  <li key={i} className="flex gap-2 text-sm text-cat-teal-fg">
                     <span className="shrink-0">•</span>
                     <span>{m}</span>
                   </li>
@@ -343,7 +316,6 @@ export default function CommonSymptomsPage({ navigate }) {
         emoji="🌡️"
         title="常見症狀處理"
         subtitle="點擊各症狀展開居家照護建議與就醫時機"
-        color="bg-gradient-to-br from-sky-50 to-blue-100"
       />
 
       <div className="max-w-3xl mx-auto px-6 py-12">
@@ -363,13 +335,13 @@ export default function CommonSymptomsPage({ navigate }) {
           </p>
         </Alert>
 
-        <div className="mt-4 bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+        <div className="mt-4 bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
           <span className="shrink-0">📋</span>
           <p>資料參考：衛生福利部疾病管制署、台灣兒科醫學會發燒與退燒藥使用衛教資料、皮膚科兒童常見皮膚問題衛教資訊。個別用藥劑量與間隔仍請以醫師或藥師指示為準。</p>
         </div>
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

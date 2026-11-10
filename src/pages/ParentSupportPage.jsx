@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { Alert } from '../components/Alert'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
 
 function SourceNote({ children }) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+    <div className="bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
       <span className="shrink-0">📋</span>
       <p>{children}</p>
     </div>
@@ -23,13 +23,13 @@ function SourceNote({ children }) {
 const moodSpectrum = [
   {
     name: '產後情緒低落（Baby Blues）', emoji: '🌦️',
-    tag: 'bg-sky-50 border-sky-200 text-sky-800',
+    tag: 'bg-cat-mist-bg border-cat-mist-fg/20 text-cat-mist-fg',
     desc: '約50–80%產婦會經歷，通常於產後2–3天出現，情緒起伏、易哭泣、焦慮，多在2週內自然緩解',
     steps: ['不需特別治療，但需要充分休息與陪伴', '讓伴侶、家人分擔照顧，爭取睡眠時間', '若2週後未緩解或症狀加劇，應進一步評估'],
   },
   {
     name: '產後憂鬱症（Postpartum Depression）', emoji: '🌧️',
-    tag: 'bg-indigo-50 border-indigo-200 text-indigo-800',
+    tag: 'bg-cat-lav-bg border-cat-lav-fg/20 text-cat-lav-fg',
     desc: '約10–15%產婦會經歷，症狀持續超過2週且逐漸加劇：持續情緒低落、對照顧嬰兒失去興趣或過度焦慮、嚴重疲憊，甚至出現傷害自己或嬰兒的念頭',
     steps: ['屬於需要專業協助的醫療狀況，可尋求心理諮商或精神科評估', '必要時可搭配藥物治療，經醫師評估對哺乳影響通常可控管', '身邊親友發現徵兆時，應主動關心並協助就醫，不要等待「自己會好」'],
   },
@@ -100,11 +100,10 @@ export default function ParentSupportPage({ navigate, initialTab }) {
         emoji="💗"
         title="心理與親職支持"
         subtitle="產後情緒、依附關係與正向教養、特殊家庭資源、求助管道"
-        color="bg-gradient-to-br from-fuchsia-50 to-pink-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="flex rounded-2xl bg-fuchsia-100 p-1 mb-10 gap-1 overflow-x-auto">
+        <div className="flex rounded-2xl bg-surface-muted border border-border p-1 mb-10 gap-1 overflow-x-auto">
           {[
             { id: 'mood', label: '🌤️ 產後情緒與分工' },
             { id: 'attachment', label: '🤝 依附與正向教養' },
@@ -115,7 +114,7 @@ export default function ParentSupportPage({ navigate, initialTab }) {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
-                tab === t.id ? 'bg-white text-fuchsia-700 shadow' : 'text-fuchsia-600 hover:bg-fuchsia-50'
+                tab === t.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               {t.label}
@@ -133,7 +132,7 @@ export default function ParentSupportPage({ navigate, initialTab }) {
 
             <section className="space-y-4">
               {moodSpectrum.map(m => (
-                <div key={m.name} className={`border-2 rounded-2xl p-5 ${m.tag}`}>
+                <div key={m.name} className={`border rounded-2xl p-5 ${m.tag}`}>
                   <p className="font-bold text-sm mb-1 flex items-center gap-2">
                     <span className="text-xl">{m.emoji}</span> {m.name}
                   </p>
@@ -145,16 +144,16 @@ export default function ParentSupportPage({ navigate, initialTab }) {
               ))}
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>😰</span> 育兒焦慮調適</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>😰</span> 育兒焦慮調適</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {anxietyTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🤲</span> 伴侶分工與支持</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🤲</span> 伴侶分工與支持</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {partnerTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
@@ -167,25 +166,25 @@ export default function ParentSupportPage({ navigate, initialTab }) {
 
         {tab === 'attachment' && (
           <div className="space-y-5">
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🤝</span> 依附關係建立</h2>
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🤝</span> 依附關係建立</h2>
               <div className="space-y-3">
                 {attachmentPoints.map(item => (
-                  <div key={item.q} className="bg-fuchsia-50 border border-fuchsia-100 rounded-2xl p-4">
-                    <p className="font-semibold text-fuchsia-700 text-sm mb-1">{item.q}</p>
-                    <p className="text-sm text-gray-600">{item.a}</p>
+                  <div key={item.q} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{item.q}</p>
+                    <p className="text-sm text-ink-muted">{item.a}</p>
                   </div>
                 ))}
               </div>
             </section>
 
-            <section className="bg-white border-2 border-pink-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🌱</span> 正向教養原則（0–3歲）</h2>
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🌱</span> 正向教養原則（0–3歲）</h2>
               <div className="space-y-3">
                 {positiveParenting.map(p => (
-                  <div key={p.title} className="bg-pink-50 border border-pink-100 rounded-2xl p-4">
-                    <p className="font-semibold text-pink-700 text-sm mb-1">{p.title}</p>
-                    <p className="text-sm text-gray-600">{p.desc}</p>
+                  <div key={p.title} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{p.title}</p>
+                    <p className="text-sm text-ink-muted">{p.desc}</p>
                   </div>
                 ))}
               </div>
@@ -199,16 +198,16 @@ export default function ParentSupportPage({ navigate, initialTab }) {
 
         {tab === 'family' && (
           <div className="space-y-5">
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>👯</span> 雙（多）胞胎家庭</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>👯</span> 雙（多）胞胎家庭</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {twinsTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border-2 border-violet-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🧩</span> 特殊需求家庭資源</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🧩</span> 特殊需求家庭資源</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {specialNeedsTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
@@ -221,20 +220,20 @@ export default function ParentSupportPage({ navigate, initialTab }) {
 
         {tab === 'help' && (
           <div className="space-y-5">
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>🧘</span> 壓力調適原則</h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>🧘</span> 壓力調適原則</h2>
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {stressManagement.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border-2 border-fuchsia-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>📞</span> 求助管道</h2>
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2"><span>📞</span> 求助管道</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {hotlines.map(h => (
-                  <div key={h.name} className="bg-fuchsia-50 border border-fuchsia-100 rounded-2xl p-4">
-                    <p className="font-bold text-fuchsia-800 text-sm mb-1">{h.name}：{h.number}</p>
-                    <p className="text-xs text-gray-600">{h.desc}</p>
+                  <div key={h.name} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-bold text-ink text-sm mb-1">{h.name}：{h.number}</p>
+                    <p className="text-xs text-ink-muted">{h.desc}</p>
                   </div>
                 ))}
               </div>
@@ -247,7 +246,7 @@ export default function ParentSupportPage({ navigate, initialTab }) {
         )}
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

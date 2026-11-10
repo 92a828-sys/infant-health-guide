@@ -247,12 +247,12 @@ const DRUG_DATA = [
   },
 ]
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
@@ -260,17 +260,17 @@ function PageHeader({ emoji, title, subtitle, color }) {
 // ── 藥庫資料區塊 ──────────────────────────────────────────
 
 const CATEGORY_COLORS = {
-  '退燒藥':   'bg-red-100 text-red-700',
-  '抗組織胺': 'bg-purple-100 text-purple-700',
-  '止咳化痰': 'bg-blue-100 text-blue-700',
-  '腸胃用藥': 'bg-amber-100 text-amber-700',
-  '抗生素':   'bg-pink-100 text-pink-700',
-  '外用藥':   'bg-teal-100 text-teal-700',
-  '其他':     'bg-gray-100 text-gray-600',
+  '退燒藥':   'bg-cat-sand-bg text-cat-sand-fg',
+  '抗組織胺': 'bg-cat-lav-bg text-cat-lav-fg',
+  '止咳化痰': 'bg-cat-mist-bg text-cat-mist-fg',
+  '腸胃用藥': 'bg-cat-slate-bg text-cat-slate-fg',
+  '抗生素':   'bg-cat-mauve-bg text-cat-mauve-fg',
+  '外用藥':   'bg-cat-teal-bg text-cat-teal-fg',
+  '其他':     'bg-surface-muted text-ink-muted',
 }
 
 function categoryBadge(cat) {
-  return CATEGORY_COLORS[cat] ?? 'bg-gray-100 text-gray-600'
+  return CATEGORY_COLORS[cat] ?? 'bg-surface-muted text-ink-muted'
 }
 
 function ImageLightbox({ src, alt, onClose }) {
@@ -287,7 +287,7 @@ function ImageLightbox({ src, alt, onClose }) {
         />
         <button
           onClick={onClose}
-          className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg text-gray-600 hover:text-gray-900 font-bold text-lg leading-none"
+          className="absolute -top-3 -right-3 bg-surface rounded-full w-8 h-8 flex items-center justify-center shadow-lg text-ink-muted hover:text-ink font-bold text-lg leading-none"
         >
           ✕
         </button>
@@ -308,7 +308,7 @@ function DrugCard({ drug }) {
         <ImageLightbox src={lightbox} alt={drug.name} onClose={() => setLightbox(null)} />
       )}
 
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {/* ── 卡片標題（點擊展開） ── */}
       <button
         onClick={() => setOpen(!open)}
@@ -318,7 +318,7 @@ function DrugCard({ drug }) {
         <div className="flex items-start gap-4 px-4 py-4">
           {/* 圖片縮圖：點擊放大 */}
           <div
-            className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-teal-50 flex items-center justify-center border border-gray-100 relative group cursor-zoom-in"
+            className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-surface-muted flex items-center justify-center border border-border relative group cursor-zoom-in"
             onClick={e => { if (firstImg) { e.stopPropagation(); setLightbox(firstImg) } }}
           >
             {firstImg ? (
@@ -335,8 +335,8 @@ function DrugCard({ drug }) {
 
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2">
-              <p className="font-bold text-gray-800 text-sm leading-snug">{drug.name}</p>
-              <span className="text-gray-400 text-sm shrink-0 mt-0.5">{open ? '▲' : '▼'}</span>
+              <p className="font-bold text-ink text-sm leading-snug">{drug.name}</p>
+              <span className="text-ink-muted text-sm shrink-0 mt-0.5">{open ? '▲' : '▼'}</span>
             </div>
 
             {/* 藥物分類標籤 */}
@@ -354,7 +354,7 @@ function DrugCard({ drug }) {
             {drug.symptoms?.length > 0 && (
               <div className="flex gap-1 flex-wrap mt-1.5">
                 {drug.symptoms.map(s => (
-                  <span key={s} className="text-xs px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-100">
+                  <span key={s} className="text-xs px-2 py-0.5 rounded-full bg-surface-muted text-ink border border-border">
                     {s}
                   </span>
                 ))}
@@ -366,7 +366,7 @@ function DrugCard({ drug }) {
 
       {/* ── 展開詳細資訊 ── */}
       {open && (
-        <div className="border-t border-gray-100 px-4 pb-4 pt-3 space-y-3">
+        <div className="border-t border-border px-4 pb-4 pt-3 space-y-3">
           {/* 多張圖片：點擊放大 */}
           {drug.images?.length > 0 && (
             <div className="flex gap-2 overflow-x-auto pb-1">
@@ -379,7 +379,7 @@ function DrugCard({ drug }) {
                   <img
                     src={url}
                     alt={`${drug.name} 外觀 ${i + 1}`}
-                    className="h-28 rounded-xl object-cover border border-gray-100"
+                    className="h-28 rounded-xl object-cover border border-border"
                   />
                   <div className="absolute inset-0 rounded-xl bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                     <span className="text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity drop-shadow">🔍</span>
@@ -391,17 +391,17 @@ function DrugCard({ drug }) {
 
           {drug.mechanism && (
             <div>
-              <p className="text-xs font-semibold text-teal-700 mb-1">🔬 藥理作用</p>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{drug.mechanism}</p>
+              <p className="text-xs font-semibold text-ink mb-1">🔬 藥理作用</p>
+              <p className="text-sm text-ink-muted leading-relaxed whitespace-pre-line">{drug.mechanism}</p>
             </div>
           )}
 
           {drug.sideEffects?.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-orange-600 mb-1">⚠️ 副作用</p>
+              <p className="text-xs font-semibold text-ink mb-1">⚠️ 副作用</p>
               <div className="flex gap-1 flex-wrap">
                 {drug.sideEffects.map(s => (
-                  <span key={s} className="text-xs px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-100">
+                  <span key={s} className="text-xs px-2 py-0.5 rounded-full bg-surface-muted text-ink border border-border">
                     {s}
                   </span>
                 ))}
@@ -414,26 +414,26 @@ function DrugCard({ drug }) {
               <p className="inline-flex items-center gap-1 text-xs font-semibold text-warning-fg mb-1">
                 <ToneIcon tone="warning" className="w-3.5 h-3.5" />注意事項
               </p>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{drug.notes}</p>
+              <p className="text-sm text-ink-muted leading-relaxed whitespace-pre-line">{drug.notes}</p>
             </div>
           )}
 
           {drug.storage && (
             <div>
-              <p className="text-xs font-semibold text-indigo-600 mb-1">📦 保存條件</p>
-              <p className="text-sm text-gray-600">{drug.storage}</p>
+              <p className="text-xs font-semibold text-ink mb-1">📦 保存條件</p>
+              <p className="text-sm text-ink-muted">{drug.storage}</p>
             </div>
           )}
 
           {drug.keywords && (
             <div>
-              <p className="text-xs font-semibold text-gray-400 mb-1">🏷️ 關鍵字 / 外觀</p>
-              <p className="text-sm text-gray-500">{drug.keywords}</p>
+              <p className="text-xs font-semibold text-ink-muted mb-1">🏷️ 關鍵字 / 外觀</p>
+              <p className="text-sm text-ink-muted">{drug.keywords}</p>
             </div>
           )}
 
           {drug.updatedAt && (
-            <p className="text-xs text-gray-300 text-right pt-1">
+            <p className="text-xs text-ink-muted text-right pt-1">
               更新：{new Date(drug.updatedAt).toLocaleDateString('zh-TW')}
             </p>
           )}
@@ -464,12 +464,12 @@ function DrugDatabase() {
     <div>
       {/* 搜尋框 */}
       <div className="relative mb-4">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted">🔍</span>
         <input
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="搜尋藥品名稱、症狀、關鍵字…"
-          className="w-full border-2 border-gray-200 rounded-2xl pl-10 pr-4 py-3 text-sm outline-none focus:border-teal-400 transition-colors"
+          className="w-full bg-surface border border-border rounded-2xl pl-10 pr-4 py-3 text-sm outline-none focus:border-brand transition-colors"
         />
       </div>
 
@@ -480,7 +480,7 @@ function DrugDatabase() {
             key={c}
             onClick={() => setActiveCat(c)}
             className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
-              activeCat === c ? 'bg-teal-500 text-white shadow-sm' : 'bg-teal-50 text-teal-700 hover:bg-teal-100'
+              activeCat === c ? 'bg-brand text-on-brand shadow-sm' : 'bg-surface-muted text-ink-muted hover:bg-brand-soft hover:text-brand'
             }`}
           >
             {c}
@@ -488,7 +488,7 @@ function DrugDatabase() {
         ))}
       </div>
 
-      <p className="text-xs text-gray-400 mb-4">
+      <p className="text-xs text-ink-muted mb-4">
         顯示 {filtered.length} / {DRUG_DATA.length} 筆藥品
       </p>
 
@@ -497,7 +497,7 @@ function DrugDatabase() {
         {filtered.length > 0
           ? filtered.map(d => <DrugCard key={d.id} drug={d} />)
           : (
-            <div className="text-center py-12 text-gray-400">
+            <div className="text-center py-12 text-ink-muted">
               <p className="text-4xl mb-2">🔎</p>
               <p className="text-sm">找不到符合的藥品</p>
             </div>
@@ -566,18 +566,17 @@ export default function MedicationPage({ navigate }) {
         emoji="💊"
         title="用藥衛教"
         subtitle="嬰幼兒用藥原則、退燒藥劑量計算與幼生藥庫"
-        color="bg-gradient-to-br from-teal-50 to-cyan-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Top-level tabs */}
-        <div className="flex rounded-2xl bg-teal-50 p-1 mb-10 gap-1 overflow-x-auto">
+        <div className="flex rounded-2xl bg-surface-muted border border-border p-1 mb-10 gap-1 overflow-x-auto">
           {MAIN_TABS.map(t => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
-                activeTab === t.id ? 'bg-white text-teal-700 shadow' : 'text-teal-600 hover:bg-teal-100'
+                activeTab === t.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               {t.label}
@@ -589,11 +588,11 @@ export default function MedicationPage({ navigate }) {
         {activeTab === 'principles' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {principles.map(p => (
-              <div key={p.title} className="bg-teal-50 border border-teal-200 rounded-2xl p-4 flex gap-3">
+              <div key={p.title} className="bg-surface-muted border border-border rounded-2xl p-4 flex gap-3">
                 <span className="text-2xl shrink-0">{p.icon}</span>
                 <div>
-                  <p className="font-semibold text-teal-800 text-sm mb-1">{p.title}</p>
-                  <p className="text-xs text-teal-600 leading-relaxed">{p.desc}</p>
+                  <p className="font-semibold text-ink text-sm mb-1">{p.title}</p>
+                  <p className="text-xs text-ink-muted leading-relaxed">{p.desc}</p>
                 </div>
               </div>
             ))}
@@ -611,10 +610,10 @@ export default function MedicationPage({ navigate }) {
                 <button
                   key={m.id}
                   onClick={() => setMed(m.id)}
-                  className={`flex-1 py-3 px-4 rounded-2xl text-sm font-semibold border-2 transition-all ${
+                  className={`flex-1 py-3 px-4 rounded-2xl text-sm font-semibold border transition-all ${
                     med === m.id
-                      ? 'bg-teal-100 border-teal-400 text-teal-800'
-                      : 'bg-white border-gray-200 text-gray-600 hover:border-teal-200'
+                      ? 'bg-brand border-brand text-on-brand'
+                      : 'bg-surface border-border text-ink-muted hover:border-brand hover:text-brand'
                   }`}
                 >
                   <p>{m.label}</p>
@@ -623,21 +622,21 @@ export default function MedicationPage({ navigate }) {
               ))}
             </div>
 
-            <div className="bg-white border-2 border-teal-200 rounded-3xl overflow-hidden">
+            <div className="bg-surface border border-border rounded-2xl overflow-hidden">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-teal-50">
-                    <th className="text-left px-5 py-3 text-teal-800 font-semibold">體重（kg）</th>
-                    <th className="text-left px-5 py-3 text-teal-800 font-semibold">每次劑量（mg）</th>
-                    <th className="text-left px-5 py-3 text-teal-800 font-semibold">給藥頻率</th>
+                  <tr className="bg-surface-muted">
+                    <th className="text-left px-5 py-3 text-ink font-semibold">體重（kg）</th>
+                    <th className="text-left px-5 py-3 text-ink font-semibold">每次劑量（mg）</th>
+                    <th className="text-left px-5 py-3 text-ink font-semibold">給藥頻率</th>
                   </tr>
                 </thead>
                 <tbody>
                   {(med === 'acet' ? acetWeights : ibuWeights).map((row, i) => (
-                    <tr key={row.kg} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      <td className="px-5 py-3 font-medium text-gray-800">{row.kg}</td>
-                      <td className="px-5 py-3 text-teal-700 font-bold">{row.dose} mg</td>
-                      <td className="px-5 py-3 text-gray-600">{row.freq}</td>
+                    <tr key={row.kg} className={i % 2 === 0 ? 'bg-surface' : 'bg-surface-muted'}>
+                      <td className="px-5 py-3 font-medium text-ink">{row.kg}</td>
+                      <td className="px-5 py-3 text-ink font-bold">{row.dose} mg</td>
+                      <td className="px-5 py-3 text-ink-muted">{row.freq}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -654,7 +653,7 @@ export default function MedicationPage({ navigate }) {
         {/* ── 禁用藥物 ── */}
         {activeTab === 'forbidden' && (
           <div className="space-y-3">
-            <p className="text-sm text-gray-500 mb-4">以下藥物在特定年齡前應避免給予幼兒</p>
+            <p className="text-sm text-ink-muted mb-4">以下藥物在特定年齡前應避免給予幼兒</p>
             {forbiddenMeds.map(item => (
               <Alert
                 key={item.name}
@@ -665,9 +664,9 @@ export default function MedicationPage({ navigate }) {
                 <p>{item.reason}</p>
               </Alert>
             ))}
-            <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 mt-4 flex gap-3">
+            <div className="bg-surface-muted border border-border rounded-2xl p-4 mt-4 flex gap-3">
               <span className="text-xl shrink-0">📞</span>
-              <p className="text-sm text-teal-700">
+              <p className="text-sm text-ink">
                 懷疑誤食藥物？請立即撥打
                 <strong> 毒藥物諮詢專線：0800-000-985</strong>（24 小時）
               </p>
@@ -678,9 +677,9 @@ export default function MedicationPage({ navigate }) {
         {/* ── 幼生藥庫 ── */}
         {activeTab === 'database' && (
           <div>
-            <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 mb-6 flex gap-3">
+            <div className="bg-surface-muted border border-border rounded-2xl p-4 mb-6 flex gap-3">
               <span className="text-xl shrink-0">💊</span>
-              <p className="text-sm text-teal-700 leading-relaxed">
+              <p className="text-sm text-ink leading-relaxed">
                 收錄幼兒常見藥品的分類、適應症、注意事項與保存方式，由護理師整理維護。
                 點擊藥品名稱可展開詳細資訊。
               </p>
@@ -691,7 +690,7 @@ export default function MedicationPage({ navigate }) {
 
 
         <div className="mt-10 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

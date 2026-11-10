@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { Alert } from '../components/Alert'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
 
 function SourceNote({ children }) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+    <div className="bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
       <span className="shrink-0">📋</span>
       <p>{children}</p>
     </div>
@@ -38,21 +38,21 @@ const breastIssues = [
   {
     name: '漲奶（Engorgement）',
     emoji: '🎈',
-    tag: 'bg-sky-50 border-sky-200 text-sky-800',
+    tag: 'bg-cat-mist-bg border-cat-mist-fg/20 text-cat-mist-fg',
     desc: '乳房脹硬、疼痛，常發生於產後3–5天退奶或哺乳間隔過長時',
     steps: ['哺乳前溫敷、輕輕按摩幫助噴乳反射', '哺乳後可冷敷消腫止痛', '勤哺乳或以手擠/吸乳器排空，避免間隔過久'],
   },
   {
     name: '乳腺炎（Mastitis）',
     emoji: '🔥',
-    tag: 'bg-red-50 border-red-200 text-red-800',
+    tag: 'bg-cat-mauve-bg border-cat-mauve-fg/20 text-cat-mauve-fg',
     desc: '局部紅腫熱痛、常合併發燒與類流感症狀，多由乳汁滯留或細菌感染引起',
     steps: ['持續哺乳患側，乳汁排空是最重要的處理原則', '哺乳前熱敷、哺乳時輕柔按摩硬塊處', '症狀持續超過24小時或發燒不退，應盡快就醫評估是否需抗生素治療'],
   },
   {
     name: '回奶／退奶',
     emoji: '📉',
-    tag: 'bg-amber-50 border-amber-200 text-amber-800',
+    tag: 'bg-cat-sand-bg border-cat-sand-fg/20 text-cat-sand-fg',
     desc: '部分食物或藥物可能抑制乳汁分泌',
     steps: ['薄荷、韭菜、麥芽（麥芽糖）等傳統上被認為有退奶效果，哺乳期宜留意攝取量', '若需主動退奶，建議逐漸減少哺乳/擠乳次數，避免驟停造成乳腺炎', '退奶期間仍脹痛可局部冷敷緩解不適'],
   },
@@ -198,12 +198,11 @@ export default function DietaryPage({ navigate }) {
         emoji="🥣"
         title="營養與餵食"
         subtitle="母乳哺育、配方奶、副食品添加、1-3歲均衡飲食與斷奶轉銜"
-        color="bg-gradient-to-br from-amber-50 to-orange-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Tabs */}
-        <div className="flex rounded-2xl bg-orange-100 p-1 mb-10 gap-1 overflow-x-auto">
+        <div className="flex rounded-2xl bg-surface-muted border border-border p-1 mb-10 gap-1 overflow-x-auto">
           {[
             { id: 'breast', label: '🤱 母乳哺育' },
             { id: 'formula', label: '🍼 配方奶' },
@@ -216,7 +215,7 @@ export default function DietaryPage({ navigate }) {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
-                tab === t.id ? 'bg-white text-orange-700 shadow' : 'text-orange-600 hover:bg-orange-50'
+                tab === t.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               {t.label}
@@ -227,8 +226,8 @@ export default function DietaryPage({ navigate }) {
         {/* Breastfeeding */}
         {tab === 'breast' && (
           <div className="space-y-5">
-            <div className="bg-pink-50 border-2 border-pink-200 rounded-3xl p-6">
-              <h2 className="font-bold text-pink-800 text-xl mb-4">🤱 母乳哺育要點</h2>
+            <div className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-xl mb-4">🤱 母乳哺育要點</h2>
               <div className="space-y-3">
                 {[
                   { q: '哺乳頻率', a: '新生兒每 2–3 小時、每日 8–12 次；不需嚴格按時，依嬰兒需求哺乳' },
@@ -236,23 +235,23 @@ export default function DietaryPage({ navigate }) {
                   { q: '母乳儲存', a: '室溫 (25°C) 4 小時；冷藏 4°C 可存 4 天；冷凍 -18°C 可存 3 個月' },
                   { q: 'WHO 建議', a: '純母乳哺育至 6 個月，加入副食品後持續哺乳至 2 歲或更久' },
                 ].map(item => (
-                  <div key={item.q} className="bg-white rounded-2xl p-4">
-                    <p className="font-semibold text-pink-700 text-sm mb-1">📌 {item.q}</p>
-                    <p className="text-sm text-gray-600">{item.a}</p>
+                  <div key={item.q} className="bg-surface-muted rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">📌 {item.q}</p>
+                    <p className="text-sm text-ink-muted">{item.a}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🪑</span> 正確哺乳姿勢
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                 {positions.map(p => (
-                  <div key={p.name} className="bg-pink-50 border border-pink-100 rounded-2xl p-4">
-                    <p className="font-semibold text-pink-700 text-sm mb-1">{p.name}</p>
-                    <p className="text-xs text-gray-600 leading-relaxed">{p.desc}</p>
+                  <div key={p.name} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{p.name}</p>
+                    <p className="text-xs text-ink-muted leading-relaxed">{p.desc}</p>
                   </div>
                 ))}
               </div>
@@ -263,22 +262,22 @@ export default function DietaryPage({ navigate }) {
               </Alert>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🍼</span> 擠奶與保存
               </h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {pumpingTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🩺</span> 常見哺乳問題處理
               </h2>
               <div className="space-y-4">
                 {breastIssues.map(issue => (
-                  <div key={issue.name} className={`border-2 rounded-2xl p-5 ${issue.tag}`}>
+                  <div key={issue.name} className={`border rounded-2xl p-5 ${issue.tag}`}>
                     <p className="font-bold text-sm mb-1 flex items-center gap-2">
                       <span className="text-xl">{issue.emoji}</span> {issue.name}
                     </p>
@@ -300,40 +299,40 @@ export default function DietaryPage({ navigate }) {
         {/* Formula */}
         {tab === 'formula' && (
           <div className="space-y-5">
-            <div className="bg-blue-50 border-2 border-blue-200 rounded-3xl p-6">
-              <h2 className="font-bold text-blue-800 text-xl mb-4">🍼 配方奶使用指引</h2>
+            <div className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-xl mb-4">🍼 配方奶使用指引</h2>
               <div className="space-y-3">
                 {[
                   { q: '奶量參考', a: '0–3 個月：每次 60–120ml，每日 8 次左右；4–6 個月：每次 150–180ml，每日 5–6 次' },
                   { q: '保存期限', a: '已沖好的奶粉室溫 2 小時內用完；冷藏可 24 小時；不可使用微波加熱' },
                 ].map(item => (
-                  <div key={item.q} className="bg-white rounded-2xl p-4">
-                    <p className="font-semibold text-blue-700 text-sm mb-1">📌 {item.q}</p>
-                    <p className="text-sm text-gray-600">{item.a}</p>
+                  <div key={item.q} className="bg-surface-muted rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">📌 {item.q}</p>
+                    <p className="text-sm text-ink-muted">{item.a}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🔍</span> 選擇原則
               </h2>
               <div className="space-y-3">
                 {formulaChoice.map(item => (
-                  <div key={item.q} className="bg-blue-50 border border-blue-100 rounded-2xl p-4">
-                    <p className="font-semibold text-blue-700 text-sm mb-1">{item.q}</p>
-                    <p className="text-sm text-gray-600">{item.a}</p>
+                  <div key={item.q} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{item.q}</p>
+                    <p className="text-sm text-ink-muted">{item.a}</p>
                   </div>
                 ))}
               </div>
             </section>
 
-            <section className="bg-white border-2 border-red-100 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🌡️</span> 調配安全（避免細菌污染）
               </h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {formulaSafety.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
@@ -347,45 +346,45 @@ export default function DietaryPage({ navigate }) {
         {/* Solid foods */}
         {tab === 'solid' && (
           <div className="space-y-5">
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🎯</span> 副食品添加四大原則
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {solidPrinciples.map(p => (
-                  <div key={p.title} className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
-                    <p className="font-semibold text-orange-700 text-sm mb-1">{p.emoji} {p.title}</p>
-                    <p className="text-xs text-gray-600 leading-relaxed">{p.desc}</p>
+                  <div key={p.title} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{p.emoji} {p.title}</p>
+                    <p className="text-xs text-ink-muted leading-relaxed">{p.desc}</p>
                   </div>
                 ))}
               </div>
             </section>
 
             {solidFoods.map(stage => (
-              <div key={stage.range} className="bg-white border border-orange-200 rounded-3xl p-5">
+              <div key={stage.range} className="bg-surface border border-border rounded-2xl p-5">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-3xl">{stage.emoji}</span>
                   <div>
-                    <p className="font-bold text-orange-800 text-base">{stage.range}</p>
-                    <p className="text-xs text-orange-500">質地：{stage.texture}</p>
+                    <p className="font-bold text-ink text-base">{stage.range}</p>
+                    <p className="text-xs text-ink-muted">質地：{stage.texture}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase mb-2">建議食材</p>
+                    <p className="text-xs font-semibold text-ink-muted uppercase mb-2">建議食材</p>
                     <ul className="space-y-1">
                       {stage.foods.map((f, i) => (
-                        <li key={i} className="text-sm text-gray-600 flex gap-1.5">
-                          <span className="text-orange-300">•</span> {f}
+                        <li key={i} className="text-sm text-ink-muted flex gap-1.5">
+                          <span className="text-ink-muted" aria-hidden="true">•</span> {f}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase mb-2">注意事項</p>
+                    <p className="text-xs font-semibold text-ink-muted uppercase mb-2">注意事項</p>
                     <ul className="space-y-1">
                       {stage.tips.map((t, i) => (
-                        <li key={i} className="text-sm text-gray-600 flex gap-1.5">
+                        <li key={i} className="text-sm text-ink-muted flex gap-1.5">
                           <span aria-hidden="true" className="text-success-fg">✓</span> {t}
                         </li>
                       ))}
@@ -395,15 +394,15 @@ export default function DietaryPage({ navigate }) {
               </div>
             ))}
 
-            <section className="bg-white border-2 border-teal-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>✋</span> BLW 寶寶主導式進食
               </h2>
               <div className="space-y-3">
                 {blwPoints.map(item => (
-                  <div key={item.q} className="bg-teal-50 border border-teal-100 rounded-2xl p-4">
-                    <p className="font-semibold text-teal-700 text-sm mb-1">{item.q}</p>
-                    <p className="text-sm text-gray-600">{item.a}</p>
+                  <div key={item.q} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{item.q}</p>
+                    <p className="text-sm text-ink-muted">{item.a}</p>
                   </div>
                 ))}
               </div>
@@ -418,25 +417,25 @@ export default function DietaryPage({ navigate }) {
         {/* 1-3 toddler diet */}
         {tab === 'toddler' && (
           <div className="space-y-5">
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>⚖️</span> 每日六大類食物參考量（1–3歲）
               </h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className="bg-amber-50 text-amber-800">
-                      <th className="border border-amber-200 p-2 text-left">食物類別</th>
-                      <th className="border border-amber-200 p-2 text-left">建議份量</th>
-                      <th className="border border-amber-200 p-2 text-left">說明</th>
+                    <tr className="bg-surface-muted text-ink">
+                      <th className="border border-border p-2 text-left">食物類別</th>
+                      <th className="border border-border p-2 text-left">建議份量</th>
+                      <th className="border border-border p-2 text-left">說明</th>
                     </tr>
                   </thead>
                   <tbody>
                     {foodGroups.map(g => (
                       <tr key={g.group}>
-                        <td className="border border-gray-200 p-2 font-medium text-gray-700">{g.group}</td>
-                        <td className="border border-gray-200 p-2 text-gray-600">{g.amount}</td>
-                        <td className="border border-gray-200 p-2 text-gray-500 text-xs">{g.note}</td>
+                        <td className="border border-border p-2 font-medium text-ink">{g.group}</td>
+                        <td className="border border-border p-2 text-ink-muted">{g.amount}</td>
+                        <td className="border border-border p-2 text-ink-muted text-xs">{g.note}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -444,25 +443,25 @@ export default function DietaryPage({ navigate }) {
               </div>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🧪</span> 重點營養素參考攝取量
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {microNutrients.map(n => (
-                  <div key={n.name} className="bg-lime-50 border border-lime-200 rounded-2xl p-4">
-                    <p className="font-semibold text-lime-800 text-sm mb-1">{n.name}：{n.value}</p>
-                    <p className="text-xs text-lime-700">{n.why}</p>
+                  <div key={n.name} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{n.name}：{n.value}</p>
+                    <p className="text-xs text-ink-muted">{n.why}</p>
                   </div>
                 ))}
               </div>
             </section>
 
-            <section className="bg-white border-2 border-orange-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🙅</span> 挑食處理技巧
               </h2>
-              <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+              <ul className="text-sm text-ink-muted space-y-2 list-disc list-inside">
                 {pickyEatingTips.map((t, i) => <li key={i}>{t}</li>)}
               </ul>
             </section>
@@ -476,15 +475,15 @@ export default function DietaryPage({ navigate }) {
         {/* Weaning transition */}
         {tab === 'weaning' && (
           <div className="space-y-5">
-            <section className="bg-white border border-gray-200 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🔄</span> 斷奶轉銜建議
               </h2>
               <div className="space-y-3">
                 {weaningTips.map(item => (
-                  <div key={item.q} className="bg-violet-50 border border-violet-100 rounded-2xl p-4">
-                    <p className="font-semibold text-violet-700 text-sm mb-1">{item.q}</p>
-                    <p className="text-sm text-gray-600">{item.a}</p>
+                  <div key={item.q} className="bg-surface-muted border border-border rounded-2xl p-4">
+                    <p className="font-semibold text-ink text-sm mb-1">{item.q}</p>
+                    <p className="text-sm text-ink-muted">{item.a}</p>
                   </div>
                 ))}
               </div>
@@ -498,7 +497,7 @@ export default function DietaryPage({ navigate }) {
         {/* Avoid foods */}
         {tab === 'avoid' && (
           <div className="space-y-3">
-            <p className="text-sm text-gray-500 mb-4">以下食物在特定年齡前應避免給予</p>
+            <p className="text-sm text-ink-muted mb-4">以下食物在特定年齡前應避免給予</p>
             {avoidFoods.map(item => (
               <Alert
                 key={item.food}
@@ -513,7 +512,7 @@ export default function DietaryPage({ navigate }) {
         )}
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>

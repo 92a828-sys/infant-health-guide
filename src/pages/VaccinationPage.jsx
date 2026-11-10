@@ -2,19 +2,19 @@ import { useState } from 'react'
 import { Alert, ToneIcon } from '../components/Alert'
 import { toneClasses } from '../components/alertTones'
 
-function PageHeader({ emoji, title, subtitle, color }) {
+function PageHeader({ emoji, title, subtitle }) {
   return (
-    <div className={`${color} py-12 px-6 text-center`}>
+    <div className="bg-canvas border-b border-border py-12 px-6 text-center">
       <div className="text-6xl mb-4">{emoji}</div>
-      <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">{title}</h1>
-      <p className="text-gray-500 text-sm max-w-xl mx-auto">{subtitle}</p>
+      <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">{title}</h1>
+      <p className="text-ink-muted text-sm max-w-xl mx-auto">{subtitle}</p>
     </div>
   )
 }
 
 function SourceNote({ children }) {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 flex gap-2 text-xs text-gray-500 leading-relaxed">
+    <div className="bg-surface-muted border border-border rounded-2xl p-3 flex gap-2 text-xs text-ink-muted leading-relaxed">
       <span className="shrink-0">📋</span>
       <p>{children}</p>
     </div>
@@ -217,24 +217,24 @@ function VaccineCalculator() {
   const statusStyle = {
     overdue: { label: '已達接種年齡', tone: 'danger', tag: toneClasses('danger') },
     soon: { label: '30天內到期', tone: 'warning', tag: toneClasses('warning') },
-    upcoming: { label: '尚未到期', tag: 'bg-gray-100 text-gray-500 border-gray-200' },
+    upcoming: { label: '尚未到期', tag: 'bg-surface-muted text-ink-muted border-border' },
   }
 
   return (
-    <section className="bg-white border-2 border-violet-200 rounded-3xl p-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+    <section className="bg-surface border border-border rounded-2xl p-6">
+      <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
         <span>🧮</span> 疫苗時程個人化試算
       </h2>
-      <label className="text-xs font-semibold text-gray-600 mb-1 block">寶寶出生日期</label>
+      <label className="text-xs font-semibold text-ink-muted mb-1 block">寶寶出生日期</label>
       <input
         type="date"
         value={birthDate}
         onChange={e => setBirthDate(e.target.value)}
-        className="border border-gray-200 rounded-xl px-3 py-2 text-sm mb-4 w-full sm:w-64"
+        className="border border-border rounded-xl px-3 py-2 text-sm mb-4 w-full sm:w-64"
       />
 
       {!birthDate && (
-        <p className="text-sm text-gray-400">輸入出生日期後，會依現行公費時程試算各劑疫苗建議接種日期。</p>
+        <p className="text-sm text-ink-muted">輸入出生日期後，會依現行公費時程試算各劑疫苗建議接種日期。</p>
       )}
 
       {birthDate && (
@@ -254,7 +254,7 @@ function VaccineCalculator() {
         </div>
       )}
 
-      <p className="text-xs text-gray-400 mt-4">
+      <p className="text-xs text-ink-muted mt-4">
         本工具僅依標準公費時程試算建議日期，不會儲存任何資料；流感疫苗為每年接種不列入試算。實際接種仍須以兒童健康手冊紀錄與醫師評估為準。
       </p>
     </section>
@@ -270,12 +270,11 @@ export default function VaccinationPage({ navigate, initialTab }) {
         emoji="💉"
         title="預防接種"
         subtitle="公費疫苗時程、自費建議、接種反應與禁忌、預防保健與新生兒篩檢"
-        color="bg-gradient-to-br from-violet-50 to-purple-100"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Tabs */}
-        <div className="flex rounded-2xl bg-violet-100 p-1 mb-10 gap-1 overflow-x-auto">
+        <div className="flex rounded-2xl bg-surface-muted border border-border p-1 mb-10 gap-1 overflow-x-auto">
           {[
             { id: 'schedule', label: '📅 接種時程' },
             { id: 'selfpay', label: '💰 自費疫苗' },
@@ -288,7 +287,7 @@ export default function VaccinationPage({ navigate, initialTab }) {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
-                tab === t.id ? 'bg-white text-violet-700 shadow' : 'text-violet-600 hover:bg-violet-50'
+                tab === t.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               {t.label}
@@ -300,23 +299,23 @@ export default function VaccinationPage({ navigate, initialTab }) {
         {tab === 'schedule' && (
           <div className="space-y-5">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-4 h-4 rounded-full bg-green-400 inline-block"></span>
-              <span className="text-sm text-gray-600">公費疫苗（政府補助，依現行時程表）</span>
+              <span className="w-4 h-4 rounded-full bg-cat-teal-fg inline-block"></span>
+              <span className="text-sm text-ink-muted">公費疫苗（政府補助，依現行時程表）</span>
             </div>
 
             <div className="space-y-4">
               {schedule.map(s => (
-                <div key={s.age} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-                  <div className="bg-violet-50 border-b border-violet-100 px-5 py-3">
-                    <h3 className="font-bold text-violet-800 text-sm">📅 {s.age}</h3>
+                <div key={s.age} className="bg-surface border border-border rounded-2xl overflow-hidden shadow-sm">
+                  <div className="bg-surface-muted border-b border-border px-5 py-3">
+                    <h3 className="font-bold text-ink text-sm">📅 {s.age}</h3>
                   </div>
                   <div className="p-4 space-y-2">
                     {s.vaccines.map(v => (
                       <div key={v.name} className="flex items-start gap-3">
-                        <span className="w-3 h-3 rounded-full shrink-0 mt-1 bg-green-400"></span>
+                        <span className="w-3 h-3 rounded-full shrink-0 mt-1 bg-cat-teal-fg"></span>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">{v.name}</p>
-                          {v.note && <p className="text-xs text-gray-400 mt-0.5">{v.note}</p>}
+                          <p className="text-sm font-medium text-ink">{v.name}</p>
+                          {v.note && <p className="text-xs text-ink-muted mt-0.5">{v.note}</p>}
                         </div>
                       </div>
                     ))}
@@ -341,14 +340,14 @@ export default function VaccinationPage({ navigate, initialTab }) {
         {/* Self-pay */}
         {tab === 'selfpay' && (
           <div className="space-y-4">
-            <p className="text-sm text-gray-500 mb-2">以下為常見自費疫苗／被動免疫選項，建議與兒科醫師討論後依個別風險評估接種：</p>
+            <p className="text-sm text-ink-muted mb-2">以下為常見自費疫苗／被動免疫選項，建議與兒科醫師討論後依個別風險評估接種：</p>
             {selfPayVaccines.map(v => (
-              <div key={v.name} className="bg-white border-2 border-amber-200 rounded-2xl p-5">
-                <p className="font-bold text-amber-800 text-sm mb-1 flex items-center gap-2">
+              <div key={v.name} className="bg-surface border border-border rounded-2xl p-5">
+                <p className="font-bold text-ink text-sm mb-1 flex items-center gap-2">
                   <span className="text-xl">{v.emoji}</span> {v.name}
                 </p>
-                <p className="text-sm text-gray-700 mb-1"><strong>建議對象／時程：</strong>{v.target}</p>
-                <p className="text-xs text-gray-500">{v.note}</p>
+                <p className="text-sm text-ink mb-1"><strong>建議對象／時程：</strong>{v.target}</p>
+                <p className="text-xs text-ink-muted">{v.note}</p>
               </div>
             ))}
             <SourceNote>
@@ -360,20 +359,20 @@ export default function VaccinationPage({ navigate, initialTab }) {
         {/* After care & contraindications */}
         {tab === 'care' && (
           <div className="space-y-5">
-            <div className="bg-blue-50 border-2 border-blue-200 rounded-3xl p-6">
-              <h2 className="font-bold text-blue-800 text-lg mb-4">💉 接種後注意事項</h2>
+            <div className="bg-surface-muted border border-border rounded-2xl p-6">
+              <h2 className="font-bold text-ink text-lg mb-4">💉 接種後注意事項</h2>
               <ul className="space-y-3">
                 {afterCare.map((c, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm text-blue-700">
-                    <span className="text-blue-400 shrink-0">✓</span>
+                  <li key={i} className="flex gap-2.5 text-sm text-ink">
+                    <span className="text-brand shrink-0">✓</span>
                     <span>{c}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <section className="bg-white border-2 border-red-100 rounded-3xl p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <section className="bg-surface border border-border rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
                 <span>🚫</span> 接種禁忌症
               </h2>
               <div className="space-y-3">
@@ -383,7 +382,7 @@ export default function VaccinationPage({ navigate, initialTab }) {
                   </Alert>
                 ))}
               </div>
-              <p className="text-xs text-gray-400 mt-3">以上僅為一般性原則，個別幼兒是否適合接種仍須由醫師評估。</p>
+              <p className="text-xs text-ink-muted mt-3">以上僅為一般性原則，個別幼兒是否適合接種仍須由醫師評估。</p>
             </section>
 
             <SourceNote>
@@ -406,9 +405,9 @@ export default function VaccinationPage({ navigate, initialTab }) {
             </Alert>
             <div className="space-y-3">
               {checkups.map(c => (
-                <div key={c.stage} className="bg-white border border-emerald-200 rounded-2xl p-4">
-                  <p className="font-semibold text-emerald-700 text-sm mb-1">🗓️ {c.stage}</p>
-                  <p className="text-sm text-gray-600">{c.items}</p>
+                <div key={c.stage} className="bg-surface border border-border rounded-2xl p-4">
+                  <p className="font-semibold text-ink text-sm mb-1">🗓️ {c.stage}</p>
+                  <p className="text-sm text-ink-muted">{c.items}</p>
                 </div>
               ))}
             </div>
@@ -422,11 +421,11 @@ export default function VaccinationPage({ navigate, initialTab }) {
         {tab === 'newborn' && (
           <div className="space-y-4">
             {newbornScreenings.map(n => (
-              <div key={n.name} className="bg-white border-2 border-sky-200 rounded-2xl p-5">
-                <p className="font-bold text-sky-800 text-sm mb-2 flex items-center gap-2">
+              <div key={n.name} className="bg-surface border border-border rounded-2xl p-5">
+                <p className="font-bold text-ink text-sm mb-2 flex items-center gap-2">
                   <span className="text-xl">{n.emoji}</span> {n.name}
                 </p>
-                <p className="text-sm text-gray-600 leading-relaxed">{n.desc}</p>
+                <p className="text-sm text-ink-muted leading-relaxed">{n.desc}</p>
               </div>
             ))}
             <SourceNote>
@@ -436,7 +435,7 @@ export default function VaccinationPage({ navigate, initialTab }) {
         )}
 
         <div className="mt-8 text-center">
-          <button onClick={() => navigate('home')} className="text-sm text-orange-500 hover:text-orange-700 underline">
+          <button onClick={() => navigate('home')} className="text-sm text-brand hover:opacity-80 underline underline-offset-4">
             ← 返回首頁
           </button>
         </div>
