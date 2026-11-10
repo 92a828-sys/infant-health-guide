@@ -1,16 +1,55 @@
-# React + Vite
+# 0–3 歲幼兒衛教專區
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+專為新手爸媽設計的嬰幼兒健康指南，由護理師整理。內容參考衛生福利部、疾病管制署、國民健康署、台灣兒科醫學會等官方資料，各頁面的來源標註區可查看該主題的參考資料。
 
-Currently, two official plugins are available:
+> 本網站資訊僅供衛教參考，不得作為醫療診斷依據。若有健康疑慮，請諮詢合格醫師；緊急狀況請撥打 119。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 主題頁面
 
-## React Compiler
+| 頁面 | 內容 |
+|---|---|
+| 生長發育里程碑 | 4 個月至 3 歲共 9 個年齡段的發展指標、可勾選檢核表與紅旗警訊 |
+| 生長曲線 | WHO 生長曲線說明、線上百分位估算器、早產兒矯正年齡換算 |
+| 常見症狀 | 發燒、感冒、腹瀉、咳嗽等居家照護與就醫時機 |
+| 疫苗接種 | 公費／自費疫苗時程、接種禁忌、個人化時程試算、兒童預防保健 |
+| 營養與餵食 | 母乳、配方奶、副食品添加、1–3 歲均衡飲食 |
+| 緊急狀況 | 立即送急診的症狀、異物哽塞、頭部撞傷、燙傷與嬰幼兒 CPR 步驟 |
+| 用藥衛教 | 用藥原則、退燒藥劑量計算、禁用藥物、幼生藥庫 |
+| 常見疾病 | 腸病毒、RSV、肺炎、流感等疾病的症狀與照護 |
+| 新生兒安全 | 安全睡眠、嬰兒大便顏色卡、紅旗症狀總表 |
+| 居家安全 | 居家安全陷阱、意外預防、玩具與環境安全 |
+| 日常照護 | 洗澡清潔、如廁訓練、睡眠作息、視力聽力口腔保健 |
+| 親職支持 | 產後情緒與分工、依附與正向教養、特殊家庭資源、求助專線 |
+| 生命徵象 | 體溫、心跳、呼吸、血氧、意識的正常值與分級 |
+| 早期學習 | 大腦發展原則、分齡親子共讀、感官遊戲 |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+每頁最上方都有常駐的緊急資源列（119 與其他求助專線）。
 
-## Expanding the ESLint configuration
+## 技術
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19 + Vite，純 JavaScript／JSX
+- Tailwind CSS v4（`@tailwindcss/vite`）
+- 圖示：lucide-react；字型：Noto Sans TC／Noto Serif TC（Google Fonts）
+- 純靜態網站，無後端；部署於 Vercel（設定見 `vercel.json`）
+- 沒有路由套件：`src/App.jsx` 依頁面 ID 切換頁面，內容資料直接寫在各頁面檔案中
+
+## 開發
+
+```sh
+npm install
+npm run dev       # 開發伺服器
+npm run build     # 產出 dist/
+npm run preview   # 預覽 build 結果
+npm run lint      # ESLint，須維持 0 錯誤
+```
+
+專案沒有自動化測試，修改後請以 `npm run lint`、`npm run build` 及瀏覽器實際檢視確認。
+
+## 設計規範摘要
+
+- 顏色一律使用 `src/index.css` 中的設計 token（含淺色／深色模式），不直接寫色碼。
+- 警示語意固定：紅＝危險、黃＝注意、綠＝正常，每個警示都要有圖示＋文字標籤，使用 `src/components/Alert.jsx`。
+- 分類色（`cat-*`）只用來區分主題類別，不可用於警示。
+- 目前已改用新 token 的有：網站外框（導覽列、頁尾、首頁、緊急資源列）、所有警示區塊，以及「生長發育里程碑」頁；其他內容頁仍在逐頁調整中。
+
+詳細規則與架構說明見 [CLAUDE.md](CLAUDE.md)。

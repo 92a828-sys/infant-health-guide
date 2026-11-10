@@ -291,7 +291,7 @@ function ImageLightbox({ src, alt, onClose }) {
         >
           ✕
         </button>
-        <p className="text-center text-white/70 text-xs mt-3">{alt}　—　點擊外側關閉</p>
+        <p className="text-center text-white/70 text-xs mt-3">{alt} — 點擊外側關閉</p>
       </div>
     </div>
   )

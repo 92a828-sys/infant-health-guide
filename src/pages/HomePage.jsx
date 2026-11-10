@@ -178,9 +178,13 @@ const VaccinationIcon = pageIcons['vaccination']
 const DietaryIcon = pageIcons['dietary']
 const DailyCareIcon = pageIcons['daily-care']
 
+// UTC+8 台灣時間的第幾天，確保午夜 12 點換句（於初次渲染時計算一次）
+function pickDailyQuote() {
+  return quotes[Math.floor((Date.now() + 8 * 3600000) / 86400000) % quotes.length]
+}
+
 export default function HomePage({ navigate }) {
-  // UTC+8 台灣時間的第幾天，確保午夜 12 點換句
-  const q = quotes[Math.floor((Date.now() + 8 * 3600000) / 86400000) % quotes.length]
+  const [q] = useState(pickDailyQuote)
   const [ageMonths, setAgeMonths] = useState(6)
 
   return (
