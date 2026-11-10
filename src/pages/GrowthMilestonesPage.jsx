@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Printer } from 'lucide-react'
 import { Alert, StatusBadge } from '../components/Alert'
 
 const ageGroups = [
@@ -7,9 +8,6 @@ const ageGroups = [
     label: '4個月',
     range: '3個月16天～5個月15天',
     emoji: '🌱',
-    headerBg: 'bg-gradient-to-br from-rose-50 to-pink-100 border-rose-200',
-    tabActive: 'bg-rose-500 text-white shadow',
-    tabInactive: 'text-rose-600 hover:bg-rose-50',
     milestones: {
       '粗動作': [
         '趴著時能以雙肘支撐，將頭抬起和地面垂直，且能維持數秒後頭慢慢放下',
@@ -43,9 +41,6 @@ const ageGroups = [
     label: '6個月',
     range: '5個月16天～8個月15天',
     emoji: '🌼',
-    headerBg: 'bg-gradient-to-br from-orange-50 to-amber-100 border-orange-200',
-    tabActive: 'bg-orange-500 text-white shadow',
-    tabInactive: 'text-orange-600 hover:bg-orange-50',
     milestones: {
       '粗動作': [
         '趴著時能用手掌撐著，將上半身抬起離開地面，頭部可以上下左右自由活動',
@@ -79,9 +74,6 @@ const ageGroups = [
     label: '9個月',
     range: '8個月16天～11個月15天',
     emoji: '🐣',
-    headerBg: 'bg-gradient-to-br from-yellow-50 to-amber-100 border-yellow-200',
-    tabActive: 'bg-yellow-500 text-white shadow',
-    tabInactive: 'text-yellow-600 hover:bg-yellow-50',
     milestones: {
       '粗動作': [
         '能翻身（趴著變成仰躺和仰躺變成趴著均能做到）',
@@ -114,9 +106,6 @@ const ageGroups = [
     label: '1歲',
     range: '11個月16天～1歲2個月15天',
     emoji: '🎂',
-    headerBg: 'bg-gradient-to-br from-lime-50 to-green-100 border-lime-200',
-    tabActive: 'bg-lime-600 text-white shadow',
-    tabInactive: 'text-lime-700 hover:bg-lime-50',
     milestones: {
       '粗動作': [
         '能由躺的姿勢（俯臥或仰躺均可）自己坐起來',
@@ -149,9 +138,6 @@ const ageGroups = [
     label: '1歲3個月',
     range: '1歲2個月16天～1歲5個月15天',
     emoji: '🌻',
-    headerBg: 'bg-gradient-to-br from-teal-50 to-cyan-100 border-teal-200',
-    tabActive: 'bg-teal-500 text-white shadow',
-    tabInactive: 'text-teal-600 hover:bg-teal-50',
     milestones: {
       '粗動作': [
         '能不須扶東西自己站起來',
@@ -183,9 +169,6 @@ const ageGroups = [
     label: '1歲半',
     range: '1歲5個月16天～1歲11個月15天',
     emoji: '🦋',
-    headerBg: 'bg-gradient-to-br from-sky-50 to-blue-100 border-sky-200',
-    tabActive: 'bg-sky-500 text-white shadow',
-    tabInactive: 'text-sky-600 hover:bg-sky-50',
     milestones: {
       '粗動作': [
         '能不須扶東西自己由坐或蹲的姿勢站起來',
@@ -221,9 +204,6 @@ const ageGroups = [
     label: '2歲',
     range: '1歲11個月16天～2歲5個月15天',
     emoji: '🐥',
-    headerBg: 'bg-gradient-to-br from-violet-50 to-purple-100 border-violet-200',
-    tabActive: 'bg-violet-500 text-white shadow',
-    tabInactive: 'text-violet-600 hover:bg-violet-50',
     milestones: {
       '粗動作': [
         '在少許支撐下能彎下或舉膝撿起地上的東西，然後恢復站的姿勢',
@@ -254,9 +234,6 @@ const ageGroups = [
     label: '2歲半',
     range: '2歲5個月16天～2歲11個月15天',
     emoji: '🌈',
-    headerBg: 'bg-gradient-to-br from-fuchsia-50 to-pink-100 border-fuchsia-200',
-    tabActive: 'bg-fuchsia-500 text-white shadow',
-    tabInactive: 'text-fuchsia-600 hover:bg-fuchsia-50',
     milestones: {
       '粗動作': [
         '能不須扶東西自己由地面站起來',
@@ -286,9 +263,6 @@ const ageGroups = [
     label: '3歲',
     range: '2歲11個月16天～3歲5個月15天',
     emoji: '⭐',
-    headerBg: 'bg-gradient-to-br from-indigo-50 to-blue-100 border-indigo-200',
-    tabActive: 'bg-indigo-500 text-white shadow',
-    tabInactive: 'text-indigo-600 hover:bg-indigo-50',
     milestones: {
       '粗動作': [
         '不須扶東西就能站起，拉起地上的東西，然後恢復站的姿勢',
@@ -316,16 +290,18 @@ const ageGroups = [
   },
 ]
 
+// 發展分類 → 分類色 token（僅區分類別，不代表好壞；警示一律用 danger/warning/success）
+// 視覺／聽覺、認知／遊戲探索 不會出現在同一月齡，各自共用一色
 const catStyle = {
-  '粗動作':   'bg-blue-50 border-blue-200 text-blue-700',
-  '細動作':   'bg-purple-50 border-purple-200 text-purple-700',
-  '語言溝通': 'bg-green-50 border-green-200 text-green-700',
-  '認知':     'bg-amber-50 border-amber-200 text-amber-700',
-  '認知學習': 'bg-amber-50 border-amber-200 text-amber-700',
-  '社會情緒': 'bg-pink-50 border-pink-200 text-pink-700',
-  '視覺':     'bg-cyan-50 border-cyan-200 text-cyan-700',
-  '聽覺':     'bg-teal-50 border-teal-200 text-teal-700',
-  '遊戲探索': 'bg-orange-50 border-orange-200 text-orange-700',
+  '粗動作':   'bg-cat-mist-bg border-cat-mist-fg/20 text-cat-mist-fg',
+  '細動作':   'bg-cat-lav-bg border-cat-lav-fg/20 text-cat-lav-fg',
+  '視覺':     'bg-cat-teal-bg border-cat-teal-fg/20 text-cat-teal-fg',
+  '聽覺':     'bg-cat-teal-bg border-cat-teal-fg/20 text-cat-teal-fg',
+  '社會情緒': 'bg-cat-mauve-bg border-cat-mauve-fg/20 text-cat-mauve-fg',
+  '語言溝通': 'bg-cat-sand-bg border-cat-sand-fg/20 text-cat-sand-fg',
+  '認知':     'bg-cat-slate-bg border-cat-slate-fg/20 text-cat-slate-fg',
+  '認知學習': 'bg-cat-slate-bg border-cat-slate-fg/20 text-cat-slate-fg',
+  '遊戲探索': 'bg-cat-slate-bg border-cat-slate-fg/20 text-cat-slate-fg',
 }
 
 const catIcon = {
@@ -356,10 +332,10 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
   return (
     <div>
       {/* Header */}
-      <div className="bg-gradient-to-br from-emerald-50 to-teal-100 py-12 px-6 text-center">
+      <div className="bg-canvas border-b border-border py-12 px-6 text-center">
         <div className="text-6xl mb-4">📏</div>
-        <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-2">生長發育里程碑</h1>
-        <p className="text-gray-500 text-sm max-w-xl mx-auto">
+        <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">生長發育里程碑</h1>
+        <p className="text-ink-muted text-sm max-w-xl mx-auto">
           依據臺北市學齡前兒童發展檢核表，涵蓋4個月至3歲共9個年齡段
         </p>
       </div>
@@ -367,9 +343,9 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
       <div className="max-w-5xl mx-auto px-4 py-10">
 
         {/* Source note */}
-        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mb-8 flex gap-3">
+        <div className="bg-surface-muted border border-border rounded-2xl p-4 mb-8 flex gap-3">
           <span className="text-xl shrink-0">📋</span>
-          <p className="text-sm text-emerald-800 leading-relaxed">
+          <p className="text-sm text-ink leading-relaxed">
             本頁內容來源：<strong>臺北市政府衛生局・臺北市學齡前兒童發展檢核表（114年版）</strong>。
             檢核表為篩查工具，每位孩子發展速度不同；若有多項疑慮，請攜帶「健保卡」及「兒童健康手冊」至兒科或早療評估機構進一步確認。
           </p>
@@ -381,8 +357,9 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
             <button
               key={g.id}
               onClick={() => setActiveId(g.id)}
+              aria-pressed={activeId === g.id}
               className={`rounded-xl py-2 px-1 text-xs font-semibold transition-all text-center leading-tight ${
-                activeId === g.id ? g.tabActive : g.tabInactive
+                activeId === g.id ? 'bg-brand text-on-brand shadow' : 'text-ink-muted hover:bg-brand-soft hover:text-brand'
               }`}
             >
               <div className="text-base mb-0.5">{g.emoji}</div>
@@ -392,33 +369,34 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
         </div>
 
         {/* Content panel */}
-        <div className={`border-2 rounded-3xl overflow-hidden ${group.headerBg.includes('border') ? '' : ''}`}>
+        <div className="bg-surface border border-border rounded-3xl overflow-hidden">
 
           {/* Panel header */}
-          <div className={`border-b-2 p-6 ${group.headerBg}`}>
+          <div className="bg-surface-muted border-b border-border p-6">
             <div className="flex items-center gap-3 flex-wrap">
               <span className="text-4xl">{group.emoji}</span>
               <div>
-                <h2 className="text-2xl font-bold text-gray-800">{group.label}</h2>
-                <p className="text-sm text-gray-500 mt-0.5">{group.range}</p>
+                <h2 className="text-2xl font-bold text-ink">{group.label}</h2>
+                <p className="text-sm text-ink-muted mt-0.5">{group.range}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 print:p-0">
+          <div className="bg-surface p-6 print:p-0">
 
             {/* Milestones */}
             <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
-              <h3 className="font-bold text-gray-700 text-sm flex items-center gap-2">
+              <h3 className="font-bold text-ink text-sm flex items-center gap-2">
                 <StatusBadge tone="success">這個階段可以做到（點擊項目可勾選）</StatusBadge>
               </h3>
               <div className="flex items-center gap-3 print:hidden">
-                <span className="text-xs text-gray-400">已勾選 {checkedCount} / {totalItems} 項</span>
+                <span className="text-xs text-ink-muted">已勾選 {checkedCount} / {totalItems} 項</span>
                 <button
                   onClick={() => window.print()}
-                  className="text-xs bg-emerald-500 text-white px-3 py-1.5 rounded-full hover:bg-emerald-600 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold bg-brand text-on-brand px-3 py-1.5 rounded-full hover:opacity-90 transition-opacity"
                 >
-                  🖨️ 列印本階段檢核表
+                  <Printer className="w-3.5 h-3.5" strokeWidth={2} aria-hidden="true" />
+                  列印本階段檢核表
                 </button>
               </div>
             </div>
@@ -426,7 +404,7 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
               {Object.entries(group.milestones).map(([cat, items]) => (
                 <div
                   key={cat}
-                  className={`border rounded-2xl p-4 ${catStyle[cat] ?? 'bg-gray-50 border-gray-200 text-gray-700'}`}
+                  className={`border rounded-2xl p-4 ${catStyle[cat] ?? 'bg-surface-muted border-border text-ink'}`}
                 >
                   <p className="font-semibold text-xs mb-2 flex items-center gap-1.5">
                     <span>{catIcon[cat] ?? '•'}</span>
@@ -440,9 +418,9 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
                         <li key={i}>
                           <button
                             onClick={() => toggleCheck(key)}
-                            className="text-xs leading-relaxed flex gap-1.5 text-gray-700 text-left w-full"
+                            className="text-xs leading-relaxed flex gap-1.5 text-ink text-left w-full"
                           >
-                            <span className={`shrink-0 mt-0.5 w-3.5 h-3.5 rounded border flex items-center justify-center ${isChecked ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-gray-300'}`}>
+                            <span className={`shrink-0 mt-0.5 w-3.5 h-3.5 rounded border flex items-center justify-center ${isChecked ? 'bg-brand border-brand text-on-brand' : 'bg-surface border-current/40'}`}>
                               {isChecked && '✓'}
                             </span>
                             <span className={isChecked ? 'line-through opacity-60' : ''}>{item}</span>
@@ -456,7 +434,7 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
             </div>
 
             {/* Red flags */}
-            <h3 className="font-bold text-gray-700 text-sm mb-4 flex items-center gap-2">
+            <h3 className="font-bold text-ink text-sm mb-4 flex items-center gap-2">
               <StatusBadge tone="danger">紅旗警訊——出現以下情形請盡早就醫評估</StatusBadge>
             </h3>
             <Alert tone="danger" label="紅旗警訊" strong>
@@ -483,8 +461,8 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
               onClick={() => setActiveId(g.id)}
               className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
                 activeId === g.id
-                  ? 'bg-gray-800 text-white border-gray-800'
-                  : 'text-gray-500 border-gray-200 hover:border-gray-400'
+                  ? 'bg-brand text-on-brand border-brand'
+                  : 'text-ink-muted border-border hover:border-brand hover:text-brand'
               }`}
             >
               {i + 1}. {g.label}
@@ -505,32 +483,32 @@ export default function GrowthMilestonesPage({ navigate, initialAgeId }) {
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => navigate('vitals')}
-            className="flex items-center gap-3 bg-cyan-50 border border-cyan-200 rounded-2xl p-4 text-left hover:bg-cyan-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">📊</span>
             <div>
-              <p className="font-semibold text-cyan-800 text-sm">0–3歲生命徵象</p>
-              <p className="text-xs text-cyan-600">體溫、心跳、呼吸正常範圍對照</p>
+              <p className="font-semibold text-ink text-sm">0–3歲生命徵象</p>
+              <p className="text-xs text-ink-muted">體溫、心跳、呼吸正常範圍對照</p>
             </div>
-            <span className="ml-auto text-cyan-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
           <button
             onClick={() => navigate('emergency')}
-            className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-2xl p-4 text-left hover:bg-red-100 transition-colors"
+            className="flex items-center gap-3 bg-surface border border-border rounded-2xl p-4 text-left hover:bg-brand-soft transition-colors"
           >
             <span className="text-2xl">🚑</span>
             <div>
-              <p className="font-semibold text-red-800 text-sm">緊急狀況判斷</p>
-              <p className="text-xs text-red-600">哪些症狀需立即就醫</p>
+              <p className="font-semibold text-ink text-sm">緊急狀況判斷</p>
+              <p className="text-xs text-ink-muted">哪些症狀需立即就醫</p>
             </div>
-            <span className="ml-auto text-red-400">→</span>
+            <span className="ml-auto text-brand">→</span>
           </button>
         </div>
 
         <div className="mt-8 text-center">
           <button
             onClick={() => navigate('home')}
-            className="text-sm text-orange-500 hover:text-orange-700 underline"
+            className="text-sm text-brand hover:opacity-80 underline underline-offset-4"
           >
             ← 返回首頁
           </button>

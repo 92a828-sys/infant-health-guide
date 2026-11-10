@@ -28,6 +28,20 @@
   --success-bg: #e7f3ea;
   --success-fg: #235c39;
   --success-border: #5b9970;
+
+  /* 分類色（低彩度）：只用來區分主題類別，不可用於警示 */
+  --cat-mist-bg: #eaf0f4;
+  --cat-mist-fg: #3d5a6c;
+  --cat-lav-bg: #f0edf5;
+  --cat-lav-fg: #5b4f73;
+  --cat-teal-bg: #e8f1f1;
+  --cat-teal-fg: #3a6464;
+  --cat-mauve-bg: #f3ecf0;
+  --cat-mauve-fg: #6e4c60;
+  --cat-sand-bg: #f3eee6;
+  --cat-sand-fg: #6b5a44;
+  --cat-slate-bg: #eeeff1;
+  --cat-slate-fg: #4a5260;
 }
 
 [data-theme="dark"] {
@@ -51,6 +65,20 @@
   --success-bg: #1e3428;
   --success-fg: #a9d8b7;
   --success-border: #5c9c72;
+
+  /* 分類色深色版：同色相，bg 約 L19%、fg 約 L82%，對比皆 ≥ 8.4:1 */
+  --cat-mist-bg: #26333b;
+  --cat-mist-fg: #c3d4df;
+  --cat-lav-bg: #2d2739;
+  --cat-lav-fg: #cec8da;
+  --cat-teal-bg: #263b3b;
+  --cat-teal-fg: #c4dfdf;
+  --cat-mauve-bg: #392832;
+  --cat-mauve-fg: #dac8d3;
+  --cat-sand-bg: #3b3226;
+  --cat-sand-fg: #dcd3c6;
+  --cat-slate-bg: #2a2f37;
+  --cat-slate-fg: #cbcfd8;
 }
 
 @theme inline {
@@ -74,6 +102,19 @@
   --color-success-bg: var(--success-bg);
   --color-success-fg: var(--success-fg);
   --color-success-border: var(--success-border);
+
+  --color-cat-mist-bg: var(--cat-mist-bg);
+  --color-cat-mist-fg: var(--cat-mist-fg);
+  --color-cat-lav-bg: var(--cat-lav-bg);
+  --color-cat-lav-fg: var(--cat-lav-fg);
+  --color-cat-teal-bg: var(--cat-teal-bg);
+  --color-cat-teal-fg: var(--cat-teal-fg);
+  --color-cat-mauve-bg: var(--cat-mauve-bg);
+  --color-cat-mauve-fg: var(--cat-mauve-fg);
+  --color-cat-sand-bg: var(--cat-sand-bg);
+  --color-cat-sand-fg: var(--cat-sand-fg);
+  --color-cat-slate-bg: var(--cat-slate-bg);
+  --color-cat-slate-fg: var(--cat-slate-fg);
 }
 
 /* 字型：內文 Sans；Serif 僅用於首頁主標與各頁面大標（h1） */
