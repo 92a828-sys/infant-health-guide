@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import EmergencyBar from './components/EmergencyBar'
 import HomePage from './pages/HomePage'
+import AgeGuidePage from './pages/AgeGuidePage'
 import GrowthMilestonesPage from './pages/GrowthMilestonesPage'
 import GrowthChartPage from './pages/GrowthChartPage'
 import CommonSymptomsPage from './pages/CommonSymptomsPage'
@@ -31,19 +32,20 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':       return <HomePage navigate={navigate} scrollTarget={navParam} />
+      case 'age-guide':  return <AgeGuidePage navigate={navigate} initialMonths={navParam} />
       case 'growth':     return <GrowthMilestonesPage navigate={navigate} initialAgeId={navParam} />
       case 'growth-chart': return <GrowthChartPage navigate={navigate} />
       case 'symptoms':   return <CommonSymptomsPage navigate={navigate} />
       case 'vaccination':return <VaccinationPage navigate={navigate} initialTab={navParam} />
-      case 'dietary':    return <DietaryPage navigate={navigate} />
+      case 'dietary':    return <DietaryPage navigate={navigate} initialTab={navParam} />
       case 'emergency':  return <EmergencyPage navigate={navigate} />
       case 'medication': return <MedicationPage navigate={navigate} />
       case 'diseases':   return <CommonDiseasesPage navigate={navigate} />
       case 'vitals':     return <VitalSignsPage navigate={navigate} />
       case 'early-learning': return <EarlyLearningPage navigate={navigate} />
       case 'newborn-safety': return <NewbornSafetyPage navigate={navigate} />
-      case 'home-safety': return <HomeSafetyPage navigate={navigate} />
-      case 'daily-care': return <DailyCarePage navigate={navigate} />
+      case 'home-safety': return <HomeSafetyPage navigate={navigate} initialTab={navParam} />
+      case 'daily-care': return <DailyCarePage navigate={navigate} initialTab={navParam} />
       case 'parent-support': return <ParentSupportPage navigate={navigate} initialTab={navParam} />
       default:           return <HomePage navigate={navigate} />
     }

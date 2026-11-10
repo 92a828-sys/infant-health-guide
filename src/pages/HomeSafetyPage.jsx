@@ -146,8 +146,8 @@ const toySafety = [
   '避免長繩、絲帶類玩具或掛飾，以免纏繞勒頸',
 ]
 
-export default function HomeSafetyPage({ navigate }) {
-  const [tab, setTab] = useState('rooms')
+export default function HomeSafetyPage({ navigate, initialTab }) {
+  const [tab, setTab] = useState(initialTab || 'rooms')
 
   return (
     <div>

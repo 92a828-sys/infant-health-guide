@@ -1,28 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Baby, ArrowRight, Ambulance, Info } from 'lucide-react'
+import { Baby, Info } from 'lucide-react'
 import { pageIcons } from '../pageIcons'
 import { navGroups, emergencyPage } from '../navGroups'
-
-const ageGroupTable = [
-  { id: 'm4', m: 4 }, { id: 'm6', m: 6 }, { id: 'm9', m: 9 },
-  { id: 'y1', m: 12 }, { id: 'y1m3', m: 15 }, { id: 'y1m6', m: 18 },
-  { id: 'y2', m: 24 }, { id: 'y2m6', m: 30 }, { id: 'y3', m: 36 },
-]
-
-function nearestAgeGroupId(months) {
-  return ageGroupTable.reduce((closest, t) =>
-    Math.abs(months - t.m) < Math.abs(months - closest.m) ? t : closest
-  ).id
-}
-
-function dietStageLabel(months) {
-  if (months < 6) return '母乳／配方奶為主，準備開始認識副食品'
-  if (months < 9) return '副食品初期：細滑泥狀，優先提供高鐵食物'
-  if (months < 12) return '泥狀至粗泥，可開始嘗試手指食物'
-  if (months < 18) return '軟爛小塊狀，練習自己進食'
-  if (months < 36) return '家庭食物（軟），建立規律三餐加點心'
-  return '接近成人飲食，均衡攝取六大類食物'
-}
+import AgePicker from '../components/AgePicker'
 
 const quotes = [
   { text: '每個孩子都有自己的節奏，陪伴比催促更重要。', icon: '🌸' },
@@ -58,11 +38,6 @@ const officialManuals = [
   { name: '兒童健康手冊（電子版）', desc: '生長發育、預防接種紀錄官方手冊', url: 'https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=1139', emoji: '📗' },
   { name: '兒童衛教手冊', desc: '早產兒出院照顧、SIDS預防、副食品等衛教內容', url: 'https://www.hpa.gov.tw/Pages/EBook.aspx?nodeid=1459', emoji: '📘' },
 ]
-
-const GrowthIcon = pageIcons['growth']
-const VaccinationIcon = pageIcons['vaccination']
-const DietaryIcon = pageIcons['dietary']
-const DailyCareIcon = pageIcons['daily-care']
 
 // UTC+8 台灣時間的第幾天，確保午夜 12 點換句（於初次渲染時計算一次）
 function pickDailyQuote() {
@@ -104,7 +79,6 @@ export default function HomePage({ navigate, scrollTarget }) {
     }, 0)
     return () => clearTimeout(t)
   }, [scrollTarget])
-  const [ageMonths, setAgeMonths] = useState(6)
 
   return (
     <div>
@@ -125,24 +99,24 @@ export default function HomePage({ navigate, scrollTarget }) {
           <p className="text-lg md:text-xl text-ink-muted mb-2">
             專為<strong className="text-ink">新手爸媽</strong>設計的幼兒健康指南
           </p>
-          <p className="text-sm text-ink-muted mb-10">
+          <p className="text-sm text-ink-muted mb-8">
             內容參考衛生福利部、台灣兒科醫學會等官方資料
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => navigate('growth')}
-              className="inline-flex items-center justify-center gap-2 bg-brand text-on-brand px-8 py-3.5 rounded-3xl font-semibold hover:opacity-90 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 text-base"
-            >
-              開始探索
-              <ArrowRight className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
-            </button>
-            <button
-              onClick={() => navigate('emergency')}
-              className="inline-flex items-center justify-center gap-2 bg-surface text-danger-fg border-2 border-danger-border px-8 py-3.5 rounded-3xl font-semibold hover:bg-danger-bg transition-all shadow-[0_10px_30px_rgba(0,0,0,0.08)] text-base"
-            >
-              <Ambulance className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
-              緊急狀況
-            </button>
+
+          {/* 依月齡探索入口（不儲存任何資料） */}
+          <div id="age-picker" className="scroll-mt-24 bg-surface border border-border rounded-2xl p-5 sm:p-6 text-left max-w-xl mx-auto shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+            <p className="font-bold text-ink text-lg mb-4">孩子目前幾歲幾個月？</p>
+            <AgePicker onSubmit={m => navigate('age-guide', m)} idPrefix="home-age" />
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-4 text-sm">
+              <p className="text-ink-muted">早產兒請使用矯正年齡</p>
+              <button
+                type="button"
+                onClick={() => document.getElementById('topics')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="text-brand font-semibold hover:underline underline-offset-4"
+              >
+                稍後再選
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -156,60 +130,9 @@ export default function HomePage({ navigate, scrollTarget }) {
         </div>
       </section>
 
-      {/* ── Age-based quick nav ── */}
-      <section id="age-nav" className="scroll-mt-20 py-12 px-6 bg-surface border-b border-border">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-semibold tracking-[0.05em] text-ink text-center mb-2">🎯 依月齡快速導覽</h2>
-          <p className="text-ink-muted text-center mb-6 text-sm">選擇寶寶目前月齡，直接前往對應內容</p>
-
-          <div className="flex items-center gap-4 mb-6">
-            <input
-              type="range" min="0" max="36" value={ageMonths}
-              onChange={e => setAgeMonths(Number(e.target.value))}
-              className="flex-1 accent-brand"
-            />
-            <span className="text-lg font-semibold text-brand w-20 text-right shrink-0">{ageMonths} 個月</span>
-          </div>
-
-          <div className="bg-surface-muted border border-border rounded-3xl p-4 mb-5 text-sm text-ink shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-            🥣 這個階段的飲食：{dietStageLabel(ageMonths)}
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <button
-              onClick={() => navigate('growth', nearestAgeGroupId(ageMonths))}
-              className="card-hover bg-emerald-50 border border-emerald-200 rounded-2xl p-3 text-center hover:bg-emerald-100"
-            >
-              <GrowthIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
-              <span className="text-xs font-semibold text-emerald-700">生長里程碑</span>
-            </button>
-            <button
-              onClick={() => navigate('vaccination', 'calculator')}
-              className="card-hover bg-violet-50 border border-violet-200 rounded-2xl p-3 text-center hover:bg-violet-100"
-            >
-              <VaccinationIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
-              <span className="text-xs font-semibold text-violet-700">疫苗時程試算</span>
-            </button>
-            <button
-              onClick={() => navigate('dietary')}
-              className="card-hover bg-orange-50 border border-orange-200 rounded-2xl p-3 text-center hover:bg-orange-100"
-            >
-              <DietaryIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
-              <span className="text-xs font-semibold text-orange-700">營養與餵食</span>
-            </button>
-            <button
-              onClick={() => navigate('daily-care')}
-              className="card-hover bg-rose-50 border border-rose-200 rounded-2xl p-3 text-center hover:bg-rose-100"
-            >
-              <DailyCareIcon className="w-6 h-6 mx-auto mb-1" strokeWidth={2} aria-hidden="true" />
-              <span className="text-xs font-semibold text-rose-700">日常照護</span>
-            </button>
-          </div>
-        </div>
-      </section>
 
       {/* ── Nav Cards ── */}
-      <section className="py-16 px-6 bg-canvas">
+      <section id="topics" className="scroll-mt-20 py-16 px-6 bg-canvas">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-[0.05em] text-ink text-center mb-2">📌 快速導覽</h2>
           <p className="text-ink-muted text-center mb-10 text-sm">選擇您需要的衛教主題</p>

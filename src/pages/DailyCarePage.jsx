@@ -87,8 +87,8 @@ const dentalTips = [
   '乳牙照護同樣重要：乳牙蛀牙可能影響恆牙排列與齒顎發育，並非「反正會換牙就不用管」',
 ]
 
-export default function DailyCarePage({ navigate }) {
-  const [tab, setTab] = useState('hygiene')
+export default function DailyCarePage({ navigate, initialTab }) {
+  const [tab, setTab] = useState(initialTab || 'hygiene')
 
   return (
     <div>

@@ -223,13 +223,13 @@ export default function Navbar({ navigate, currentPage }) {
     navigate(id)
   }
 
-  // 「依月齡探索」：探索功能完成前，先帶到首頁的月齡快速導覽
+  // 「依月齡探索」：帶到首頁 hero 的月齡選擇
   const ageExplore = () => {
     setMenuOpen(false)
     if (currentPage === 'home') {
-      document.getElementById('age-nav')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById('age-picker')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     } else {
-      navigate('home', 'age-nav')
+      navigate('home', 'age-picker')
     }
   }
 

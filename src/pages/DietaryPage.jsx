@@ -189,8 +189,8 @@ const avoidFoods = [
   { food: '低脂乳製品', reason: '3 歲前需要全脂提供足夠能量與脂肪', urgent: false },
 ]
 
-export default function DietaryPage({ navigate }) {
-  const [tab, setTab] = useState('solid')
+export default function DietaryPage({ navigate, initialTab }) {
+  const [tab, setTab] = useState(initialTab || 'solid')
 
   return (
     <div>
